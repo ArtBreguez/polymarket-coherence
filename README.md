@@ -6,8 +6,9 @@ A small, reproducible study of price coherence in Polymarket's *mutually
 exclusive* (negRisk) events. In a mutually-exclusive event the outcome
 probabilities must sum to 1. Naive readings at the **mid price** appear to show
 frequent, large violations (buy/sell the whole field for less/more than \$1).
-This repo tests whether those violations **survive the bid-ask spread** — i.e.
-whether they are *executable* — and finds that most do not.
+This repo tests whether those violations **survive the bid-ask spread and order-book
+depth** — i.e. whether they are *executable* — and finds they are governed by
+liquidity structure, not mispricing.
 
 ## TL;DR findings
 
@@ -23,33 +24,36 @@ Snapshot of 37 negRisk events (≥3 outcomes):
 The mid prices sum to 1; the apparent violation is the **bid-ask spread band**
 straddling 1.0.
 
-### 2. Depth-aware: the "arbitrage" is never executable, and most fields can't be locked at all
+### 2. Depth-aware: apparent "violations" are a liquidity-structure artifact
 The real test of a mutually-exclusive "coherence violation" is whether you can
 **buy one YES share in every outcome for less than \$1** and pocket the
-guaranteed payoff. Using full L2 books and walking the ask side for realistic
-order sizes:
+guaranteed payoff. That requires *every* outcome to be fillable. Walking full L2
+books shows completeness is governed by field size:
 
-| Order size / leg | Complete fields¹ | Median lock cost | Min lock cost (best case) |
+| Field size | Events | Complete¹ | Median outcomes with a book |
 |---|---|---|---|
-| 1 share | 5 / 37 | 1.029 | **1.015** |
-| 100 shares | 5 / 37 | 1.029 | 1.016 |
-| 1,000 shares | 5 / 37 | 1.029 | 1.017 |
+| small (≤20 outcomes) | 9 | **56%** | **100%** |
+| large (>20 outcomes) | 28 | **0%** | **47%** |
 
-¹ *Complete field* = **every** declared outcome is fillable at that size. Only
-**5 of 37** events are complete; the other 32 have empty/unlisted legs, so the
-field **cannot be locked at all** — buying the available subset for < \$1 is not
-arbitrage, because the winner may be one of the empty legs.
+¹ *Complete* = every declared outcome is fillable, so the field can actually be
+locked.
 
-**Even in the best complete field, the lock costs 1.015 — above \$1. There is no
-executable arbitrage**, and the cost rises with both order size (walking the
-book) and field size (corr ≈ +0.47).
+Small, dense fields are complete and **not arbitrageable** — locking \$1 costs
+**1.015–1.029** (above \$1) across order sizes of 1–1,000 shares, and rises with
+both order size (walking the book) and field size (corr ≈ +0.47). Large fields
+are **never complete**: a median of ~half their outcomes have no book at all, so
+the "sum of listed prices" is not a portfolio you can buy. Of the missing legs,
+**836 are real named candidates with no liquidity** vs only 114 structural
+placeholders — this is a genuine long-tail illiquidity effect, not a listing
+artifact.
 
-> **Interpretation.** Naive reports of widespread "arbitrage" in multi-outcome
-> prediction markets are two artifacts stacked: (a) a **mid-price illusion** — at
-> executable quotes the field straddles \$1; and (b) **incomplete-field illusion**
-> — apparent sub-\$1 fields are missing tradable legs and can't be locked.
-> Coherence must be judged on **depth-aware, complete-field** execution, not mid
-> prices or a fillable subset.
+> **Interpretation.** Naive multi-outcome "coherence violations" on Polymarket
+> are **not mispricing** and **not free money**. They are governed by liquidity
+> structure: (a) at the mid, prices already sum to ~1; (b) small dense fields are
+> coherent and cost >\$1 to lock after spread; (c) large fields only *appear*
+> violated because a long tail of illiquid, unpriced outcomes cannot be bought,
+> so their listed-price sum is not an executable portfolio. Coherence must be
+> judged on **depth-aware, complete-field** execution.
 
 ## Reproduce
 
@@ -103,8 +107,10 @@ optional figures) and re-derive every number above.
 Arbitrage and coherence on Polymarket have been studied. This repo does **not**
 claim to discover prediction-market arbitrage; its contribution is the narrow,
 contrarian, and reproducible point that **naive multi-outcome "coherence
-violations" are two stacked artifacts — the mid-price spread band and incomplete
-(non-lockable) fields — and vanish under depth-aware, complete-field execution.**
+violations" are governed by liquidity structure, not mispricing** — the mid
+prices already sum to ~1, small dense fields cost >\$1 to lock after spread, and
+large fields only *appear* violated because a long tail of illiquid, unpriced
+outcomes cannot be bought.
 
 - *Unravelling the Probabilistic Forest: Arbitrage in Prediction Markets* (2025)
 - *Executable Arbitrage and Market Efficiency in Prediction Markets* (2026)

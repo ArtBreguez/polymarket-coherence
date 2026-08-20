@@ -148,6 +148,38 @@ def main() -> int:
             cor = cov / (st.pstdev(ns) * st.pstdev(cs))
             print(f"\ncorr(field size n, field cost at size {big:.0f}) = {cor:.3f}")
 
+    # ---- Liquidity structure: completeness is governed by field size ----
+    # A field is "complete" only if every declared outcome has a fillable book.
+    # The headline question is whether apparent coherence violations are about
+    # mispricing or about the long tail of illiquid outcomes you simply cannot buy.
+    print("\n--- Liquidity structure (why apparent 'violations' are not executable) ---")
+    small = [r for r in rows if r["n"] <= 20]
+    large = [r for r in rows if r["n"] > 20]
+
+    def complete_frac(group):
+        if not group:
+            return float("nan")
+        return sum(1 for r in group if r["by_size"][min(sizes)]["complete"]) / len(group)
+
+    def median_fill_ratio(group):
+        # fraction of declared outcomes that are fillable (at the smallest size)
+        rr = []
+        for r in group:
+            fs = r["by_size"][min(sizes)]["field_size"]
+            fl = r["by_size"][min(sizes)]["filled_legs"]
+            if fs:
+                rr.append(fl / fs)
+        return st.median(rr) if rr else float("nan")
+
+    print(f"small fields (n<=20): {len(small):2d} | complete: {complete_frac(small):.0%} "
+          f"| median outcomes with a book: {median_fill_ratio(small):.0%}")
+    print(f"large fields (n> 20): {len(large):2d} | complete: {complete_frac(large):.0%} "
+          f"| median outcomes with a book: {median_fill_ratio(large):.0%}")
+    print("Interpretation: completeness collapses with field size. Large multi-outcome")
+    print("events list a long tail of illiquid/unpriced outcomes that cannot be bought,")
+    print("so the 'sum of listed prices' is not an executable portfolio — the apparent")
+    print("coherence violation is a liquidity-structure artifact, not mispricing.")
+
     try:
         import matplotlib
         matplotlib.use("Agg")
