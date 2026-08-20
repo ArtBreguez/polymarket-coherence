@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polymarket Coherence — live study</title>
+<meta name="description" content="Are Polymarket multi-outcome 'coherence violations' real arbitrage or a liquidity-structure artifact? A small, reproducible study with a live forward panel.">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#141a24; --border:#243040; --fg:#e6edf3;
+    --muted:#8b98a9; --accent:#3b82f6; --good:#22c55e; --bad:#ef4444; --warn:#f59e0b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:32px 20px 64px}
+  header h1{font-size:26px;margin:0 0 6px}
+  header p{color:var(--muted);margin:0 0 4px}
+  .updated{font-size:12px;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:28px 0}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px}
+  .card .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .card .v{font-size:26px;font-weight:600;margin-top:6px}
+  .card .s{font-size:12px;color:var(--muted);margin-top:2px}
+  h2{font-size:18px;margin:36px 0 10px;border-bottom:1px solid var(--border);padding-bottom:8px}
+  .chartbox{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px}
+  .chartbox canvas{width:100%!important}
+  #costChart{height:300px!important} #liqChart{height:240px!important}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
+  th{color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600}
+  .pill.yes{background:rgba(34,197,94,.15);color:var(--good)}
+  .pill.no{background:rgba(139,152,169,.15);color:var(--muted)}
+  .finding{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--accent);
+    border-radius:8px;padding:14px 16px;margin:14px 0;color:#cdd7e2}
+  .finding b{color:var(--fg)}
+  footer{margin-top:48px;color:var(--muted);font-size:13px;border-top:1px solid var(--border);padding-top:16px}
+  .muted{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Polymarket Coherence <span class="muted">— live study</span></h1>
+    <p>Do Polymarket's multi-outcome (negRisk) markets really violate coherence, or is it a liquidity-structure artifact?</p>
+    <p class="updated" id="updated">loading…</p>
+    <p style="margin-top:10px"><a href="https://github.com/ArtBreguez/polymarket-coherence">source & methodology on GitHub →</a></p>
+  </header>
+
+  <div class="finding">
+    A mutually-exclusive event's outcome prices should sum to <b>$1</b>. Naively they seem to
+    violate this often — but at the mid they sum to ~1, and the "violations" are the <b>bid-ask
+    spread</b> plus a long tail of <b>illiquid outcomes you cannot actually buy</b>. This page
+    tracks, live, whether a genuinely executable sub-$1 lock ever opens.
+  </div>
+
+  <div class="grid" id="cards"></div>
+
+  <h2>Executable lock cost over time</h2>
+  <p class="muted" style="font-size:13px;margin-top:0">Median &amp; minimum cost to buy one YES share in every outcome of a <em>complete</em> field (order size 100). Below the red $1 line would be real arbitrage.</p>
+  <div class="chartbox"><canvas id="costChart"></canvas></div>
+
+  <h2>Liquidity structure (latest snapshot)</h2>
+  <p class="muted" style="font-size:13px;margin-top:0">Field completeness collapses with size: small dense fields are lockable; large fields list a long illiquid tail.</p>
+  <div class="chartbox"><canvas id="liqChart"></canvas></div>
+
+  <h2>Per-event — latest snapshot</h2>
+  <div class="chartbox" style="padding:6px 10px">
+    <table id="evTable"><thead><tr>
+      <th>Event</th><th class="num">Outcomes</th><th class="num">Priced</th>
+      <th>Complete</th><th class="num">Lock cost</th>
+    </tr></thead><tbody></tbody></table>
+  </div>
+
+  <footer>
+    Data refreshes automatically via a scheduled collector (public Gamma + CLOB APIs, no key).
+    This is a small, reproducible research artifact — see the repo for honest limitations and prior work.
+    <span id="genstamp"></span>
+  </footer>
+</div>
+
+<script>
+const fmt = (x, d=4) => (x==null? "—" : Number(x).toFixed(d));
+const shortTs = s => s ? s.slice(5,16).replace("T"," ") : "—";
+
+async function load(){
+  const bust = "?t=" + Date.now();
+  const [summary, ts, events] = await Promise.all([
+    fetch("data/summary.json"+bust).then(r=>r.json()),
+    fetch("data/timeseries.json"+bust).then(r=>r.json()),
+    fetch("data/events.json"+bust).then(r=>r.json()),
+  ]);
+
+  document.getElementById("updated").textContent =
+    `${summary.snapshots} snapshots · ${summary.distinct_events} events · last update ${shortTs(summary.last_snapshot)} UTC`;
+  document.getElementById("genstamp").textContent =
+    ` Generated ${shortTs(summary.generated_utc)} UTC.`;
+
+  const ls = summary.liquidity_structure || {};
+  const cards = [
+    {k:"Snapshots", v:summary.snapshots, s:"and counting"},
+    {k:"Ever executable (&lt;$1)", v:`${summary.ever_executable} / ${summary.distinct_events}`,
+      s: summary.ever_executable? "a window opened!" : "no free lunch so far"},
+    {k:"Min lock cost", v:"$"+fmt(summary.cost_min), s:"best case, all obs"},
+    {k:"Median lock cost", v:"$"+fmt(summary.cost_median), s:`${summary.n_cost_obs} observations`},
+    {k:"Small fields complete", v:(ls.small_complete_pct??"—")+"%", s:`n≤20 · median ${ls.small_median_fill_pct??"—"}% priced`},
+    {k:"Large fields complete", v:(ls.large_complete_pct??"—")+"%", s:`n>20 · median ${ls.large_median_fill_pct??"—"}% priced`},
+  ];
+  document.getElementById("cards").innerHTML = cards.map(c=>
+    `<div class="card"><div class="k">${c.k}</div><div class="v">${c.v}</div><div class="s">${c.s}</div></div>`).join("");
+
+  const labels = ts.map(p=>shortTs(p.ts));
+  // dashed $1 reference line drawn under the data
+  const oneLine = {id:"oneLine", beforeDatasetsDraw(chart){
+    const {ctx, chartArea:{left,right}, scales:{y}} = chart;
+    if(!y) return; const yy = y.getPixelForValue(1.0);
+    if(yy<chart.chartArea.top||yy>chart.chartArea.bottom) return;
+    ctx.save(); ctx.strokeStyle="#ef4444"; ctx.lineWidth=1; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(left,yy); ctx.lineTo(right,yy); ctx.stroke(); ctx.restore();
+  }};
+  new Chart(document.getElementById("costChart"), {
+    type:"line",
+    data:{labels, datasets:[
+      {label:"median cost", data:ts.map(p=>p.median_cost), borderColor:"#3b82f6", backgroundColor:"#3b82f6", tension:.25, pointRadius:3, borderWidth:2},
+      {label:"min cost", data:ts.map(p=>p.min_cost), borderColor:"#22c55e", backgroundColor:"#22c55e", tension:.25, pointRadius:3, borderWidth:2},
+    ]},
+    options:{responsive:true, maintainAspectRatio:false, animation:false, plugins:{legend:{labels:{color:"#e6edf3"}}},
+      scales:{
+        x:{ticks:{color:"#8b98a9",maxRotation:0,autoSkip:true,maxTicksLimit:8},grid:{color:"#243040"}},
+        y:{ticks:{color:"#8b98a9"},grid:{color:"#243040"},suggestedMin:0.98,suggestedMax:1.03}}},
+    plugins:[oneLine]
+  });
+
+  const liq = summary.liquidity_structure || {};
+  new Chart(document.getElementById("liqChart"), {
+    type:"bar",
+    data:{labels:["Complete fields (%)","Median outcomes priced (%)"],
+      datasets:[
+        {label:`small (n≤20, ${liq.small_n||0})`, data:[liq.small_complete_pct, liq.small_median_fill_pct], backgroundColor:"#3b82f6"},
+        {label:`large (n>20, ${liq.large_n||0})`, data:[liq.large_complete_pct, liq.large_median_fill_pct], backgroundColor:"#f59e0b"},
+      ]},
+    options:{responsive:true, maintainAspectRatio:false, animation:false, plugins:{legend:{labels:{color:"#e6edf3"}}},
+      scales:{x:{ticks:{color:"#8b98a9"},grid:{color:"#243040"}},
+              y:{ticks:{color:"#8b98a9"},grid:{color:"#243040"},max:100}}}
+  });
+
+  const tb = document.querySelector("#evTable tbody");
+  tb.innerHTML = events.map(e=>{
+    const pill = e.complete? `<span class="pill yes">yes</span>` : `<span class="pill no">no</span>`;
+    const cost = e.lock_cost==null? '<span class="muted">n/a</span>' : "$"+fmt(e.lock_cost);
+    const fill = e.fill_ratio==null? "—" : Math.round(e.fill_ratio*100)+"%";
+    return `<tr><td>${e.title??""}</td><td class="num">${e.n_markets??""}</td>
+      <td class="num">${fill}</td><td>${pill}</td><td class="num">${cost}</td></tr>`;
+  }).join("");
+}
+load().catch(e=>{document.getElementById("updated").textContent="failed to load data: "+e;});
+</script>
+</body>
+</html>

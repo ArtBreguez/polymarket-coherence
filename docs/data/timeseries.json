@@ -1,0 +1,42 @@
+[
+  {
+    "ts": "2026-08-20T17:07:44.445789+00:00",
+    "events": 39,
+    "complete": 5,
+    "executable": 0,
+    "min_cost": 1.0159,
+    "median_cost": 1.029
+  },
+  {
+    "ts": "2026-08-20T17:08:21.268384+00:00",
+    "events": 39,
+    "complete": 5,
+    "executable": 0,
+    "min_cost": 1.0159,
+    "median_cost": 1.029
+  },
+  {
+    "ts": "2026-08-20T17:10:20.911950+00:00",
+    "events": 39,
+    "complete": 5,
+    "executable": 0,
+    "min_cost": 1.0159,
+    "median_cost": 1.029
+  },
+  {
+    "ts": "2026-08-20T17:11:14.753839+00:00",
+    "events": 39,
+    "complete": 5,
+    "executable": 0,
+    "min_cost": 1.0159,
+    "median_cost": 1.029
+  },
+  {
+    "ts": "2026-08-20T17:15:40.302214+00:00",
+    "events": 39,
+    "complete": 5,
+    "executable": 0,
+    "min_cost": 1.0159,
+    "median_cost": 1.029
+  }
+]

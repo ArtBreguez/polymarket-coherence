@@ -16,7 +16,10 @@ if git diff --quiet -- data/panel.jsonl; then
   exit 0
 fi
 
-git add data/panel.jsonl
+# 3) regenerate the GitHub Pages dashboard data from the updated panel
+python3 scripts/generate_site_data.py >/dev/null 2>&1 || true
+
+git add data/panel.jsonl docs/data/
 git -c user.name="Arthur Breguez" \
     -c user.email="98524696+ArtBreguez@users.noreply.github.com" \
     commit -q -m "data: forward-panel snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
@@ -24,7 +27,7 @@ git -c user.name="Arthur Breguez" \
 # push; if it fails (transient), leave the commit for the next run to push
 git push -q origin master 2>/dev/null || true
 
-# 3) surface ONLY executable windows (<$1) — the whole point of the panel.
+# 4) surface ONLY executable windows (<$1) — the whole point of the panel.
 # On a normal run with none found, print nothing (silent = healthy).
 if echo "$OUT" | grep -q "LOCK<\$1"; then
   echo "polymarket-coherence: executable window detected"
