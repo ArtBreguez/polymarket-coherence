@@ -18,21 +18,21 @@
     "n_markets": 13,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.027
+    "lock_cost": 1.026
   },
   {
     "title": "Where will the next next round of US-Iran peace talks be...?",
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.046569
+    "lock_cost": 1.046634
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.113746
+    "lock_cost": 1.11375
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -269,6 +269,13 @@
     "title": "Brazil Presidential Election First Round: 2nd Place",
     "n_markets": 32,
     "fill_ratio": 0.5312,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Elon Musk # tweets August 14 - August 21, 2026?",
+    "n_markets": 26,
+    "fill_ratio": 0.5769,
     "complete": false,
     "lock_cost": null
   }
