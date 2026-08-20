@@ -67,12 +67,31 @@ python scripts/analyze.py       --in  data/snapshot.csv
 # Part 2 — depth-aware executable coherence (the differentiator)
 python scripts/collect_depth.py --limit 500 --out data/books.json     # CLOB L2 books, no key
 python scripts/analyze_depth.py --in  data/books.json --sizes 1,10,100,1000
+
+# Part 3 — forward panel: run on a schedule, then analyze window persistence
+python scripts/collect_forward.py --size 100 --out data/panel.jsonl    # append one snapshot
+python scripts/analyze_panel.py   --in  data/panel.jsonl               # windows over time
 ```
 
 `collect*.py` each write a data file plus a `*.manifest.json` recording snapshot
 time and source URLs, so a run is fully reproducible from the committed data
 alone. The `analyze*.py` scripts are pure stdlib (matplotlib only for the
 optional figures) and re-derive every number above.
+
+## Part 3 — does an executable window ever open? (forward panel)
+
+A single snapshot cannot tell you whether a fleeting sub-\$1 lock ever appears.
+`collect_forward.py` appends one timestamped observation per event to
+`data/panel.jsonl`; run it on a schedule (e.g. every 15 min) to build a panel.
+`analyze_panel.py` then reports, per event: how many snapshots were complete
+(lockable), the min/median lock cost over time, the fraction of snapshots that
+were executable (< \$1), and the **longest run of consecutive executable
+snapshots** — a proxy for how long a window persists.
+
+Seed panel (2 back-to-back snapshots, order size 100): **5/39 events complete,
+0 ever executable**, lock cost stable across snapshots (min 1.016, median 1.029).
+The committed `panel.jsonl` is a seed; the scheduled collector grows it into a
+real time series.
 
 ## Data
 
@@ -94,9 +113,10 @@ optional figures) and re-derive every number above.
   book. Polymarket makers are fee-exempt but takers and on-chain conversion pay
   costs, which only make the (already > \$1) lock *more* expensive — so the
   no-arbitrage conclusion is conservative.
-- **Single snapshot per event.** Books are a point-in-time photo; a fleeting
-  sub-\$1 window could open and close between snapshots. Establishing how often
-  and how long real windows exist needs the forward collector (future work).
+- **Panel is young.** Window-persistence needs many snapshots; the committed
+  `panel.jsonl` is a seed. The scheduled `collect_forward.py` grows it into a
+  real time series (see Part 3). Until it does, "0 executable windows" is a
+  strong snapshot result, not yet a duration statistic.
 - **Scope is coherence, not realized profit.** We measure whether a lock is
   *available*, not whether anyone took it. Depth-aware realized on-chain arbitrage
   profit is measured by the 2026 "Executable Arbitrage" paper (see below); this
