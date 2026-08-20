@@ -1,0 +1,2 @@
+# Analysis is pure Python stdlib. matplotlib is only needed for the optional figure.
+matplotlib>=3.5

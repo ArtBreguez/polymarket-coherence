@@ -1,0 +1,7 @@
+{
+  "snapshot_utc": "2026-08-20T16:48:24.978032+00:00",
+  "source": "https://gamma-api.polymarket.com/events?closed=false&order=volume",
+  "events_scanned": 100,
+  "negRisk_child_markets": 1790,
+  "note": "Public Gamma API snapshot. p_yes_mid is outcomePrices[0]; best_bid/best_ask are the executable top-of-book quotes."
+}

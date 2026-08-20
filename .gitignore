@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+# Keep committed snapshot + manifest for reproducibility; ignore ad-hoc extra pulls.
+data/snapshot_*.csv
