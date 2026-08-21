@@ -2,6 +2,9 @@
 
 **Do Polymarket's multi-outcome markets really violate coherence — or is it just the spread?**
 
+📊 **Live dashboard:** https://artbreguez.github.io/polymarket-coherence/ — auto-updates
+every 15 min from a scheduled collector.
+
 A small, reproducible study of price coherence in Polymarket's *mutually
 exclusive* (negRisk) events. In a mutually-exclusive event the outcome
 probabilities must sum to 1. Naive readings at the **mid price** appear to show
