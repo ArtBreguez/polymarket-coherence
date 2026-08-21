@@ -25,16 +25,14 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PANEL = os.path.join(ROOT, "data", "panel.jsonl")
 BACKUP = os.path.join(ROOT, "data", "panel_raw.jsonl.bak")
 
-# Expired-but-still-open markets collected before the endDate filter landed.
-ZOMBIE_IDS = {
-    "831375",  # Next Prime Minister of Ethiopia? (endDate 2026-06-01)
-    "411239",  # Elon Musk # tweets August 14 - August 21, 2026?
-}
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from hygiene import ZOMBIE_EVENT_IDS as ZOMBIE_IDS  # noqa: E402  single source of truth
 
 CANONICAL_KEYS = ["ts", "event_id", "title", "n_markets", "volume", "end_date",
                   "size", "filled_legs", "fill_ratio", "complete", "lock_cost"]

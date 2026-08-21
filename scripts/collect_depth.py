@@ -22,54 +22,26 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
+import sys
 import time
 import urllib.parse
 import urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from hygiene import http_json, gamma_events, live_negrisk_events  # noqa: E402
 
 GAMMA = "https://gamma-api.polymarket.com"
 CLOB = "https://clob.polymarket.com"
 BATCH = 40  # tokens per /books POST — polite and well within limits
 
 
-def is_expired(end_date, now=None):
-    """True if the event's endDate is in the past. Polymarket sometimes keeps
-    resolved/expired events flagged closed=false; those 'zombie' markets have
-    degenerate prices and must be excluded from a coherence study."""
-    if not end_date:
-        return False
-    try:
-        end = dt.datetime.fromisoformat(str(end_date).replace("Z", "+00:00"))
-    except ValueError:
-        return False
-    return end < (now or dt.datetime.now(dt.timezone.utc))
-
-
 def _get(url: str):
-    req = urllib.request.Request(url, headers={"Accept": "application/json",
-                                               "User-Agent": "polymarket-coherence/1.0"})
-    for attempt in range(4):
-        try:
-            with urllib.request.urlopen(req, timeout=30) as r:
-                return json.loads(r.read())
-        except Exception:  # noqa: BLE001
-            if attempt == 3:
-                raise
-            time.sleep(1.5 * (attempt + 1))
+    return http_json(url, timeout=30)
 
 
 def _post(url: str, payload):
-    data = json.dumps(payload).encode()
-    req = urllib.request.Request(url, data=data, method="POST",
-                                 headers={"Content-Type": "application/json",
-                                          "User-Agent": "polymarket-coherence/1.0"})
-    for attempt in range(4):
-        try:
-            with urllib.request.urlopen(req, timeout=45) as r:
-                return json.loads(r.read())
-        except Exception:  # noqa: BLE001
-            if attempt == 3:
-                raise
-            time.sleep(1.5 * (attempt + 1))
+    return http_json(url, data=payload, timeout=45)
 
 
 def collect(limit: int):
@@ -79,11 +51,7 @@ def collect(limit: int):
     # token_id -> {event_id, event_title, n_markets, question, volume}
     meta: dict[str, dict] = {}
     tokens: list[str] = []
-    for e in events:
-        if not e.get("negRisk"):
-            continue
-        if is_expired(e.get("endDate")):
-            continue  # skip zombie markets: past endDate but still closed=false
+    for e in live_negrisk_events(events, min_outcomes=1):
         markets = e.get("markets", [])
         n = len(markets)
         for m in markets:

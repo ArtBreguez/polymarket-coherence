@@ -20,21 +20,15 @@ import datetime as dt
 import json
 import os
 import statistics as st
+import sys
 from collections import defaultdict
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from hygiene import ZOMBIE_EVENT_IDS as EXCLUDED_EVENT_IDS  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PANEL = os.path.join(ROOT, "data", "panel.jsonl")
 OUTDIR = os.path.join(ROOT, "docs", "data")
-
-# Event IDs that Polymarket kept flagged closed=false past their endDate
-# ('zombie' markets: degenerate prices, evaporating liquidity). They were
-# collected before the endDate filter was added to the collectors; we exclude
-# them here so the historical panel on the site reflects only live markets.
-# Newer snapshots already drop expired events at collection time.
-EXCLUDED_EVENT_IDS = {
-    "831375",  # Next Prime Minister of Ethiopia? (endDate 2026-06-01)
-    "411239",  # Elon Musk # tweets August 14 - August 21, 2026?
-}
 
 
 def load_panel():

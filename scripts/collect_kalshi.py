@@ -19,16 +19,17 @@ import datetime as dt
 import json
 import urllib.parse
 import urllib.request
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from hygiene import http_json  # noqa: E402
 
 KALSHI = "https://api.elections.kalshi.com/trade-api/v2"
 
 
 def _get(path: str, params: dict) -> dict:
-    url = f"{KALSHI}{path}?" + urllib.parse.urlencode(params)
-    req = urllib.request.Request(url, headers={"Accept": "application/json",
-                                               "User-Agent": "polymarket-coherence/1.0"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.loads(r.read())
+    return http_json(f"{KALSHI}{path}?" + urllib.parse.urlencode(params), timeout=30)
 
 
 def collect_series(series_ticker: str) -> dict:

@@ -127,6 +127,26 @@ time and source URLs, so a run is fully reproducible from the committed data
 alone. The `analyze*.py` scripts are pure stdlib (matplotlib only for the
 optional figures) and re-derive every number above.
 
+### Data hygiene (`scripts/hygiene.py`)
+Every external pull — Polymarket Gamma, Polymarket CLOB, Kalshi — routes through
+one shared hygiene module instead of re-implementing (and drifting) the rules per
+collector. It is the single choke point that guarantees:
+
+- **Zombie filtering** — events whose `endDate` is in the past are dropped even
+  when the venue still flags them `closed=false` (resolved/expired markets have
+  degenerate prices and evaporating liquidity), plus a curated `ZOMBIE_EVENT_IDS`
+  set for events captured before the filter existed.
+- **`live_negrisk_events()`** — the one function every Polymarket pull calls:
+  negRisk-only, minimum field size, zombie-free.
+- **Price sanity** — `clean_price()` accepts a probability quote only in the open
+  interval (0, 1); exactly 0/1, negative, >1 or NaN is degenerate and flagged
+  (`p_yes_mid_valid`) rather than silently averaged into a result.
+- **Polite HTTP** — retry with backoff and a real `User-Agent` (Gamma 403s
+  without one).
+
+All of it is pure/stdlib and unit-tested with no network (`tests/test_core.py`),
+so the cleaning rules themselves are verified, not just trusted.
+
 ## Part 3 — does an executable window ever open? (forward panel)
 
 A single snapshot cannot tell you whether a fleeting sub-\$1 lock ever appears.

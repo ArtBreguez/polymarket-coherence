@@ -23,6 +23,47 @@ def _load(mod_name, filename):
 depth = _load("analyze_depth", "analyze_depth.py")
 fwd = _load("collect_forward", "collect_forward.py")
 loop = _load("analyze_loop", "analyze_loop.py")
+hy = _load("hygiene", "hygiene.py")
+
+
+# ---- hygiene: the single source of truth for data cleaning ----
+def test_hygiene_to_float():
+    assert hy.to_float("0.5") == 0.5
+    assert hy.to_float(None) is None
+    assert hy.to_float("") is None
+    assert hy.to_float("abc") is None
+
+def test_hygiene_clean_price_valid_range():
+    assert hy.clean_price(0.5) == 0.5
+    assert hy.clean_price(0.001) == 0.001
+    assert hy.clean_price(0.999) == 0.999
+
+def test_hygiene_clean_price_rejects_degenerate():
+    assert hy.clean_price(0.0) is None      # resolved/placeholder
+    assert hy.clean_price(1.0) is None      # resolved
+    assert hy.clean_price(-0.1) is None     # corrupt
+    assert hy.clean_price(1.5) is None      # corrupt
+    assert hy.clean_price(None) is None
+    assert hy.clean_price(float("nan")) is None
+
+def test_hygiene_is_zombie_by_id():
+    assert hy.is_zombie({"id": "831375"}) is True   # known Ethiopia zombie
+    assert hy.is_zombie({"id": "999999", "endDate": "2099-01-01T00:00:00Z"}) is False
+
+def test_hygiene_is_zombie_by_expiry():
+    assert hy.is_zombie({"id": "x", "endDate": "2020-01-01T00:00:00Z"}) is True
+    assert hy.is_zombie({"id": "x"}) is False  # no date -> keep
+
+def test_hygiene_live_negrisk_filters_all():
+    events = [
+        {"id": "1", "negRisk": True,  "markets": [1, 2, 3], "endDate": "2099-01-01T00:00:00Z"},  # keep
+        {"id": "2", "negRisk": False, "markets": [1, 2, 3]},                                       # not negRisk
+        {"id": "3", "negRisk": True,  "markets": [1]},                                             # too small
+        {"id": "831375", "negRisk": True, "markets": [1, 2, 3, 4]},                                # zombie id
+        {"id": "5", "negRisk": True,  "markets": [1, 2, 3], "endDate": "2000-01-01T00:00:00Z"},   # expired
+    ]
+    kept = hy.live_negrisk_events(events, min_outcomes=3)
+    assert [e["id"] for e in kept] == ["1"]
 
 
 # ---- vwap_buy: walk the ask side cheapest-first ----
@@ -64,14 +105,14 @@ def test_field_cost_incomplete_when_book_too_thin():
 
 # ---- is_expired: reject zombie markets ----
 def test_is_expired_past_date():
-    assert fwd.is_expired("2020-01-01T00:00:00Z") is True
+    assert hy.is_expired("2020-01-01T00:00:00Z") is True
 
 def test_is_expired_future_date():
-    assert fwd.is_expired("2099-01-01T00:00:00Z") is False
+    assert hy.is_expired("2099-01-01T00:00:00Z") is False
 
 def test_is_expired_missing_or_garbage_kept():
-    assert fwd.is_expired(None) is False
-    assert fwd.is_expired("not-a-date") is False
+    assert hy.is_expired(None) is False
+    assert hy.is_expired("not-a-date") is False
 
 
 # ---- kalshi_fee: round_up(0.07 * p*(1-p)) ----

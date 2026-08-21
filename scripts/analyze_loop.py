@@ -27,23 +27,18 @@ import argparse
 import json
 import urllib.parse
 import urllib.request
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from hygiene import http_json, to_float as _f  # noqa: E402
 
 GAMMA = "https://gamma-api.polymarket.com"
 KALSHI = "https://api.elections.kalshi.com/trade-api/v2"
 
 
-def _get(url: str) -> dict | list:
-    req = urllib.request.Request(url, headers={"Accept": "application/json",
-                                               "User-Agent": "polymarket-coherence/1.0"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.loads(r.read())
-
-
-def _f(x):
-    try:
-        return float(x)
-    except (TypeError, ValueError):
-        return None
+def _get(url: str):
+    return http_json(url, timeout=30)
 
 
 def kalshi_fee(price, contracts=1):

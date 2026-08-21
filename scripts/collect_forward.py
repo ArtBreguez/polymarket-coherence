@@ -21,45 +21,21 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
+import sys
 import time
-import urllib.parse
-import urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from hygiene import http_json, gamma_events, live_negrisk_events  # noqa: E402
 
 GAMMA = "https://gamma-api.polymarket.com"
 CLOB = "https://clob.polymarket.com"
 BATCH = 40
 
 
-def is_expired(end_date, now=None):
-    """True if the event's endDate is in the past. Polymarket sometimes keeps
-    resolved/expired events flagged closed=false; those 'zombie' markets have
-    degenerate prices and must be excluded from a coherence study."""
-    if not end_date:
-        return False  # no endDate → cannot judge; keep it
-    try:
-        end = dt.datetime.fromisoformat(str(end_date).replace("Z", "+00:00"))
-    except ValueError:
-        return False
-    now = now or dt.datetime.now(dt.timezone.utc)
-    return end < now
-
-
 def _req(url, data=None):
-    method = "POST" if data is not None else "GET"
-    body = json.dumps(data).encode() if data is not None else None
-    headers = {"Accept": "application/json", "User-Agent": "polymarket-coherence/1.0"}
-    if data is not None:
-        headers["Content-Type"] = "application/json"
-    req = urllib.request.Request(url, data=body, method=method, headers=headers)
-    for attempt in range(4):
-        try:
-            with urllib.request.urlopen(req, timeout=45) as r:
-                return json.loads(r.read())
-        except Exception:  # noqa: BLE001 — transient, retry with backoff
-            if attempt == 3:
-                raise
-            time.sleep(1.5 * (attempt + 1))
-    return None
+    """Thin wrapper kept for call-site compatibility; delegates to hygiene."""
+    return http_json(url, data=data, timeout=45)
 
 
 def vwap_buy(asks, shares):
@@ -83,18 +59,15 @@ def vwap_buy(asks, shares):
 
 
 def snapshot(size: float, limit: int):
-    events = _req(f"{GAMMA}/events?" + urllib.parse.urlencode(
-        {"closed": "false", "limit": limit, "order": "volume", "ascending": "false"})) or []
+    events = gamma_events(limit=limit)
 
-    # token -> event; collect the YES token per child market
+    # token -> event; collect the YES token per child market.
+    # live_negrisk_events applies all shared hygiene: negRisk-only, >=3 outcomes,
+    # and zombie/expired exclusion — the single choke point for this pull.
     ev_tokens: dict[str, list[str]] = {}
     ev_meta: dict[str, dict] = {}
     tok_all: list[str] = []
-    for e in events:
-        if not e.get("negRisk"):
-            continue
-        if is_expired(e.get("endDate")):
-            continue  # skip zombie markets: past endDate but still closed=false in Gamma
+    for e in live_negrisk_events(events, min_outcomes=1):
         eid = str(e.get("id"))
         toks = []
         for m in e.get("markets", []):
