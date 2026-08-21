@@ -20,10 +20,12 @@ buy every outcome for less than \$1 and collect the guaranteed \$1.
 these markets are quoted and how liquidity is distributed?**
 
 The contribution here is narrow and contrarian: not to discover prediction-market
-arbitrage (others have — see *Prior work*), but to show that **naive
-multi-outcome "coherence violations" are governed by liquidity structure, not
-mispricing**, and to demonstrate it at three levels of increasing rigor, including
-a second, independently-quoted venue.
+arbitrage (others have — see *Prior work*), but to show that the **large
+multi-outcome "coherence violations" a naive observer sees are governed by
+liquidity structure, not mispricing** — and that the only genuine sub-\$1 windows
+are rare, marginal (≤0.6% gross), and confined to the *smallest* fields, the
+opposite of the naive picture. Demonstrated at three levels of increasing rigor,
+including a second, independently-quoted venue.
 
 ---
 
@@ -63,7 +65,8 @@ guaranteed payoff by buying every outcome:
 | 100 shares | 5 | **1.0190** | 1.0040 |
 | 1000 shares | 5 | 1.0190 | 1.0068 |
 
-**Every complete field costs more than \$1 to lock, at every size.** No free lunch.
+**Every complete field costs more than \$1 to lock in this snapshot, at every
+size.** (The forward panel in Part 3 finds rare, marginal exceptions — see there.)
 
 The reason only 5 fields are lockable at all is the core result:
 
@@ -78,22 +81,36 @@ illiquid, unpriced outcomes** that cannot be bought. Their "sum of listed prices
 is therefore not an executable portfolio — the apparent violation is a
 **liquidity-structure artifact, not mispricing**.
 
-## Part 3 — No executable window ever opens (forward panel)
+## Part 3 — Executable windows are rare, marginal, and only in small fields (forward panel)
 
 A single snapshot can't tell you whether a fleeting sub-\$1 lock ever *appears*.
-A scheduled collector (every 15 min) built a panel of **117 snapshots** over ~28h
+A scheduled collector (every 15 min) built a panel of **125 snapshots** over ~30h
 across 38 events.
 
 - **5 of 38** events were ever complete (lockable) — always the same 5 small,
-  dense fields (Fed, midterms, US-Iran).
-- **0 of 38** events were *ever* executable (lock cost < \$1) in any snapshot.
-- Lock cost over all 585 complete observations: **min 1.0039, median 1.026, max
-  1.207** — stable and always above \$1.
+  dense fields (Fed, midterms, US-Iran). Large fields are **never** lockable.
+- **1 of 38** events ever crossed below \$1 on a **gross** basis: "Balance of
+  Power: 2026 Midterms" (5 outcomes) hit a lock cost of **0.994** — a **+0.6%
+  gross edge** — and held sub-\$1 for **4 consecutive snapshots (~60 min)**.
+- Lock cost over all 625 complete observations: **min 0.994, median 1.025, max
+  1.217**. 4 of 625 (0.6%) were sub-\$1, all in that one small field.
 
-The lockable fields are so tight (e.g. "Balance of Power" median 1.016, std
-~0.002) that crossing \$1 would take an implausible move; the fields that could
-plausibly diverge are never complete. The panel confirms the snapshot result
-prospectively: **no free lunch opens.**
+This is the honest, important result — and it *sharpens* rather than weakens the
+thesis. The method **does** detect a window when one opens, and the one it found
+is exactly where theory predicts: a **small, dense, fully-liquid field**, not a
+large one. The window is **marginal (0.6% gross) and gross-of-costs**: on
+Polymarket, converting a complete YES set to \$1 incurs on-chain gas and
+conversion costs not modeled here (see *Scope & limitations*), which plausibly
+erase a 0.6% edge. Large multi-outcome fields — the ones a naive observer flags
+as "violated" — **never** produce such a window at all, because they never
+complete. So:
+
+- **Large-field "violations": pure liquidity artifact.** Never executable.
+- **Small-field windows: real but marginal.** Rare, tiny, gross-of-fees, in the
+  few fields dense enough to lock.
+
+The panel confirms prospectively what the snapshots showed: **no large free
+lunch — only occasional, sub-1%, small-field, gross-of-cost windows.**
 
 ## Part 4 — The same outcome is coherent across two venues (cross-market)
 
@@ -121,8 +138,9 @@ missing depth. **The two venues are coherent.**
 
 ## Conclusion
 
-Apparent multi-outcome "coherence violations" on Polymarket are **not exploitable
-mispricing**. They are governed by market microstructure, shown three ways:
+The *large* multi-outcome "coherence violations" that a naive observer flags on
+Polymarket are **not exploitable mispricing** — they are governed by market
+microstructure, shown three ways:
 
 1. **Spread** — at the mid, prices already sum to ~1; the "violation" is the
    bid/ask band, which widens with field size.
@@ -131,8 +149,16 @@ mispricing**. They are governed by market microstructure, shown three ways:
 3. **Cross-venue** — against a second independent order book, matched outcomes are
    coherent once fees and real liquidity are enforced.
 
-Coherence must be judged on **depth-aware, complete-field, fee-and-liquidity-aware
-execution** — not on the sum of listed prices.
+The one place a genuine sub-\$1 lock *does* appear is exactly where the
+microstructure allows it: a **small, dense, fully-liquid field**, and even there
+the edge is **marginal (≤0.6% gross) and rare** (4 of 625 complete observations),
+plausibly erased by execution costs. That is the opposite of the naive picture,
+in which the *large* fields look most violated.
+
+Bottom line: coherence must be judged on **depth-aware, complete-field,
+fee-and-liquidity-aware execution** — not on the sum of listed prices. Judged that
+way, the apparent violations vanish, and what remains are tiny, gross-of-cost
+windows in the smallest fields.
 
 ## Scope & honest limitations
 
@@ -140,11 +166,14 @@ execution** — not on the sum of listed prices.
   not whether anyone took it. Depth-aware realized on-chain profit is a different
   question (see *Prior work*).
 - **Snapshot + young panel.** Parts 1–2 are a cross-sectional snapshot;
-  Part 3's panel is ~28h. "0 executable windows" is a strong result over 117
-  snapshots, not yet a long-horizon duration statistic.
-- **Conservative on costs.** Part 2's lock cost is the raw book-walking fill cost;
-  taker fees / gas only make an already >\$1 lock *more* expensive, so the
-  no-arbitrage conclusion is conservative. Part 4 *does* model Kalshi fees.
+  Part 3's panel is ~30h / 125 snapshots. The "rare, marginal, small-field-only
+  windows" result is strong over that span, not yet a long-horizon duration
+  statistic.
+- **Costs modeled only in Part 4.** Parts 1–3 report the raw book-walking fill
+  cost. For nearly all fields the lock already costs >\$1, so taker fees / on-chain
+  gas only reinforce no-arbitrage. The lone sub-\$1 case (Part 3, 0.6% gross) sits
+  *within* the range those unmodeled costs could erase, so it is reported as a
+  **gross** window, not realized profit. Part 4 *does* model Kalshi fees.
 - **Curated cross-venue matches.** Only unambiguous same-semantics events are
   matched (2 here); automatic semantic matching is deliberately avoided because it
   fabricates false arbitrage.

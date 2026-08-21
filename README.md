@@ -15,8 +15,9 @@ exclusive* (negRisk) events. In a mutually-exclusive event the outcome
 probabilities must sum to 1. Naive readings at the **mid price** appear to show
 frequent, large violations (buy/sell the whole field for less/more than \$1).
 This repo tests whether those violations **survive the bid-ask spread and order-book
-depth** — i.e. whether they are *executable* — and finds they are governed by
-liquidity structure, not mispricing.
+depth** — i.e. whether they are *executable* — and finds the large ones are a
+liquidity-structure artifact, while genuine sub-\$1 windows are rare, marginal
+(≤0.6% gross), and confined to the smallest fields.
 
 ## TL;DR findings
 
@@ -53,13 +54,16 @@ shares, and rises with both order size (walking the book) and field size
 outcomes have no book at all, so the "sum of listed prices" is not a portfolio
 you can buy — a genuine long-tail illiquidity effect, not a listing artifact.
 
-> **Interpretation.** Naive multi-outcome "coherence violations" on Polymarket
-> are **not mispricing** and **not free money**. They are governed by liquidity
-> structure: (a) at the mid, prices already sum to ~1; (b) small dense fields are
-> coherent and cost >\$1 to lock after spread; (c) large fields only *appear*
-> violated because a long tail of illiquid, unpriced outcomes cannot be bought,
-> so their listed-price sum is not an executable portfolio. Coherence must be
-> judged on **depth-aware, complete-field** execution.
+> **Interpretation.** The *large* multi-outcome "coherence violations" a naive
+> observer flags on Polymarket are **not mispricing** and **not free money**.
+> They are governed by liquidity structure: (a) at the mid, prices already sum to
+> ~1; (b) small dense fields are near-coherent and typically cost >\$1 to lock
+> after spread; (c) large fields only *appear* violated because a long tail of
+> illiquid, unpriced outcomes cannot be bought, so their listed-price sum is not
+> an executable portfolio. The forward panel (below) finds the *only* genuine
+> sub-\$1 windows are rare, marginal (≤0.6% gross), and confined to small fields —
+> the opposite of the naive picture. Coherence must be judged on **depth-aware,
+> complete-field** execution.
 
 ### 3. Cross-market (Law of One Price): Polymarket vs Kalshi
 Within one venue, prices are internally coherent by construction. The sharper
@@ -158,10 +162,14 @@ A single snapshot cannot tell you whether a fleeting sub-\$1 lock ever appears.
 were executable (< \$1), and the **longest run of consecutive executable
 snapshots** — a proxy for how long a window persists.
 
-Panel to date (**117 snapshots** over ~28h, order size 100): **5/38 events
-complete** (the same small dense fields every time), **0 ever executable** (lock
-cost < \$1) in any snapshot. Lock cost over all 585 complete observations:
-**min 1.004, median 1.026, max 1.207** — stable and always above \$1. The
+Panel to date (**125 snapshots** over ~30h, order size 100): **5/38 events
+complete** (the same small dense fields every time; large fields never lock).
+**1/38 ever crossed below \$1 on a gross basis** — "Balance of Power: 2026
+Midterms" hit **0.994** (+0.6% gross edge) and held sub-\$1 for ~60 min. Lock
+cost over all 625 complete observations: **min 0.994, median 1.025, max 1.217**;
+only 4/625 (0.6%) were sub-\$1, all in that one small field, and all *gross* of
+on-chain execution costs that plausibly erase a 0.6% edge. Large multi-outcome
+fields — the ones that *look* most violated — never produce a window at all. The
 scheduled collector keeps growing the series.
 
 ## Data
@@ -179,14 +187,16 @@ scheduled collector keeps growing the series.
 - **Parts 1–2 are cross-sectional; Part 3 is a young panel.** The Gamma API does
   not reliably serve historical price series for resolved markets (verified: even
   the \$1.5B Trump-2024 market returns an empty `prices-history`), so Parts 1–2
-  are a single snapshot. Part 3's forward collector has built ~28h / 117
-  snapshots so far — "0 executable windows" is a strong result over that span,
-  not yet a long-horizon duration statistic.
+  are a single snapshot. Part 3's forward collector has built ~30h / 125
+  snapshots so far — the "rare, marginal, small-field-only windows" result is
+  strong over that span, but not yet a long-horizon duration statistic.
 - **Fees & gas not modeled in Parts 1–3.** The lock cost is the raw fill cost of
   walking the book. Polymarket makers are fee-exempt but takers and on-chain
-  conversion pay costs, which only make the (already > \$1) lock *more* expensive
-  — so the no-arbitrage conclusion is conservative. Part 4 *does* model Kalshi's
-  taker fee explicitly.
+  conversion pay costs. For the vast majority of fields the lock already costs
+  > \$1, so these costs only reinforce no-arbitrage. The one exception — the
+  small-field 0.6%-gross window in Part 3 — is *within* the range these unmodeled
+  costs could plausibly erase, so we report it as a **gross** window, not a
+  realized profit. Part 4 *does* model Kalshi's taker fee explicitly.
 - **Zombie markets are filtered.** Polymarket occasionally keeps an event flagged
   `closed=false` past its `endDate` (e.g. a resolved weekly market). These have
   degenerate prices and evaporating liquidity, so all collectors now drop any
@@ -203,11 +213,12 @@ scheduled collector keeps growing the series.
 
 Arbitrage and coherence on Polymarket have been studied. This repo does **not**
 claim to discover prediction-market arbitrage; its contribution is the narrow,
-contrarian, and reproducible point that **naive multi-outcome "coherence
-violations" are governed by liquidity structure, not mispricing** — the mid
-prices already sum to ~1, small dense fields cost >\$1 to lock after spread, and
-large fields only *appear* violated because a long tail of illiquid, unpriced
-outcomes cannot be bought.
+contrarian, and reproducible point that **the large multi-outcome "coherence
+violations" a naive observer sees are a liquidity-structure artifact, not
+mispricing** — the mid prices already sum to ~1, small dense fields typically
+cost >\$1 to lock after spread (genuine sub-\$1 windows are rare, ≤0.6% gross, and
+only in the smallest fields), and large fields only *appear* violated because a
+long tail of illiquid, unpriced outcomes cannot be bought.
 
 - *Unravelling the Probabilistic Forest: Arbitrage in Prediction Markets* (2025)
 - *Executable Arbitrage and Market Efficiency in Prediction Markets* (2026)
