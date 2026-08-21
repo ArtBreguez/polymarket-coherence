@@ -114,13 +114,8 @@
     <div class="box chart sm"><canvas id="liqChart"></canvas></div>
 
     <h2 id="loop">cross-market // law of one price · polymarket vs kalshi</h2>
-    <p class="desc">same real-world event, two independent order books. edge = best spread-crossing profit <em>after</em> Kalshi's taker fee. net &gt; 0 would be real arbitrage.</p>
-    <div class="box" id="loopBox"><div class="cap" id="loopCap">loading…</div>
-      <table id="loopTable"><thead><tr>
-        <th>bucket</th><th class="num">poly bid/ask</th><th class="num">kalshi bid/ask</th>
-        <th class="num">gross</th><th class="num">net(fee)</th>
-      </tr></thead><tbody></tbody></table>
-    </div>
+    <p class="desc">same real-world event, two independent order books. edge = best spread-crossing profit <em>after</em> Kalshi's taker fee. an edge only counts as <span class="pos">arb</span> if it survives fees AND sits on real liquidity (a zero-liq quote is a phantom top-of-book).</p>
+    <div id="loopWrap"><div class="box"><div class="cap dimtxt">loading…</div></div></div>
 
     <h2>per-event // latest snapshot</h2>
     <p class="desc">outcomes = declared field size · priced = fraction with a live book · lock = cost to guarantee $1.</p>
@@ -195,26 +190,41 @@ async function load(){
       plugins:{legend:{labels:{color:G,boxWidth:12}}},
       scales:{x:{ticks:{color:D},grid:{color:GRID}},y:{ticks:{color:D},grid:{color:GRID},max:100}}}});
 
-  // cross-market loop table
+  // cross-market loop — one block per matched event
+  const lb=document.getElementById("loopWrap");
   if(loop&&loop.results&&loop.results.length){
-    const r=loop.results[0];
-    document.getElementById("loopCap").textContent="> "+r.description+" · "+sTs(loop.generated_utc)+" UTC";
-    let best=null;
-    document.querySelector("#loopTable tbody").innerHTML=r.buckets.map(b=>{
-      const pj=b.poly_bid==null?"—":`${b.poly_bid}/${b.poly_ask}`;
-      const kj=b.kalshi_bid==null?"—":`${b.kalshi_bid}/${b.kalshi_ask}`;
-      const en=b.edge_net,eg=b.edge_gross;
-      if(en!=null&&(best==null||en>best))best=en;
-      const encls=en!=null&&en>0?"pos":"neg";
-      return `<tr><td>${b.label}</td><td class="num dimtxt">${pj}</td><td class="num dimtxt">${kj}</td>
-        <td class="num">${fmt(eg,3)}</td><td class="num ${encls}">${fmt(en,3)}</td></tr>`;
+    let totalExec=0, totalMatched=0;
+    lb.innerHTML=loop.results.map(r=>{
+      let best=null, nexec=0;
+      const rows=r.buckets.map(b=>{
+        const pj=b.poly_bid==null?"—":`${b.poly_bid}/${b.poly_ask}`;
+        const kj=b.kalshi_bid==null?"—":`${b.kalshi_bid}/${b.kalshi_ask}`;
+        const en=b.edge_net;
+        const ex=b.executable;
+        if(ex){nexec++;if(best==null||en>best)best=en;}
+        totalMatched++;
+        const encls=ex?"pos":(en!=null&&en>0?"dimtxt":"neg");
+        const liq=b.kalshi_liq!=null?("$"+fmt(b.kalshi_liq,0)):"—";
+        return `<tr><td>${b.label}</td><td class="num dimtxt">${pj}</td><td class="num dimtxt">${kj}</td>
+          <td class="num ${encls}">${fmt(en,3)}</td><td class="num dimtxt">${liq}</td>
+          <td>${ex?'<span class="pill pos">arb</span>':'<span class="pill n">—</span>'}</td></tr>`;
+      }).join("");
+      totalExec+=nexec;
+      const kindTag=r.kind==="by_name"?"name-matched":"bucket-matched";
+      return `<div class="box" style="margin-bottom:12px">
+        <div class="cap">> ${r.description} · <span class="dimtxt">${r.buckets.length} outcomes · ${kindTag}</span></div>
+        <div class="scroll" style="max-height:260px"><table><thead><tr>
+          <th>outcome</th><th class="num">poly b/a</th><th class="num">kalshi b/a</th>
+          <th class="num">net(fee)</th><th class="num">kalshi liq</th><th>exec</th>
+        </tr></thead><tbody>${rows}</tbody></table></div></div>`;
     }).join("");
-    const good=best!=null&&best>0;
     document.getElementById("verdict").innerHTML=
-      `<b>verdict:</b> best net-of-fee cross-market edge = <b class="${good?'pos':'neg'}">$${fmt(best,3)}</b> — `+
-      (good?"a real arbitrage window is open.":"no arbitrage. gross gaps are entirely eaten by spread + Kalshi fees. the two venues are coherent.");
+      `<b>verdict:</b> across <b>${loop.results.length}</b> matched events / <b>${totalMatched}</b> aligned outcomes, `+
+      (totalExec>0
+        ?`<b class="pos">${totalExec}</b> executable net-of-fee arbitrage(s) open right now.`
+        :`<b class="pos">0</b> executable arbitrage. every raw cross-venue gap is eaten by spread + Kalshi fees, or sits on a phantom (zero-liquidity) quote. the two venues are coherent.`);
   } else {
-    document.getElementById("loopBox").innerHTML='<div class="cap dimtxt">cross-market feed unavailable this run.</div>';
+    lb.innerHTML='<div class="box"><div class="cap dimtxt">cross-market feed unavailable this run.</div></div>';
   }
 
   document.querySelector("#evTable tbody").innerHTML=events.map(e=>{

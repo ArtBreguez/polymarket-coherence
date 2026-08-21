@@ -87,6 +87,27 @@ def test_kalshi_fee_none_is_zero():
     assert loop.kalshi_fee(None) == 0.0
 
 
+# ---- loop_edge: cross-venue arbitrage after fees ----
+def test_loop_edge_none_when_missing_quote():
+    eg, en, dr = loop.loop_edge(None, 0.5, 0.5, 0.6)
+    assert eg is None and en is None and dr is None
+
+def test_loop_edge_no_arbitrage_when_quotes_agree():
+    # both venues 0.50/0.51 -> no gap, fees make net negative
+    eg, en, dr = loop.loop_edge(0.50, 0.51, 0.50, 0.51)
+    assert en < 0
+
+def test_loop_edge_gross_positive_but_fee_kills_it():
+    # buy Kalshi ask 0.66, sell Polymarket bid 0.67 -> gross +0.01, fee ~0.02 -> net<0
+    eg, en, dr = loop.loop_edge(0.67, 0.68, 0.65, 0.66)
+    assert eg > 0 and en < 0
+
+def test_loop_edge_direction_reported():
+    eg, en, dr = loop.loop_edge(0.90, 0.91, 0.10, 0.11)
+    # Polymarket dear, Kalshi cheap -> buy Kalshi, sell Polymarket
+    assert dr == "buy_kalshi_sell_poly" and en > 0
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_") and callable(v)]
     failed = 0

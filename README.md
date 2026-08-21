@@ -64,10 +64,17 @@ artifact.
 Within one venue, prices are internally coherent by construction. The sharper
 test — with *real* variance, because two venues quote independently — is whether
 the **same real-world outcome** trades at the same price on **Polymarket and
-Kalshi**. We curate explicit event matches (`data/event_matches.json`; automatic
-semantic matching is error-prone and produces fake arbitrage) and compare
-executable quotes bucket by bucket, **modeling Kalshi's taker fee**
-`ceil(0.07·p·(1−p))`.
+Kalshi**. We curate explicit event matches (`data/event_matches.json`) two ways:
+**bucket-matched** (discrete categorical events like the FOMC decision, mapped
+outcome-by-outcome) and **name-matched** (team fields like the NBA champion,
+matched by unique city substring; ambiguous names such as two Madrid clubs are
+skipped, never guessed). Automatic semantic matching is error-prone and produces
+fake arbitrage, so every match is declared and auditable.
+
+An edge counts as executable arbitrage only if it (a) survives **Kalshi's taker
+fee** `ceil(0.07·p·(1−p))` **and** (b) sits on **real liquidity** — a
+zero-liquidity Kalshi quote is a phantom top-of-book with an empty order book
+behind it, so a "gap" there is not tradeable.
 
 Live example — September FOMC decision, aligned bucket by bucket:
 
@@ -77,16 +84,18 @@ Live example — September FOMC decision, aligned bucket by bucket:
 | hike 25bp | 0.31 / 0.32 | 0.32 / 0.33 | 0.00 | **−0.02** |
 | cut 25bp | 0.011 / 0.012 | 0.00 / 0.01 | +0.001 | **−0.009** |
 
-Best net-of-fee edge: **−0.003 → no arbitrage.** The raw cross-venue gaps (up to
-a cent) are entirely eaten by fees and spread. The two venues are coherent on
-matched events.
+Across the matched events (Fed decision · 5 buckets, NBA champion · 30 teams =
+**35 aligned outcomes**): **0 executable arbitrage.** A few NBA teams show a
+gross gap that even survives fees (e.g. NY Knicks +$0.01), but every one sits on
+a **zero-liquidity Kalshi quote** — phantom top-of-book, not tradeable. The two
+venues are coherent.
 
 > **Interpretation.** The same-outcome, cross-venue result mirrors the
-> single-venue one: apparent coherence violations are a **spread-and-fee
-> artifact**, not exploitable mispricing — now shown against a second,
+> single-venue one: apparent coherence violations are a **spread-, fee- and
+> liquidity artifact**, not exploitable mispricing — now shown against a second,
 > independently-quoted order book, a much stronger test than internal coherence
-> alone. The method *does* detect a real window whenever one opens (net edge > 0);
-> in this snapshot none does.
+> alone. The method *does* flag a real window whenever one opens (net edge > 0 on
+> real liquidity); in this snapshot none does.
 
 ## Reproduce
 

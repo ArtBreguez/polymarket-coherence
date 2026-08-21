@@ -1,8 +1,9 @@
 {
-  "_comment": "Curated cross-venue event matches. Automatic semantic matching across venues is error-prone (wrong date/bucket pairing produces fake arbitrage), so matches are declared explicitly and auditably here. Each match maps one Polymarket negRisk event to one Kalshi mutually-exclusive event, bucket by bucket. Prices are read live; only the identity mapping is fixed.",
+  "_comment": "Curated cross-venue event matches. Automatic semantic matching across venues is error-prone (wrong date/bucket pairing produces fake arbitrage), so matches are declared explicitly and auditably here. Two match kinds: 'buckets' (explicit per-outcome mapping, for discrete categorical events like the FOMC decision) and 'by_name' (map a Kalshi series to a Polymarket event by matching each outcome's name/city substring, for team/person fields). Only events with the SAME contract semantics are matched; e.g. Polymarket exact-rate buckets are NOT matched to Kalshi cumulative 'Above X' thresholds, and illiquid long tails are kept (low liquidity is data, not error). Prices are read live; only the identity mapping is fixed.",
   "matches": [
     {
       "id": "fed-sep-2026",
+      "kind": "buckets",
       "description": "FOMC September 2026 rate decision",
       "polymarket_event_title": "Fed Decision in September?",
       "kalshi_series": "KXFEDDECISION",
@@ -14,6 +15,15 @@
         {"label": "hike_25",   "polymarket_contains": "increase interest rates by 25", "kalshi_ticker_suffix": "H25"},
         {"label": "hike_50",   "polymarket_contains": "increase interest rates by 50", "kalshi_ticker_suffix": "H26"}
       ]
+    },
+    {
+      "id": "nba-champ-2027",
+      "kind": "by_name",
+      "description": "NBA 2027 Champion",
+      "polymarket_event_title": "NBA: 2027 Champion",
+      "kalshi_series": "KXNBA",
+      "name_source": "groupItemTitle",
+      "match_on": "city_substring"
     }
   ]
 }
