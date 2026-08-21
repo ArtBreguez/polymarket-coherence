@@ -4,7 +4,7 @@
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.009
+    "lock_cost": 1.01
   },
   {
     "title": "Balance of Power: 2026 Midterms",
@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.164759
+    "lock_cost": 1.167587
   },
   {
     "title": "Democratic Presidential Nominee 2028",
