@@ -1,7 +1,7 @@
 [
   {
     "ts": "2026-08-20T17:07:44.445789+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -9,7 +9,7 @@
   },
   {
     "ts": "2026-08-20T17:08:21.268384+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -17,7 +17,7 @@
   },
   {
     "ts": "2026-08-20T17:10:20.911950+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -25,7 +25,7 @@
   },
   {
     "ts": "2026-08-20T17:11:14.753839+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -33,7 +33,7 @@
   },
   {
     "ts": "2026-08-20T17:15:40.302214+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -41,7 +41,7 @@
   },
   {
     "ts": "2026-08-20T17:30:42.254761+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -49,7 +49,7 @@
   },
   {
     "ts": "2026-08-20T17:45:41.788564+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -57,7 +57,7 @@
   },
   {
     "ts": "2026-08-20T18:00:41.242994+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -65,7 +65,7 @@
   },
   {
     "ts": "2026-08-20T18:15:41.965396+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -73,7 +73,7 @@
   },
   {
     "ts": "2026-08-20T18:30:40.984530+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -81,7 +81,7 @@
   },
   {
     "ts": "2026-08-20T18:45:42.751263+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -89,7 +89,7 @@
   },
   {
     "ts": "2026-08-20T19:00:41.950495+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -97,7 +97,7 @@
   },
   {
     "ts": "2026-08-20T19:15:41.706648+00:00",
-    "events": 39,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -105,7 +105,7 @@
   },
   {
     "ts": "2026-08-20T19:30:42.102626+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -113,7 +113,7 @@
   },
   {
     "ts": "2026-08-20T19:45:43.468836+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -121,7 +121,7 @@
   },
   {
     "ts": "2026-08-20T20:00:43.069331+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -129,7 +129,7 @@
   },
   {
     "ts": "2026-08-20T20:15:43.128367+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -137,7 +137,7 @@
   },
   {
     "ts": "2026-08-20T20:30:42.584137+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -145,7 +145,7 @@
   },
   {
     "ts": "2026-08-20T20:45:43.289478+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0159,
@@ -153,7 +153,7 @@
   },
   {
     "ts": "2026-08-20T21:00:43.355017+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -161,7 +161,7 @@
   },
   {
     "ts": "2026-08-20T21:15:43.144453+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -169,7 +169,7 @@
   },
   {
     "ts": "2026-08-20T21:30:44.296037+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -177,7 +177,7 @@
   },
   {
     "ts": "2026-08-20T21:45:44.131011+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -185,7 +185,7 @@
   },
   {
     "ts": "2026-08-20T22:00:43.950666+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -193,7 +193,7 @@
   },
   {
     "ts": "2026-08-20T22:15:43.503211+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -201,7 +201,7 @@
   },
   {
     "ts": "2026-08-20T22:30:43.758303+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -209,7 +209,7 @@
   },
   {
     "ts": "2026-08-20T22:45:45.159118+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -217,7 +217,7 @@
   },
   {
     "ts": "2026-08-20T23:00:45.446760+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -225,7 +225,7 @@
   },
   {
     "ts": "2026-08-20T23:15:45.052620+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -233,7 +233,7 @@
   },
   {
     "ts": "2026-08-20T23:30:45.101447+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -241,7 +241,7 @@
   },
   {
     "ts": "2026-08-20T23:45:45.893269+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -249,7 +249,7 @@
   },
   {
     "ts": "2026-08-21T00:00:45.717147+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -257,7 +257,7 @@
   },
   {
     "ts": "2026-08-21T00:15:46.602787+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -265,7 +265,7 @@
   },
   {
     "ts": "2026-08-21T00:30:50.534689+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -273,7 +273,7 @@
   },
   {
     "ts": "2026-08-21T00:45:48.535212+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -281,7 +281,7 @@
   },
   {
     "ts": "2026-08-21T01:00:45.937981+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -289,7 +289,7 @@
   },
   {
     "ts": "2026-08-21T01:15:46.210128+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -297,7 +297,7 @@
   },
   {
     "ts": "2026-08-21T01:30:46.601171+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -305,7 +305,7 @@
   },
   {
     "ts": "2026-08-21T01:45:47.295742+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -313,7 +313,7 @@
   },
   {
     "ts": "2026-08-21T02:00:46.883233+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -321,7 +321,7 @@
   },
   {
     "ts": "2026-08-21T02:15:46.760658+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -329,7 +329,7 @@
   },
   {
     "ts": "2026-08-21T02:31:00.067525+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -337,7 +337,7 @@
   },
   {
     "ts": "2026-08-21T02:45:46.342642+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -345,7 +345,7 @@
   },
   {
     "ts": "2026-08-21T03:00:46.857949+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -353,7 +353,7 @@
   },
   {
     "ts": "2026-08-21T03:15:47.484342+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -361,7 +361,7 @@
   },
   {
     "ts": "2026-08-21T03:30:47.026828+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -369,7 +369,7 @@
   },
   {
     "ts": "2026-08-21T03:45:47.682642+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -377,7 +377,7 @@
   },
   {
     "ts": "2026-08-21T04:00:47.655263+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -385,7 +385,7 @@
   },
   {
     "ts": "2026-08-21T04:15:46.485310+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0168,
@@ -393,7 +393,7 @@
   },
   {
     "ts": "2026-08-21T04:30:48.633337+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0168,
@@ -401,7 +401,7 @@
   },
   {
     "ts": "2026-08-21T04:45:47.870608+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0168,
@@ -409,7 +409,7 @@
   },
   {
     "ts": "2026-08-21T05:00:48.017253+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0168,
@@ -417,7 +417,7 @@
   },
   {
     "ts": "2026-08-21T05:15:47.984805+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0167,
@@ -425,7 +425,7 @@
   },
   {
     "ts": "2026-08-21T05:30:48.090744+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0168,
@@ -433,7 +433,7 @@
   },
   {
     "ts": "2026-08-21T05:45:48.678230+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0168,
@@ -441,7 +441,7 @@
   },
   {
     "ts": "2026-08-21T06:00:48.157954+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0168,
@@ -449,7 +449,7 @@
   },
   {
     "ts": "2026-08-21T06:15:49.073875+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -457,7 +457,7 @@
   },
   {
     "ts": "2026-08-21T06:30:50.010635+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -465,7 +465,7 @@
   },
   {
     "ts": "2026-08-21T06:45:49.412212+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -473,7 +473,7 @@
   },
   {
     "ts": "2026-08-21T07:00:48.437598+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -481,7 +481,7 @@
   },
   {
     "ts": "2026-08-21T07:15:49.670681+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -489,7 +489,7 @@
   },
   {
     "ts": "2026-08-21T07:30:49.099842+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -497,7 +497,7 @@
   },
   {
     "ts": "2026-08-21T07:45:49.358785+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -505,7 +505,7 @@
   },
   {
     "ts": "2026-08-21T08:00:49.088872+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -513,7 +513,7 @@
   },
   {
     "ts": "2026-08-21T08:15:49.876856+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0167,
@@ -521,7 +521,7 @@
   },
   {
     "ts": "2026-08-21T08:30:50.193393+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0168,
@@ -529,7 +529,7 @@
   },
   {
     "ts": "2026-08-21T08:45:50.038244+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0168,
@@ -537,7 +537,7 @@
   },
   {
     "ts": "2026-08-21T09:00:52.265634+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.0168,
@@ -545,7 +545,7 @@
   },
   {
     "ts": "2026-08-21T09:15:50.863577+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -553,7 +553,7 @@
   },
   {
     "ts": "2026-08-21T09:30:51.133695+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -561,7 +561,7 @@
   },
   {
     "ts": "2026-08-21T09:45:51.273839+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -569,7 +569,7 @@
   },
   {
     "ts": "2026-08-21T10:00:50.452586+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -577,7 +577,7 @@
   },
   {
     "ts": "2026-08-21T10:15:51.845806+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -585,7 +585,7 @@
   },
   {
     "ts": "2026-08-21T10:30:49.986347+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -593,7 +593,7 @@
   },
   {
     "ts": "2026-08-21T10:45:51.302822+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -601,7 +601,7 @@
   },
   {
     "ts": "2026-08-21T11:00:52.831945+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -609,7 +609,7 @@
   },
   {
     "ts": "2026-08-21T11:15:52.028724+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -617,7 +617,7 @@
   },
   {
     "ts": "2026-08-21T11:30:51.726096+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -625,7 +625,7 @@
   },
   {
     "ts": "2026-08-21T11:45:52.662241+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -633,7 +633,7 @@
   },
   {
     "ts": "2026-08-21T12:00:53.551041+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -641,7 +641,7 @@
   },
   {
     "ts": "2026-08-21T12:15:52.449832+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -649,7 +649,7 @@
   },
   {
     "ts": "2026-08-21T12:30:52.500787+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -657,7 +657,7 @@
   },
   {
     "ts": "2026-08-21T12:45:54.377371+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -665,7 +665,7 @@
   },
   {
     "ts": "2026-08-21T13:00:52.383120+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -673,7 +673,7 @@
   },
   {
     "ts": "2026-08-21T13:15:53.416533+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.01,
@@ -681,7 +681,7 @@
   },
   {
     "ts": "2026-08-21T13:30:53.899707+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.009,
@@ -689,7 +689,7 @@
   },
   {
     "ts": "2026-08-21T13:45:52.888957+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -697,7 +697,7 @@
   },
   {
     "ts": "2026-08-21T14:00:54.145670+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.016,
@@ -705,7 +705,7 @@
   },
   {
     "ts": "2026-08-21T14:15:53.732284+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.015,
@@ -713,7 +713,7 @@
   },
   {
     "ts": "2026-08-21T14:30:53.502335+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.015,
@@ -721,7 +721,7 @@
   },
   {
     "ts": "2026-08-21T14:45:54.047286+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.015,
@@ -729,7 +729,7 @@
   },
   {
     "ts": "2026-08-21T15:00:53.970358+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.015,
@@ -737,7 +737,7 @@
   },
   {
     "ts": "2026-08-21T15:15:53.990172+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.015,
@@ -745,7 +745,7 @@
   },
   {
     "ts": "2026-08-21T15:30:54.611990+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.015,
@@ -753,7 +753,7 @@
   },
   {
     "ts": "2026-08-21T15:45:53.737289+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.015,
@@ -761,7 +761,7 @@
   },
   {
     "ts": "2026-08-21T15:59:25.728774+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.015,
@@ -769,7 +769,7 @@
   },
   {
     "ts": "2026-08-21T16:00:55.130065+00:00",
-    "events": 40,
+    "events": 38,
     "complete": 5,
     "executable": 0,
     "min_cost": 1.015,

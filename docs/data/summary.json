@@ -1,9 +1,9 @@
 {
-  "generated_utc": "2026-08-21T16:00:55.215260+00:00",
+  "generated_utc": "2026-08-21T16:08:52.225474+00:00",
   "snapshots": 97,
   "first_snapshot": "2026-08-20T17:07:44.445789+00:00",
   "last_snapshot": "2026-08-21T16:00:55.130065+00:00",
-  "distinct_events": 40,
+  "distinct_events": 38,
   "ever_executable": 0,
   "cost_min": 1.009,
   "cost_median": 1.027,
@@ -13,7 +13,7 @@
     "small_n": 11,
     "small_complete_pct": 45,
     "small_median_fill_pct": 94,
-    "large_n": 29,
+    "large_n": 27,
     "large_complete_pct": 0,
     "large_median_fill_pct": 50
   }

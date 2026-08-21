@@ -30,6 +30,20 @@ CLOB = "https://clob.polymarket.com"
 BATCH = 40
 
 
+def is_expired(end_date, now=None):
+    """True if the event's endDate is in the past. Polymarket sometimes keeps
+    resolved/expired events flagged closed=false; those 'zombie' markets have
+    degenerate prices and must be excluded from a coherence study."""
+    if not end_date:
+        return False  # no endDate → cannot judge; keep it
+    try:
+        end = dt.datetime.fromisoformat(str(end_date).replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    now = now or dt.datetime.now(dt.timezone.utc)
+    return end < now
+
+
 def _req(url, data=None):
     method = "POST" if data is not None else "GET"
     body = json.dumps(data).encode() if data is not None else None
@@ -79,6 +93,8 @@ def snapshot(size: float, limit: int):
     for e in events:
         if not e.get("negRisk"):
             continue
+        if is_expired(e.get("endDate")):
+            continue  # skip zombie markets: past endDate but still closed=false in Gamma
         eid = str(e.get("id"))
         toks = []
         for m in e.get("markets", []):
@@ -94,7 +110,8 @@ def snapshot(size: float, limit: int):
         ev_tokens[eid] = toks
         ev_meta[eid] = {"title": e.get("title"),
                         "n_markets": len(e.get("markets", [])),
-                        "volume": e.get("volume")}
+                        "volume": e.get("volume"),
+                        "end_date": e.get("endDate")}
         tok_all.extend(toks)
 
     # fetch books in batches
@@ -129,6 +146,7 @@ def snapshot(size: float, limit: int):
             "title": meta["title"],
             "n_markets": n,
             "volume": meta["volume"],
+            "end_date": meta.get("end_date"),
             "size": size,
             "filled_legs": filled_legs,
             "fill_ratio": round(filled_legs / n, 4) if n else None,

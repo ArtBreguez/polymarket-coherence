@@ -31,6 +31,19 @@ CLOB = "https://clob.polymarket.com"
 BATCH = 40  # tokens per /books POST — polite and well within limits
 
 
+def is_expired(end_date, now=None):
+    """True if the event's endDate is in the past. Polymarket sometimes keeps
+    resolved/expired events flagged closed=false; those 'zombie' markets have
+    degenerate prices and must be excluded from a coherence study."""
+    if not end_date:
+        return False
+    try:
+        end = dt.datetime.fromisoformat(str(end_date).replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    return end < (now or dt.datetime.now(dt.timezone.utc))
+
+
 def _get(url: str):
     req = urllib.request.Request(url, headers={"Accept": "application/json",
                                                "User-Agent": "polymarket-coherence/1.0"})
@@ -69,6 +82,8 @@ def collect(limit: int):
     for e in events:
         if not e.get("negRisk"):
             continue
+        if is_expired(e.get("endDate")):
+            continue  # skip zombie markets: past endDate but still closed=false
         markets = e.get("markets", [])
         n = len(markets)
         for m in markets:

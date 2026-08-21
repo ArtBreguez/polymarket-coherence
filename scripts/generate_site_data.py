@@ -26,6 +26,16 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PANEL = os.path.join(ROOT, "data", "panel.jsonl")
 OUTDIR = os.path.join(ROOT, "docs", "data")
 
+# Event IDs that Polymarket kept flagged closed=false past their endDate
+# ('zombie' markets: degenerate prices, evaporating liquidity). They were
+# collected before the endDate filter was added to the collectors; we exclude
+# them here so the historical panel on the site reflects only live markets.
+# Newer snapshots already drop expired events at collection time.
+EXCLUDED_EVENT_IDS = {
+    "831375",  # Next Prime Minister of Ethiopia? (endDate 2026-06-01)
+    "411239",  # Elon Musk # tweets August 14 - August 21, 2026?
+}
+
 
 def load_panel():
     rows = []
@@ -35,9 +45,12 @@ def load_panel():
         line = line.strip()
         if line:
             try:
-                rows.append(json.loads(line))
+                r = json.loads(line)
             except json.JSONDecodeError:
                 continue
+            if r.get("event_id") in EXCLUDED_EVENT_IDS:
+                continue  # drop known zombie (expired) markets from the site view
+            rows.append(r)
     return rows
 
 

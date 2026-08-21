@@ -120,6 +120,13 @@ real time series.
   `panel.jsonl` is a seed. The scheduled `collect_forward.py` grows it into a
   real time series (see Part 3). Until it does, "0 executable windows" is a
   strong snapshot result, not yet a duration statistic.
+- **Zombie markets are filtered.** Polymarket occasionally keeps an event flagged
+  `closed=false` past its `endDate` (e.g. a resolved weekly market). These have
+  degenerate prices and evaporating liquidity, so all collectors now drop any
+  event whose `endDate` is in the past, and the site generator excludes two such
+  events that were captured before that filter existed. The raw `panel.jsonl` is
+  kept intact as the unedited collection record; the filtering happens at the
+  analysis/site layer.
 - **Scope is coherence, not realized profit.** We measure whether a lock is
   *available*, not whether anyone took it. Depth-aware realized on-chain arbitrage
   profit is measured by the 2026 "Executable Arbitrage" paper (see below); this

@@ -23,6 +23,19 @@ import urllib.request
 GAMMA = "https://gamma-api.polymarket.com"
 
 
+def is_expired(end_date, now=None):
+    """True if the event's endDate is in the past. Polymarket sometimes keeps
+    resolved/expired events flagged closed=false; those 'zombie' markets have
+    degenerate prices and must be excluded from a coherence study."""
+    if not end_date:
+        return False
+    try:
+        end = dt.datetime.fromisoformat(str(end_date).replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    return end < (now or dt.datetime.now(dt.timezone.utc))
+
+
 def _get(path: str, params: dict) -> list | dict:
     url = f"{GAMMA}{path}?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers={"Accept": "application/json",
@@ -54,6 +67,8 @@ def collect(limit: int) -> tuple[list[dict], dict]:
     for e in events:
         if not e.get("negRisk"):
             continue  # negRisk == mutually-exclusive-by-construction; the object of study
+        if is_expired(e.get("endDate")):
+            continue  # skip zombie markets: past endDate but still closed=false
         markets = e.get("markets", [])
         for m in markets:
             best_bid = _f(m.get("bestBid"))
