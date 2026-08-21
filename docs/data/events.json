@@ -1,12 +1,5 @@
 [
   {
-    "title": "Fed Decision in September?",
-    "n_markets": 5,
-    "fill_ratio": 1.0,
-    "complete": true,
-    "lock_cost": 1.009
-  },
-  {
     "title": "Balance of Power: 2026 Midterms",
     "n_markets": 5,
     "fill_ratio": 1.0,
@@ -21,18 +14,25 @@
     "lock_cost": 1.028
   },
   {
+    "title": "Fed Decision in September?",
+    "n_markets": 5,
+    "fill_ratio": 1.0,
+    "complete": true,
+    "lock_cost": 1.03
+  },
+  {
     "title": "Where will the next next round of US-Iran peace talks be...?",
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.046981
+    "lock_cost": 1.051119
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.156641
+    "lock_cost": 1.138253
   },
   {
     "title": "Democratic Presidential Nominee 2028",
