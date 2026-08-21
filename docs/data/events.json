@@ -4,7 +4,7 @@
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.01
+    "lock_cost": 1.009
   },
   {
     "title": "Balance of Power: 2026 Midterms",
@@ -18,7 +18,7 @@
     "n_markets": 13,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.025
+    "lock_cost": 1.024
   },
   {
     "title": "Where will the next next round of US-Iran peace talks be...?",
@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.162987
+    "lock_cost": 1.165893
   },
   {
     "title": "Democratic Presidential Nominee 2028",
