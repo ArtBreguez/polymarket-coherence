@@ -1,8 +1,8 @@
 {
-  "snapshot_utc": "2026-08-20T16:53:57.323847+00:00",
+  "snapshot_utc": "2026-08-21T21:06:56.846799+00:00",
   "source_events": "https://gamma-api.polymarket.com/events?closed=false&order=volume",
   "source_books": "https://clob.polymarket.com/books (batched POST)",
   "events_scanned": 100,
-  "tokens_requested": 1790,
-  "books_returned": 840
+  "tokens_requested": 1757,
+  "books_returned": 832
 }

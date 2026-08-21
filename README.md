@@ -7,6 +7,9 @@ every 15 min from a scheduled collector.
 
 ![tests](https://github.com/ArtBreguez/polymarket-coherence/actions/workflows/tests.yml/badge.svg)
 
+📄 **Read the write-up: [FINDINGS.md](FINDINGS.md)** — question, method, results,
+limitations, prior work (the short-paper version of this repo).
+
 A small, reproducible study of price coherence in Polymarket's *mutually
 exclusive* (negRisk) events. In a mutually-exclusive event the outcome
 probabilities must sum to 1. Naive readings at the **mid price** appear to show
@@ -18,16 +21,16 @@ liquidity structure, not mispricing.
 ## TL;DR findings
 
 ### 1. Top-of-book: mid prices are coherent; the "violation" is the spread
-Snapshot of 37 negRisk events (≥3 outcomes):
+Snapshot of 36 negRisk events (≥3 outcomes, 1,757 child markets):
 
 | Quantity | Median |
 |---|---|
-| Σ P(outcome) at **mid** | **1.000** — coherent |
-| Σ **best bid** | 0.972 |
-| Σ **best ask** | 1.026 |
+| Σ P(outcome) at **mid** | **0.999** — coherent |
+| Σ **best bid** | 0.968 |
+| Σ **best ask** | 1.019 |
 
-The mid prices sum to 1; the apparent violation is the **bid-ask spread band**
-straddling 1.0.
+The mid prices sum to ~1; the apparent violation is the **bid-ask spread band**
+straddling 1.0, which widens with field size (corr ≈ **+0.67**).
 
 ### 2. Depth-aware: apparent "violations" are a liquidity-structure artifact
 The real test of a mutually-exclusive "coherence violation" is whether you can
@@ -38,19 +41,17 @@ books shows completeness is governed by field size:
 | Field size | Events | Complete¹ | Median outcomes with a book |
 |---|---|---|---|
 | small (≤20 outcomes) | 9 | **56%** | **100%** |
-| large (>20 outcomes) | 28 | **0%** | **47%** |
+| large (>20 outcomes) | 27 | **0%** | **50%** |
 
 ¹ *Complete* = every declared outcome is fillable, so the field can actually be
 locked.
 
 Small, dense fields are complete and **not arbitrageable** — locking \$1 costs
-**1.015–1.029** (above \$1) across order sizes of 1–1,000 shares, and rises with
-both order size (walking the book) and field size (corr ≈ +0.47). Large fields
-are **never complete**: a median of ~half their outcomes have no book at all, so
-the "sum of listed prices" is not a portfolio you can buy. Of the missing legs,
-**836 are real named candidates with no liquidity** vs only 114 structural
-placeholders — this is a genuine long-tail illiquidity effect, not a listing
-artifact.
+a median of **1.019** (min 1.004; above \$1) across order sizes of 1–1,000
+shares, and rises with both order size (walking the book) and field size
+(corr ≈ **+0.42**). Large fields are **never complete**: a median of ~half their
+outcomes have no book at all, so the "sum of listed prices" is not a portfolio
+you can buy — a genuine long-tail illiquidity effect, not a listing artifact.
 
 > **Interpretation.** Naive multi-outcome "coherence violations" on Polymarket
 > are **not mispricing** and **not free money**. They are governed by liquidity
@@ -157,10 +158,11 @@ A single snapshot cannot tell you whether a fleeting sub-\$1 lock ever appears.
 were executable (< \$1), and the **longest run of consecutive executable
 snapshots** — a proxy for how long a window persists.
 
-Seed panel (2 back-to-back snapshots, order size 100): **5/39 events complete,
-0 ever executable**, lock cost stable across snapshots (min 1.016, median 1.029).
-The committed `panel.jsonl` is a seed; the scheduled collector grows it into a
-real time series.
+Panel to date (**117 snapshots** over ~28h, order size 100): **5/38 events
+complete** (the same small dense fields every time), **0 ever executable** (lock
+cost < \$1) in any snapshot. Lock cost over all 585 complete observations:
+**min 1.004, median 1.026, max 1.207** — stable and always above \$1. The
+scheduled collector keeps growing the series.
 
 ## Data
 
@@ -174,18 +176,17 @@ real time series.
 
 ## Honest limitations
 
-- **Snapshot, not panel.** The Gamma API does not reliably serve historical
-  price series for resolved markets (verified: even the \$1.5B Trump-2024 market
-  returns an empty `prices-history`). This study is a **cross-sectional
-  snapshot**; a time-series version would need a live collector running forward.
-- **Fees & gas not modeled.** The lock cost is the raw fill cost of walking the
-  book. Polymarket makers are fee-exempt but takers and on-chain conversion pay
-  costs, which only make the (already > \$1) lock *more* expensive — so the
-  no-arbitrage conclusion is conservative.
-- **Panel is young.** Window-persistence needs many snapshots; the committed
-  `panel.jsonl` is a seed. The scheduled `collect_forward.py` grows it into a
-  real time series (see Part 3). Until it does, "0 executable windows" is a
-  strong snapshot result, not yet a duration statistic.
+- **Parts 1–2 are cross-sectional; Part 3 is a young panel.** The Gamma API does
+  not reliably serve historical price series for resolved markets (verified: even
+  the \$1.5B Trump-2024 market returns an empty `prices-history`), so Parts 1–2
+  are a single snapshot. Part 3's forward collector has built ~28h / 117
+  snapshots so far — "0 executable windows" is a strong result over that span,
+  not yet a long-horizon duration statistic.
+- **Fees & gas not modeled in Parts 1–3.** The lock cost is the raw fill cost of
+  walking the book. Polymarket makers are fee-exempt but takers and on-chain
+  conversion pay costs, which only make the (already > \$1) lock *more* expensive
+  — so the no-arbitrage conclusion is conservative. Part 4 *does* model Kalshi's
+  taker fee explicitly.
 - **Zombie markets are filtered.** Polymarket occasionally keeps an event flagged
   `closed=false` past its `endDate` (e.g. a resolved weekly market). These have
   degenerate prices and evaporating liquidity, so all collectors now drop any
