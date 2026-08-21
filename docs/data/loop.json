@@ -1,0 +1,66 @@
+{
+  "generated_utc": "2026-08-21T16:55:48.395396+00:00",
+  "results": [
+    {
+      "id": "fed-sep-2026",
+      "description": "FOMC September 2026 rate decision",
+      "buckets": [
+        {
+          "label": "maintain",
+          "poly_bid": 0.67,
+          "poly_ask": 0.68,
+          "kalshi_bid": 0.65,
+          "kalshi_ask": 0.66,
+          "mid_gap": 0.02,
+          "edge_gross": 0.01,
+          "edge_net": -0.01,
+          "direction": "buy_kalshi_sell_poly"
+        },
+        {
+          "label": "cut_25",
+          "poly_bid": 0.011,
+          "poly_ask": 0.012,
+          "kalshi_bid": 0.0,
+          "kalshi_ask": 0.01,
+          "mid_gap": 0.0065,
+          "edge_gross": 0.001,
+          "edge_net": -0.009,
+          "direction": "buy_kalshi_sell_poly"
+        },
+        {
+          "label": "cut_50",
+          "poly_bid": 0.002,
+          "poly_ask": 0.003,
+          "kalshi_bid": 0.0,
+          "kalshi_ask": 0.01,
+          "mid_gap": -0.0025,
+          "edge_gross": -0.003,
+          "edge_net": -0.003,
+          "direction": "buy_poly_sell_kalshi"
+        },
+        {
+          "label": "hike_25",
+          "poly_bid": 0.31,
+          "poly_ask": 0.32,
+          "kalshi_bid": 0.32,
+          "kalshi_ask": 0.33,
+          "mid_gap": -0.01,
+          "edge_gross": 0.0,
+          "edge_net": -0.02,
+          "direction": "buy_poly_sell_kalshi"
+        },
+        {
+          "label": "hike_50",
+          "poly_bid": 0.003,
+          "poly_ask": 0.004,
+          "kalshi_bid": 0.0,
+          "kalshi_ask": 0.01,
+          "mid_gap": -0.0015,
+          "edge_gross": -0.004,
+          "edge_net": -0.004,
+          "direction": "buy_poly_sell_kalshi"
+        }
+      ]
+    }
+  ]
+}

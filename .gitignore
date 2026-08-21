@@ -4,3 +4,5 @@ __pycache__/
 .DS_Store
 # Keep committed snapshot + manifest for reproducibility; ignore ad-hoc extra pulls.
 data/snapshot_*.csv
+*.bak
+data/panel_raw.jsonl.bak

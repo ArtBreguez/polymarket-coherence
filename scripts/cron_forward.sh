@@ -16,7 +16,9 @@ if git diff --quiet -- data/panel.jsonl; then
   exit 0
 fi
 
-# 3) regenerate the GitHub Pages dashboard data from the updated panel
+# 3) keep the panel canonical (drop zombies, normalize schema) then regenerate
+#    the dashboard data (incl. cross-market loop.json)
+python3 scripts/clean_panel.py >/dev/null 2>&1 || true
 python3 scripts/generate_site_data.py >/dev/null 2>&1 || true
 
 git add data/panel.jsonl docs/data/

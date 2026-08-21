@@ -147,6 +147,25 @@ def main() -> int:
         with open(os.path.join(OUTDIR, name), "w") as f:
             json.dump(obj, f, indent=2)
 
+    # ---- cross-market LOOP (optional; live network) ----
+    try:
+        loop_spec = os.path.join(os.path.dirname(__file__), "analyze_loop.py")
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("analyze_loop", loop_spec)
+        alm = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(alm)
+        matches_path = os.path.join(ROOT, "data", "event_matches.json")
+        loop_results = alm.analyze(matches_path)
+        loop_obj = {
+            "generated_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
+            "results": loop_results,
+        }
+        with open(os.path.join(OUTDIR, "loop.json"), "w") as f:
+            json.dump(loop_obj, f, indent=2)
+        print(f"  cross-market loop.json written ({len(loop_results)} matched events)")
+    except Exception as e:  # noqa: BLE001 — network optional; keep site data flowing
+        print(f"  (loop.json skipped: {e})")
+
     print(f"site data written to docs/data/ — {len(snapshots)} snapshots, "
           f"{len(ev_hist)} events, ever_executable={ever_exec}")
     return 0

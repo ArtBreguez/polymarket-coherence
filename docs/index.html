@@ -3,161 +3,228 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Polymarket Coherence — live study</title>
-<meta name="description" content="Are Polymarket multi-outcome 'coherence violations' real arbitrage or a liquidity-structure artifact? A small, reproducible study with a live forward panel.">
+<title>polymarket-coherence // live terminal</title>
+<meta name="description" content="Are Polymarket 'coherence violations' real arbitrage or a spread/liquidity artifact? A live, reproducible study across Polymarket & Kalshi.">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root{
-    --bg:#0b0e14; --panel:#141a24; --border:#243040; --fg:#e6edf3;
-    --muted:#8b98a9; --accent:#3b82f6; --good:#22c55e; --bad:#ef4444; --warn:#f59e0b;
+    --bg:#050806; --panel:#0a120c; --border:#123018; --grid:#0e2414;
+    --fg:#3bf07a; --dim:#1f8f4a; --mut:#0f7a3a; --amber:#f5b942; --red:#ff5555;
+    --cyan:#38e0d0; --glow:0 0 6px rgba(59,240,122,.45);
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--fg);
-    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-  .wrap{max-width:960px;margin:0 auto;padding:32px 20px 64px}
-  header h1{font-size:26px;margin:0 0 6px}
-  header p{color:var(--muted);margin:0 0 4px}
-  .updated{font-size:12px;color:var(--muted)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:28px 0}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px}
-  .card .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-  .card .v{font-size:26px;font-weight:600;margin-top:6px}
-  .card .s{font-size:12px;color:var(--muted);margin-top:2px}
-  h2{font-size:18px;margin:36px 0 10px;border-bottom:1px solid var(--border);padding-bottom:8px}
-  .chartbox{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px}
-  .chartbox canvas{width:100%!important}
-  #costChart{height:300px!important} #liqChart{height:240px!important}
-  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
-  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
-  th{color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+  html,body{margin:0;background:var(--bg);color:var(--fg);
+    font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    font-size:14px;line-height:1.55}
+  body{position:relative;overflow-x:hidden}
+  /* CRT scanlines + flicker */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0px,rgba(0,0,0,0) 2px,rgba(0,0,0,.18) 3px,rgba(0,0,0,0) 4px);
+    mix-blend-mode:multiply}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:8;
+    background:radial-gradient(ellipse at center,rgba(10,40,20,0) 55%,rgba(0,0,0,.55) 100%)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline;text-shadow:var(--glow)}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px 18px 70px;position:relative;z-index:1}
+  .glow{text-shadow:var(--glow)}
+  /* top bar */
+  .bar{display:flex;justify-content:space-between;align-items:center;
+    border:1px solid var(--border);border-radius:6px;padding:7px 12px;background:var(--panel);
+    font-size:12px;color:var(--dim)}
+  .bar .dot{color:var(--fg)}
+  .blink{animation:bl 1.1s step-end infinite}@keyframes bl{50%{opacity:0}}
+  /* banner */
+  pre.logo{color:var(--fg);text-shadow:var(--glow);font-size:11px;line-height:1.15;
+    margin:18px 0 6px;overflow-x:auto;white-space:pre}
+  .sub{color:var(--dim);margin:0 0 4px}
+  .prompt{color:var(--mut)}
+  .cmd{color:var(--fg)}
+  /* sections */
+  h2{font-size:13px;margin:30px 0 8px;color:var(--fg);text-transform:uppercase;letter-spacing:.12em}
+  h2::before{content:"$ ";color:var(--mut)}
+  .desc{color:var(--dim);font-size:12.5px;margin:0 0 10px}
+  /* stat grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+  .card{border:1px solid var(--border);border-radius:6px;padding:12px 13px;background:var(--panel);
+    position:relative}
+  .card .k{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em}
+  .card .v{font-size:24px;font-weight:700;margin-top:5px;color:var(--fg);text-shadow:var(--glow)}
+  .card .s{font-size:11px;color:var(--dim);margin-top:3px}
+  .card.warn .v{color:var(--amber);text-shadow:0 0 6px rgba(245,185,66,.4)}
+  /* panels */
+  .box{border:1px solid var(--border);border-radius:6px;background:var(--panel);padding:14px}
+  .box.chart{height:300px} .box.chart.sm{height:250px}
+  .box .cap{color:var(--mut);font-size:11px;margin:-4px 0 8px}
+  /* table */
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th,td{text-align:left;padding:5px 9px;border-bottom:1px solid var(--grid);white-space:nowrap}
+  th{color:var(--mut);font-weight:400;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;
+    position:sticky;top:0;background:var(--panel)}
   td.num{text-align:right;font-variant-numeric:tabular-nums}
-  .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600}
-  .pill.yes{background:rgba(34,197,94,.15);color:var(--good)}
-  .pill.no{background:rgba(139,152,169,.15);color:var(--muted)}
-  .finding{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--accent);
-    border-radius:8px;padding:14px 16px;margin:14px 0;color:#cdd7e2}
-  .finding b{color:var(--fg)}
-  footer{margin-top:48px;color:var(--muted);font-size:13px;border-top:1px solid var(--border);padding-top:16px}
-  .muted{color:var(--muted)}
+  tr:hover td{background:rgba(59,240,122,.05)}
+  .scroll{max-height:420px;overflow-y:auto;border:1px solid var(--border);border-radius:6px}
+  .pill{padding:1px 7px;border-radius:3px;font-size:10.5px;border:1px solid}
+  .pill.y{color:var(--fg);border-color:var(--dim);background:rgba(59,240,122,.1)}
+  .pill.n{color:var(--mut);border-color:var(--grid)}
+  .neg{color:var(--red)} .pos{color:var(--amber)} .dimtxt{color:var(--mut)}
+  .quote{border-left:2px solid var(--dim);padding:8px 12px;margin:12px 0;color:var(--dim);
+    background:rgba(15,122,58,.06);font-size:12.5px}
+  .quote b{color:var(--fg)}
+  footer{margin-top:40px;border-top:1px solid var(--border);padding-top:12px;color:var(--mut);font-size:11.5px}
+  .loading{color:var(--amber)}
+  ::selection{background:var(--dim);color:#000}
+  /* scrollbar */
+  ::-webkit-scrollbar{width:9px;height:9px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--grid);border-radius:4px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--dim)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <h1>Polymarket Coherence <span class="muted">— live study</span></h1>
-    <p>Do Polymarket's multi-outcome (negRisk) markets really violate coherence, or is it a liquidity-structure artifact?</p>
-    <p class="updated" id="updated">loading…</p>
-    <p style="margin-top:10px"><a href="https://github.com/ArtBreguez/polymarket-coherence">source & methodology on GitHub →</a></p>
-  </header>
 
-  <div class="finding">
-    A mutually-exclusive event's outcome prices should sum to <b>$1</b>. Naively they seem to
-    violate this often — but at the mid they sum to ~1, and the "violations" are the <b>bid-ask
-    spread</b> plus a long tail of <b>illiquid outcomes you cannot actually buy</b>. This page
-    tracks, live, whether a genuinely executable sub-$1 lock ever opens.
+  <div class="bar">
+    <span><span class="dot">●</span> polymarket-coherence <span class="dimtxt">// live research terminal</span></span>
+    <span id="clock">--:--:-- UTC</span>
   </div>
 
-  <div class="grid" id="cards"></div>
+  <pre class="logo">
+ ┌─┐┌─┐┬ ┬┌─┐┬─┐┌─┐┌┐┌┌─┐┌─┐   ┬  ┌─┐┌┐
+ │  │ │├─┤├┤ ├┬┘├┤ ││││  ├┤    │  ├─┤├┴┐
+ └─┘└─┘┴ ┴└─┘┴└─└─┘┘└┘└─┘└─┘   ┴─┘┴ ┴└─┘  v4 · polymarket × kalshi</pre>
+  <p class="sub">&gt; do mutually-exclusive prediction markets really violate coherence — or is it just spread, fees &amp; liquidity?</p>
+  <p class="sub" style="margin-bottom:14px">
+    <span class="prompt">artbreguez@research:~$</span>
+    <span class="cmd">./monitor --venues polymarket,kalshi --live</span><span class="blink">▊</span>
+  </p>
+  <p style="font-size:12px"><a href="https://github.com/ArtBreguez/polymarket-coherence">[ git repo ]</a> &nbsp; <a href="#loop">[ cross-market ]</a> &nbsp; <a id="statuslink">[ status ]</a></p>
 
-  <h2>Executable lock cost over time</h2>
-  <p class="muted" style="font-size:13px;margin-top:0">Median &amp; minimum cost to buy one YES share in every outcome of a <em>complete</em> field (order size 100). Below the red $1 line would be real arbitrage.</p>
-  <div class="chartbox"><canvas id="costChart"></canvas></div>
+  <div id="boot" class="loading" style="margin-top:14px">booting data feed…</div>
 
-  <h2>Liquidity structure (latest snapshot)</h2>
-  <p class="muted" style="font-size:13px;margin-top:0">Field completeness collapses with size: small dense fields are lockable; large fields list a long illiquid tail.</p>
-  <div class="chartbox"><canvas id="liqChart"></canvas></div>
+  <div id="content" style="display:none">
 
-  <h2>Per-event — latest snapshot</h2>
-  <div class="chartbox" style="padding:6px 10px">
-    <table id="evTable"><thead><tr>
-      <th>Event</th><th class="num">Outcomes</th><th class="num">Priced</th>
-      <th>Complete</th><th class="num">Lock cost</th>
-    </tr></thead><tbody></tbody></table>
+    <h2>system status</h2>
+    <div class="grid" id="cards"></div>
+
+    <h2>executable lock cost // time series</h2>
+    <p class="desc">median &amp; min cost to buy 1 YES share in every outcome of a <em>complete</em> field (size 100). anything under the red $1.00 line = real arbitrage.</p>
+    <div class="box chart"><canvas id="costChart"></canvas></div>
+
+    <h2>liquidity structure // latest</h2>
+    <p class="desc">field completeness collapses with size — small dense fields are lockable; large fields are a long illiquid tail you can't buy.</p>
+    <div class="box chart sm"><canvas id="liqChart"></canvas></div>
+
+    <h2 id="loop">cross-market // law of one price · polymarket vs kalshi</h2>
+    <p class="desc">same real-world event, two independent order books. edge = best spread-crossing profit <em>after</em> Kalshi's taker fee. net &gt; 0 would be real arbitrage.</p>
+    <div class="box" id="loopBox"><div class="cap" id="loopCap">loading…</div>
+      <table id="loopTable"><thead><tr>
+        <th>bucket</th><th class="num">poly bid/ask</th><th class="num">kalshi bid/ask</th>
+        <th class="num">gross</th><th class="num">net(fee)</th>
+      </tr></thead><tbody></tbody></table>
+    </div>
+
+    <h2>per-event // latest snapshot</h2>
+    <p class="desc">outcomes = declared field size · priced = fraction with a live book · lock = cost to guarantee $1.</p>
+    <div class="scroll"><table id="evTable"><thead><tr>
+      <th>event</th><th class="num">outcomes</th><th class="num">priced</th><th>complete</th><th class="num">lock $</th>
+    </tr></thead><tbody></tbody></table></div>
+
+    <div class="quote" id="verdict"></div>
+
+    <footer>
+      <div>feed: public Gamma + CLOB (Polymarket) &amp; Kalshi trade-api · no keys · collector runs every 15 min → auto-commits to the repo.</div>
+      <div id="genstamp" style="margin-top:4px"></div>
+      <div style="margin-top:4px">a small, reproducible research artifact. see the repo for methodology, honest limitations &amp; prior work.</div>
+    </footer>
   </div>
-
-  <footer>
-    Data refreshes automatically via a scheduled collector (public Gamma + CLOB APIs, no key).
-    This is a small, reproducible research artifact — see the repo for honest limitations and prior work.
-    <span id="genstamp"></span>
-  </footer>
 </div>
 
 <script>
-const fmt = (x, d=4) => (x==null? "—" : Number(x).toFixed(d));
-const shortTs = s => s ? s.slice(5,16).replace("T"," ") : "—";
+const fmt=(x,d=4)=>(x==null?"—":Number(x).toFixed(d));
+const sTs=s=>s?s.slice(5,16).replace("T"," "):"—";
+function tick(){const d=new Date();document.getElementById("clock").textContent=
+  d.toISOString().slice(11,19)+" UTC";}
+setInterval(tick,1000);tick();
+
+async function jget(f){const r=await fetch(f+"?t="+Date.now());if(!r.ok)throw new Error(f+" "+r.status);return r.json();}
 
 async function load(){
-  const bust = "?t=" + Date.now();
-  const [summary, ts, events] = await Promise.all([
-    fetch("data/summary.json"+bust).then(r=>r.json()),
-    fetch("data/timeseries.json"+bust).then(r=>r.json()),
-    fetch("data/events.json"+bust).then(r=>r.json()),
-  ]);
+  const [summary,ts,events]=await Promise.all([
+    jget("data/summary.json"),jget("data/timeseries.json"),jget("data/events.json")]);
+  let loop=null; try{loop=await jget("data/loop.json");}catch(e){}
 
-  document.getElementById("updated").textContent =
-    `${summary.snapshots} snapshots · ${summary.distinct_events} events · last update ${shortTs(summary.last_snapshot)} UTC`;
-  document.getElementById("genstamp").textContent =
-    ` Generated ${shortTs(summary.generated_utc)} UTC.`;
+  document.getElementById("boot").style.display="none";
+  document.getElementById("content").style.display="block";
+  document.getElementById("statuslink").textContent="[ "+summary.snapshots+" snapshots ]";
+  document.getElementById("genstamp").textContent="last collector run: "+sTs(summary.last_snapshot)+" UTC · site generated "+sTs(summary.generated_utc)+" UTC";
 
-  const ls = summary.liquidity_structure || {};
-  const cards = [
-    {k:"Snapshots", v:summary.snapshots, s:"and counting"},
-    {k:"Ever executable (&lt;$1)", v:`${summary.ever_executable} / ${summary.distinct_events}`,
-      s: summary.ever_executable? "a window opened!" : "no free lunch so far"},
-    {k:"Min lock cost", v:"$"+fmt(summary.cost_min), s:"best case, all obs"},
-    {k:"Median lock cost", v:"$"+fmt(summary.cost_median), s:`${summary.n_cost_obs} observations`},
-    {k:"Small fields complete", v:(ls.small_complete_pct??"—")+"%", s:`n≤20 · median ${ls.small_median_fill_pct??"—"}% priced`},
-    {k:"Large fields complete", v:(ls.large_complete_pct??"—")+"%", s:`n>20 · median ${ls.large_median_fill_pct??"—"}% priced`},
+  const ls=summary.liquidity_structure||{};
+  const cards=[
+    {k:"snapshots",v:summary.snapshots,s:"every 15 min"},
+    {k:"events tracked",v:summary.distinct_events,s:"negRisk fields"},
+    {k:"arb windows",v:summary.ever_executable+" / "+summary.distinct_events,s:summary.ever_executable?"window opened":"no free lunch",warn:summary.ever_executable>0},
+    {k:"min lock cost",v:"$"+fmt(summary.cost_min),s:"best case · "+summary.n_cost_obs+" obs"},
+    {k:"small complete",v:(ls.small_complete_pct??"—")+"%",s:"n≤20 · "+(ls.small_median_fill_pct??"—")+"% priced"},
+    {k:"large complete",v:(ls.large_complete_pct??"—")+"%",s:"n>20 · "+(ls.large_median_fill_pct??"—")+"% priced"},
   ];
-  document.getElementById("cards").innerHTML = cards.map(c=>
-    `<div class="card"><div class="k">${c.k}</div><div class="v">${c.v}</div><div class="s">${c.s}</div></div>`).join("");
+  document.getElementById("cards").innerHTML=cards.map(c=>
+    `<div class="card ${c.warn?'warn':''}"><div class="k">${c.k}</div><div class="v">${c.v}</div><div class="s">${c.s}</div></div>`).join("");
 
-  const labels = ts.map(p=>shortTs(p.ts));
-  // dashed $1 reference line drawn under the data
-  const oneLine = {id:"oneLine", beforeDatasetsDraw(chart){
-    const {ctx, chartArea:{left,right}, scales:{y}} = chart;
-    if(!y) return; const yy = y.getPixelForValue(1.0);
-    if(yy<chart.chartArea.top||yy>chart.chartArea.bottom) return;
-    ctx.save(); ctx.strokeStyle="#ef4444"; ctx.lineWidth=1; ctx.setLineDash([5,4]);
-    ctx.beginPath(); ctx.moveTo(left,yy); ctx.lineTo(right,yy); ctx.stroke(); ctx.restore();
-  }};
-  new Chart(document.getElementById("costChart"), {
-    type:"line",
-    data:{labels, datasets:[
-      {label:"median cost", data:ts.map(p=>p.median_cost), borderColor:"#3b82f6", backgroundColor:"#3b82f6", tension:.25, pointRadius:3, borderWidth:2},
-      {label:"min cost", data:ts.map(p=>p.min_cost), borderColor:"#22c55e", backgroundColor:"#22c55e", tension:.25, pointRadius:3, borderWidth:2},
+  const G="#3bf07a",A="#f5b942",R="#ff5555",D="#0f7a3a",GRID="rgba(18,48,24,.7)";
+  Chart.defaults.color="#1f8f4a";Chart.defaults.font.family="monospace";
+  const one={id:"one",beforeDatasetsDraw(c){const y=c.scales.y;if(!y)return;const yy=y.getPixelForValue(1.0);
+    if(yy<c.chartArea.top||yy>c.chartArea.bottom)return;const x=c.ctx;x.save();x.strokeStyle=R;x.setLineDash([5,4]);
+    x.lineWidth=1;x.beginPath();x.moveTo(c.chartArea.left,yy);x.lineTo(c.chartArea.right,yy);x.stroke();
+    x.fillStyle=R;x.font="10px monospace";x.fillText("$1.00 no-arb",c.chartArea.left+4,yy-4);x.restore();}};
+  const labels=ts.map(p=>sTs(p.ts));
+  new Chart(document.getElementById("costChart"),{type:"line",
+    data:{labels,datasets:[
+      {label:"median",data:ts.map(p=>p.median_cost),borderColor:G,backgroundColor:G,tension:.2,pointRadius:0,borderWidth:2},
+      {label:"min",data:ts.map(p=>p.min_cost),borderColor:A,backgroundColor:A,tension:.2,pointRadius:0,borderWidth:1.5},
     ]},
-    options:{responsive:true, maintainAspectRatio:false, animation:false, plugins:{legend:{labels:{color:"#e6edf3"}}},
-      scales:{
-        x:{ticks:{color:"#8b98a9",maxRotation:0,autoSkip:true,maxTicksLimit:8},grid:{color:"#243040"}},
-        y:{ticks:{color:"#8b98a9"},grid:{color:"#243040"},suggestedMin:0.98,suggestedMax:1.03}}},
-    plugins:[oneLine]
-  });
+    options:{responsive:true,maintainAspectRatio:false,animation:false,
+      plugins:{legend:{labels:{color:G,boxWidth:12}}},
+      scales:{x:{ticks:{color:D,maxRotation:0,autoSkip:true,maxTicksLimit:8},grid:{color:GRID}},
+        y:{ticks:{color:D},grid:{color:GRID},suggestedMin:.98,suggestedMax:1.06}}},plugins:[one]});
 
-  const liq = summary.liquidity_structure || {};
-  new Chart(document.getElementById("liqChart"), {
-    type:"bar",
-    data:{labels:["Complete fields (%)","Median outcomes priced (%)"],
-      datasets:[
-        {label:`small (n≤20, ${liq.small_n||0})`, data:[liq.small_complete_pct, liq.small_median_fill_pct], backgroundColor:"#3b82f6"},
-        {label:`large (n>20, ${liq.large_n||0})`, data:[liq.large_complete_pct, liq.large_median_fill_pct], backgroundColor:"#f59e0b"},
-      ]},
-    options:{responsive:true, maintainAspectRatio:false, animation:false, plugins:{legend:{labels:{color:"#e6edf3"}}},
-      scales:{x:{ticks:{color:"#8b98a9"},grid:{color:"#243040"}},
-              y:{ticks:{color:"#8b98a9"},grid:{color:"#243040"},max:100}}}
-  });
+  new Chart(document.getElementById("liqChart"),{type:"bar",
+    data:{labels:["complete fields %","outcomes priced %"],datasets:[
+      {label:`small n≤20 (${ls.small_n||0})`,data:[ls.small_complete_pct,ls.small_median_fill_pct],backgroundColor:G},
+      {label:`large n>20 (${ls.large_n||0})`,data:[ls.large_complete_pct,ls.large_median_fill_pct],backgroundColor:A},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,animation:false,
+      plugins:{legend:{labels:{color:G,boxWidth:12}}},
+      scales:{x:{ticks:{color:D},grid:{color:GRID}},y:{ticks:{color:D},grid:{color:GRID},max:100}}}});
 
-  const tb = document.querySelector("#evTable tbody");
-  tb.innerHTML = events.map(e=>{
-    const pill = e.complete? `<span class="pill yes">yes</span>` : `<span class="pill no">no</span>`;
-    const cost = e.lock_cost==null? '<span class="muted">n/a</span>' : "$"+fmt(e.lock_cost);
-    const fill = e.fill_ratio==null? "—" : Math.round(e.fill_ratio*100)+"%";
-    return `<tr><td>${e.title??""}</td><td class="num">${e.n_markets??""}</td>
-      <td class="num">${fill}</td><td>${pill}</td><td class="num">${cost}</td></tr>`;
+  // cross-market loop table
+  if(loop&&loop.results&&loop.results.length){
+    const r=loop.results[0];
+    document.getElementById("loopCap").textContent="> "+r.description+" · "+sTs(loop.generated_utc)+" UTC";
+    let best=null;
+    document.querySelector("#loopTable tbody").innerHTML=r.buckets.map(b=>{
+      const pj=b.poly_bid==null?"—":`${b.poly_bid}/${b.poly_ask}`;
+      const kj=b.kalshi_bid==null?"—":`${b.kalshi_bid}/${b.kalshi_ask}`;
+      const en=b.edge_net,eg=b.edge_gross;
+      if(en!=null&&(best==null||en>best))best=en;
+      const encls=en!=null&&en>0?"pos":"neg";
+      return `<tr><td>${b.label}</td><td class="num dimtxt">${pj}</td><td class="num dimtxt">${kj}</td>
+        <td class="num">${fmt(eg,3)}</td><td class="num ${encls}">${fmt(en,3)}</td></tr>`;
+    }).join("");
+    const good=best!=null&&best>0;
+    document.getElementById("verdict").innerHTML=
+      `<b>verdict:</b> best net-of-fee cross-market edge = <b class="${good?'pos':'neg'}">$${fmt(best,3)}</b> — `+
+      (good?"a real arbitrage window is open.":"no arbitrage. gross gaps are entirely eaten by spread + Kalshi fees. the two venues are coherent.");
+  } else {
+    document.getElementById("loopBox").innerHTML='<div class="cap dimtxt">cross-market feed unavailable this run.</div>';
+  }
+
+  document.querySelector("#evTable tbody").innerHTML=events.map(e=>{
+    const pill=e.complete?`<span class="pill y">yes</span>`:`<span class="pill n">no</span>`;
+    const cost=e.lock_cost==null?'<span class="dimtxt">—</span>':"$"+fmt(e.lock_cost);
+    const fill=e.fill_ratio==null?"—":Math.round(e.fill_ratio*100)+"%";
+    return `<tr><td>${e.title??""}</td><td class="num">${e.n_markets??""}</td><td class="num">${fill}</td><td>${pill}</td><td class="num">${cost}</td></tr>`;
   }).join("");
 }
-load().catch(e=>{document.getElementById("updated").textContent="failed to load data: "+e;});
+load().catch(e=>{document.getElementById("boot").textContent="feed error: "+e;});
 </script>
 </body>
 </html>
