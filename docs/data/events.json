@@ -18,14 +18,14 @@
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.019
+    "lock_cost": 1.02
   },
   {
     "title": "Where will the next next round of US-Iran peace talks be...?",
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.042085
+    "lock_cost": 1.042285
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
