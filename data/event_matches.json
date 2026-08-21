@@ -1,0 +1,19 @@
+{
+  "_comment": "Curated cross-venue event matches. Automatic semantic matching across venues is error-prone (wrong date/bucket pairing produces fake arbitrage), so matches are declared explicitly and auditably here. Each match maps one Polymarket negRisk event to one Kalshi mutually-exclusive event, bucket by bucket. Prices are read live; only the identity mapping is fixed.",
+  "matches": [
+    {
+      "id": "fed-sep-2026",
+      "description": "FOMC September 2026 rate decision",
+      "polymarket_event_title": "Fed Decision in September?",
+      "kalshi_series": "KXFEDDECISION",
+      "kalshi_date_code": "26SEP",
+      "buckets": [
+        {"label": "maintain",  "polymarket_contains": "no change",        "kalshi_ticker_suffix": "H0"},
+        {"label": "cut_25",    "polymarket_contains": "decrease interest rates by 25", "kalshi_ticker_suffix": "C25"},
+        {"label": "cut_50",    "polymarket_contains": "decrease interest rates by 50", "kalshi_ticker_suffix": "C26"},
+        {"label": "hike_25",   "polymarket_contains": "increase interest rates by 25", "kalshi_ticker_suffix": "H25"},
+        {"label": "hike_50",   "polymarket_contains": "increase interest rates by 50", "kalshi_ticker_suffix": "H26"}
+      ]
+    }
+  ]
+}

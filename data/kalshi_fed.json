@@ -1,0 +1,487 @@
+{
+  "snapshot_utc": "2026-08-21T16:35:02.173772+00:00",
+  "source": "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXFEDDECISION",
+  "series": "KXFEDDECISION",
+  "markets": {
+    "KXFEDDECISION-28JAN-H26": {
+      "ticker": "KXFEDDECISION-28JAN-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0900",
+      "yes_ask": "0.2000",
+      "close_time": "2028-01-26T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-28JAN-H25": {
+      "ticker": "KXFEDDECISION-28JAN-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.0400",
+      "yes_ask": "0.2300",
+      "close_time": "2028-01-26T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-28JAN-H0": {
+      "ticker": "KXFEDDECISION-28JAN-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.5600",
+      "yes_ask": "0.5700",
+      "close_time": "2028-01-26T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-28JAN-C26": {
+      "ticker": "KXFEDDECISION-28JAN-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0200",
+      "yes_ask": "0.0600",
+      "close_time": "2028-01-26T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-28JAN-C25": {
+      "ticker": "KXFEDDECISION-28JAN-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.0500",
+      "yes_ask": "0.0600",
+      "close_time": "2028-01-26T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27DEC-H26": {
+      "ticker": "KXFEDDECISION-27DEC-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0200",
+      "yes_ask": "0.1400",
+      "close_time": "2027-12-08T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27DEC-H25": {
+      "ticker": "KXFEDDECISION-27DEC-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.0100",
+      "yes_ask": "0.6800",
+      "close_time": "2027-12-08T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27DEC-H0": {
+      "ticker": "KXFEDDECISION-27DEC-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.5200",
+      "yes_ask": "0.7400",
+      "close_time": "2027-12-08T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27DEC-C26": {
+      "ticker": "KXFEDDECISION-27DEC-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0100",
+      "yes_ask": "0.1300",
+      "close_time": "2027-12-08T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27DEC-C25": {
+      "ticker": "KXFEDDECISION-27DEC-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.0800",
+      "yes_ask": "0.5300",
+      "close_time": "2027-12-08T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27OCT-H26": {
+      "ticker": "KXFEDDECISION-27OCT-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0400",
+      "yes_ask": "0.1500",
+      "close_time": "2027-10-27T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27OCT-H25": {
+      "ticker": "KXFEDDECISION-27OCT-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.0500",
+      "yes_ask": "0.1600",
+      "close_time": "2027-10-27T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27OCT-H0": {
+      "ticker": "KXFEDDECISION-27OCT-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.7700",
+      "yes_ask": "0.7800",
+      "close_time": "2027-10-27T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27OCT-C26": {
+      "ticker": "KXFEDDECISION-27OCT-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.1600",
+      "close_time": "2027-10-27T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27OCT-C25": {
+      "ticker": "KXFEDDECISION-27OCT-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.0500",
+      "yes_ask": "0.1800",
+      "close_time": "2027-10-27T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27SEP-H26": {
+      "ticker": "KXFEDDECISION-27SEP-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.1300",
+      "close_time": "2027-09-15T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27SEP-H25": {
+      "ticker": "KXFEDDECISION-27SEP-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.0500",
+      "yes_ask": "0.3200",
+      "close_time": "2027-09-15T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27SEP-H0": {
+      "ticker": "KXFEDDECISION-27SEP-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.5900",
+      "yes_ask": "0.8000",
+      "close_time": "2027-09-15T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27SEP-C26": {
+      "ticker": "KXFEDDECISION-27SEP-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.0400",
+      "close_time": "2027-09-15T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27SEP-C25": {
+      "ticker": "KXFEDDECISION-27SEP-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.0700",
+      "yes_ask": "0.2700",
+      "close_time": "2027-09-15T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JUL-H26": {
+      "ticker": "KXFEDDECISION-27JUL-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0200",
+      "yes_ask": "0.0300",
+      "close_time": "2027-07-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JUL-H25": {
+      "ticker": "KXFEDDECISION-27JUL-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.0600",
+      "close_time": "2027-07-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JUL-H0": {
+      "ticker": "KXFEDDECISION-27JUL-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.7700",
+      "yes_ask": "0.7900",
+      "close_time": "2027-07-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JUL-C26": {
+      "ticker": "KXFEDDECISION-27JUL-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0100",
+      "yes_ask": "0.0300",
+      "close_time": "2027-07-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JUL-C25": {
+      "ticker": "KXFEDDECISION-27JUL-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.2000",
+      "close_time": "2027-07-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JUN-H26": {
+      "ticker": "KXFEDDECISION-27JUN-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.0900",
+      "close_time": "2027-06-09T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JUN-H25": {
+      "ticker": "KXFEDDECISION-27JUN-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.0500",
+      "yes_ask": "0.2700",
+      "close_time": "2027-06-09T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JUN-H0": {
+      "ticker": "KXFEDDECISION-27JUN-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.6100",
+      "yes_ask": "0.8000",
+      "close_time": "2027-06-09T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JUN-C26": {
+      "ticker": "KXFEDDECISION-27JUN-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0500",
+      "yes_ask": "0.1200",
+      "close_time": "2027-06-09T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JUN-C25": {
+      "ticker": "KXFEDDECISION-27JUN-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.0600",
+      "yes_ask": "0.1500",
+      "close_time": "2027-06-09T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27APR-H26": {
+      "ticker": "KXFEDDECISION-27APR-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.0400",
+      "close_time": "2027-04-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27APR-H25": {
+      "ticker": "KXFEDDECISION-27APR-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.1200",
+      "close_time": "2027-04-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27APR-H0": {
+      "ticker": "KXFEDDECISION-27APR-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.6000",
+      "yes_ask": "0.6100",
+      "close_time": "2027-04-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27APR-C26": {
+      "ticker": "KXFEDDECISION-27APR-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0200",
+      "yes_ask": "0.0300",
+      "close_time": "2027-04-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27APR-C25": {
+      "ticker": "KXFEDDECISION-27APR-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.1100",
+      "yes_ask": "0.1700",
+      "close_time": "2027-04-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27MAR-H26": {
+      "ticker": "KXFEDDECISION-27MAR-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.0400",
+      "close_time": "2027-03-17T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27MAR-H25": {
+      "ticker": "KXFEDDECISION-27MAR-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.0500",
+      "yes_ask": "0.1000",
+      "close_time": "2027-03-17T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27MAR-H0": {
+      "ticker": "KXFEDDECISION-27MAR-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.6100",
+      "yes_ask": "0.7400",
+      "close_time": "2027-03-17T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27MAR-C26": {
+      "ticker": "KXFEDDECISION-27MAR-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0200",
+      "yes_ask": "0.0300",
+      "close_time": "2027-03-17T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27MAR-C25": {
+      "ticker": "KXFEDDECISION-27MAR-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.1200",
+      "yes_ask": "0.1300",
+      "close_time": "2027-03-17T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JAN-H26": {
+      "ticker": "KXFEDDECISION-27JAN-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.0400",
+      "close_time": "2027-01-27T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JAN-H25": {
+      "ticker": "KXFEDDECISION-27JAN-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.1600",
+      "yes_ask": "0.2000",
+      "close_time": "2027-01-27T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JAN-H0": {
+      "ticker": "KXFEDDECISION-27JAN-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.5700",
+      "yes_ask": "0.6000",
+      "close_time": "2027-01-27T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JAN-C26": {
+      "ticker": "KXFEDDECISION-27JAN-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0100",
+      "yes_ask": "0.0200",
+      "close_time": "2027-01-27T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-27JAN-C25": {
+      "ticker": "KXFEDDECISION-27JAN-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.0700",
+      "yes_ask": "0.1400",
+      "close_time": "2027-01-27T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26DEC-H26": {
+      "ticker": "KXFEDDECISION-26DEC-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0100",
+      "yes_ask": "0.0200",
+      "close_time": "2026-12-09T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26DEC-H25": {
+      "ticker": "KXFEDDECISION-26DEC-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.2200",
+      "yes_ask": "0.2800",
+      "close_time": "2026-12-09T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26DEC-H0": {
+      "ticker": "KXFEDDECISION-26DEC-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.6700",
+      "yes_ask": "0.6800",
+      "close_time": "2026-12-09T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26DEC-C26": {
+      "ticker": "KXFEDDECISION-26DEC-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0100",
+      "yes_ask": "0.0200",
+      "close_time": "2026-12-09T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26DEC-C25": {
+      "ticker": "KXFEDDECISION-26DEC-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.0700",
+      "yes_ask": "0.0900",
+      "close_time": "2026-12-09T18:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26OCT-H26": {
+      "ticker": "KXFEDDECISION-26OCT-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0000",
+      "yes_ask": "0.0200",
+      "close_time": "2026-10-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26OCT-H25": {
+      "ticker": "KXFEDDECISION-26OCT-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.2300",
+      "yes_ask": "0.2400",
+      "close_time": "2026-10-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26OCT-H0": {
+      "ticker": "KXFEDDECISION-26OCT-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.7100",
+      "yes_ask": "0.7300",
+      "close_time": "2026-10-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26OCT-C26": {
+      "ticker": "KXFEDDECISION-26OCT-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0100",
+      "yes_ask": "0.0200",
+      "close_time": "2026-10-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26OCT-C25": {
+      "ticker": "KXFEDDECISION-26OCT-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.0300",
+      "yes_ask": "0.0400",
+      "close_time": "2026-10-28T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26SEP-H26": {
+      "ticker": "KXFEDDECISION-26SEP-H26",
+      "yes_sub_title": "Hike >25bps",
+      "yes_bid": "0.0000",
+      "yes_ask": "0.0100",
+      "close_time": "2026-09-16T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26SEP-H25": {
+      "ticker": "KXFEDDECISION-26SEP-H25",
+      "yes_sub_title": "Hike 25bps",
+      "yes_bid": "0.3200",
+      "yes_ask": "0.3300",
+      "close_time": "2026-09-16T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26SEP-H0": {
+      "ticker": "KXFEDDECISION-26SEP-H0",
+      "yes_sub_title": "Fed maintains rate",
+      "yes_bid": "0.6500",
+      "yes_ask": "0.6600",
+      "close_time": "2026-09-16T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26SEP-C26": {
+      "ticker": "KXFEDDECISION-26SEP-C26",
+      "yes_sub_title": "Cut >25bps",
+      "yes_bid": "0.0000",
+      "yes_ask": "0.0100",
+      "close_time": "2026-09-16T17:59:00Z",
+      "liquidity": "0.0000"
+    },
+    "KXFEDDECISION-26SEP-C25": {
+      "ticker": "KXFEDDECISION-26SEP-C25",
+      "yes_sub_title": "Cut 25bps",
+      "yes_bid": "0.0000",
+      "yes_ask": "0.0100",
+      "close_time": "2026-09-16T17:59:00Z",
+      "liquidity": "0.0000"
+    }
+  }
+}

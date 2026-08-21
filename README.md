@@ -5,6 +5,8 @@
 📊 **Live dashboard:** https://artbreguez.github.io/polymarket-coherence/ — auto-updates
 every 15 min from a scheduled collector.
 
+![tests](https://github.com/ArtBreguez/polymarket-coherence/actions/workflows/tests.yml/badge.svg)
+
 A small, reproducible study of price coherence in Polymarket's *mutually
 exclusive* (negRisk) events. In a mutually-exclusive event the outcome
 probabilities must sum to 1. Naive readings at the **mid price** appear to show
@@ -58,6 +60,34 @@ artifact.
 > so their listed-price sum is not an executable portfolio. Coherence must be
 > judged on **depth-aware, complete-field** execution.
 
+### 3. Cross-market (Law of One Price): Polymarket vs Kalshi
+Within one venue, prices are internally coherent by construction. The sharper
+test — with *real* variance, because two venues quote independently — is whether
+the **same real-world outcome** trades at the same price on **Polymarket and
+Kalshi**. We curate explicit event matches (`data/event_matches.json`; automatic
+semantic matching is error-prone and produces fake arbitrage) and compare
+executable quotes bucket by bucket, **modeling Kalshi's taker fee**
+`ceil(0.07·p·(1−p))`.
+
+Live example — September FOMC decision, aligned bucket by bucket:
+
+| Bucket | Polymarket (bid/ask) | Kalshi (bid/ask) | Gross edge | Net of fee |
+|---|---|---|---|---|
+| maintain | 0.67 / 0.68 | 0.65 / 0.66 | +0.01 | **−0.01** |
+| hike 25bp | 0.31 / 0.32 | 0.32 / 0.33 | 0.00 | **−0.02** |
+| cut 25bp | 0.011 / 0.012 | 0.00 / 0.01 | +0.001 | **−0.009** |
+
+Best net-of-fee edge: **−0.003 → no arbitrage.** The raw cross-venue gaps (up to
+a cent) are entirely eaten by fees and spread. The two venues are coherent on
+matched events.
+
+> **Interpretation.** The same-outcome, cross-venue result mirrors the
+> single-venue one: apparent coherence violations are a **spread-and-fee
+> artifact**, not exploitable mispricing — now shown against a second,
+> independently-quoted order book, a much stronger test than internal coherence
+> alone. The method *does* detect a real window whenever one opens (net edge > 0);
+> in this snapshot none does.
+
 ## Reproduce
 
 ```bash
@@ -74,6 +104,13 @@ python scripts/analyze_depth.py --in  data/books.json --sizes 1,10,100,1000
 # Part 3 — forward panel: run on a schedule, then analyze window persistence
 python scripts/collect_forward.py --size 100 --out data/panel.jsonl    # append one snapshot
 python scripts/analyze_panel.py   --in  data/panel.jsonl               # windows over time
+
+# Part 4 — cross-market Law of One Price (Polymarket vs Kalshi)
+python scripts/collect_kalshi.py --series KXFEDDECISION --out data/kalshi_fed.json  # Kalshi, no key
+python scripts/analyze_loop.py   --matches data/event_matches.json     # net-of-fee cross-venue edge
+
+# Tests (no network)
+python tests/test_core.py
 ```
 
 `collect*.py` each write a data file plus a `*.manifest.json` recording snapshot
