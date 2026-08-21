@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-08-21T14:00:54.230799+00:00",
-  "snapshots": 88,
+  "generated_utc": "2026-08-21T14:15:53.817018+00:00",
+  "snapshots": 89,
   "first_snapshot": "2026-08-20T17:07:44.445789+00:00",
-  "last_snapshot": "2026-08-21T14:00:54.145670+00:00",
+  "last_snapshot": "2026-08-21T14:15:53.732284+00:00",
   "distinct_events": 40,
   "ever_executable": 0,
   "cost_min": 1.009,
   "cost_median": 1.027,
   "cost_max": 1.1932,
-  "n_cost_obs": 440,
+  "n_cost_obs": 445,
   "liquidity_structure": {
     "small_n": 11,
     "small_complete_pct": 45,
