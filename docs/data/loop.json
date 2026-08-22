@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-22T05:46:03.849536+00:00",
+  "generated_utc": "2026-08-22T06:01:03.469696+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -327,14 +327,14 @@
         },
         {
           "label": "Dallas Mavericks",
-          "poly_bid": 0.008,
-          "poly_ask": 0.015,
+          "poly_bid": 0.007,
+          "poly_ask": 0.012,
           "kalshi_bid": 0.0,
           "kalshi_ask": 0.01,
           "kalshi_liq": 0.0,
-          "edge_gross": -0.002,
+          "edge_gross": -0.003,
           "edge_net": -0.012,
-          "direction": "buy_kalshi_sell_poly",
+          "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
         {
