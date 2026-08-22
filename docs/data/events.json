@@ -18,21 +18,21 @@
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.02
+    "lock_cost": 1.023
   },
   {
     "title": "Where will the next next round of US-Iran peace talks be...?",
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.05085
+    "lock_cost": 1.048601
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.232761
+    "lock_cost": 1.230584
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -182,16 +182,16 @@
     "lock_cost": null
   },
   {
-    "title": "Which party will win the House in 2026?",
-    "n_markets": 9,
-    "fill_ratio": 0.2222,
+    "title": "2026 Men\u2019s US Open Winner (Tennis)",
+    "n_markets": 49,
+    "fill_ratio": 0.4286,
     "complete": false,
     "lock_cost": null
   },
   {
-    "title": "2026 Men\u2019s US Open Winner (Tennis)",
-    "n_markets": 49,
-    "fill_ratio": 0.4286,
+    "title": "Which party will win the House in 2026?",
+    "n_markets": 9,
+    "fill_ratio": 0.2222,
     "complete": false,
     "lock_cost": null
   },
