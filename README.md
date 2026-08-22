@@ -26,12 +26,12 @@ Snapshot of 36 negRisk events (≥3 outcomes, 1,757 child markets):
 
 | Quantity | Median |
 |---|---|
-| Σ P(outcome) at **mid** | **0.999** — coherent |
-| Σ **best bid** | 0.968 |
-| Σ **best ask** | 1.019 |
+| Σ P(outcome) at **mid** | **0.998** — coherent |
+| Σ **best bid** | 0.966 |
+| Σ **best ask** | 1.017 |
 
 The mid prices sum to ~1; the apparent violation is the **bid-ask spread band**
-straddling 1.0, which widens with field size (corr ≈ **+0.67**).
+straddling 1.0, which widens with field size (corr ≈ **+0.66**).
 
 ### 2. Depth-aware: apparent "violations" are a liquidity-structure artifact
 The real test of a mutually-exclusive "coherence violation" is whether you can
@@ -47,12 +47,15 @@ books shows completeness is governed by field size:
 ¹ *Complete* = every declared outcome is fillable, so the field can actually be
 locked.
 
-Small, dense fields are complete and **not arbitrageable** — locking \$1 costs
-a median of **1.019** (min 1.004; above \$1) across order sizes of 1–1,000
-shares, and rises with both order size (walking the book) and field size
-(corr ≈ **+0.42**). Large fields are **never complete**: a median of ~half their
-outcomes have no book at all, so the "sum of listed prices" is not a portfolio
-you can buy — a genuine long-tail illiquidity effect, not a listing artifact.
+Small, dense fields are complete; the **median** complete field still costs more
+than \$1 to lock — a median of **1.022** across order sizes of 1–1,000 shares,
+rising with both order size (walking the book) and field size (corr ≈ **+0.37**).
+The lone sub-\$1 case is a small dense field — "Balance of Power: 2026 Midterms"
+locks at **0.9957** (100 shares), a marginal **+0.4% gross** window that shrinks
+with size and is gross of on-chain costs. Large fields are **never complete**: a
+median of ~half their outcomes have no book at all, so the "sum of listed prices"
+is not a portfolio you can buy — a genuine long-tail illiquidity effect, not a
+listing artifact.
 
 > **Interpretation.** The *large* multi-outcome "coherence violations" a naive
 > observer flags on Polymarket are **not mispricing** and **not free money**.

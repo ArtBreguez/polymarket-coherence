@@ -3,7 +3,7 @@
 *A short, reproducible study of price coherence in Polymarket's mutually-exclusive
 (negRisk) events, extended to a cross-market test against Kalshi.*
 
-Snapshot: **2026-08-21** · public data only (Gamma API, CLOB L2 order books,
+Snapshot: **2026-08-22** · public data only (Gamma API, CLOB L2 order books,
 Kalshi trade-api) · no keys, no wallet · every number below is reproduced by the
 scripts in this repo from the committed data.
 
@@ -35,20 +35,21 @@ Across **36** negRisk events (**1,757** child markets) in the snapshot:
 
 | Quantity | Median across events |
 |---|---|
-| Σ P(mid) | **0.999** |
-| Σ best-bid | **0.968** |
-| Σ best-ask | **1.019** |
+| Σ P(mid) | **0.998** |
+| Σ best-bid | **0.966** |
+| Σ best-ask | **1.017** |
 
 The mid-price sum is essentially 1.0 — markets are coherent at the mid. The
 bid/ask sums **straddle** 1.0: you cannot buy the whole field for the bid sum
-(0.968) because you pay the **ask**, and the ask sum (1.019) is already above \$1.
+(0.966) because you pay the **ask**, and the ask sum (1.017) is already above \$1.
 The gap is a bid/ask **spread band**, and it widens with field size
-(corr(field size, band) = **+0.665**).
+(corr(field size, band) = **+0.664**).
 
-At top-of-book, 6 of 36 fields *look* buyable below \$0.99 — a false signal that
-Part 2 dismantles.
+At top-of-book, 7 of 36 fields *look* buyable below \$0.99 — a mostly-false signal
+that Part 2 dismantles (only one of them survives a depth-aware, complete-field
+lock).
 
-## Part 2 — Locking a field costs more than \$1 (depth-aware)
+## Part 2 — Locking a field costs ~\$1, and the only sub-\$1 case is a small dense field (depth-aware)
 
 Top-of-book ignores two things: you can only fill limited size at the best quote,
 and **some outcomes have no book at all**. A guaranteed \$1 lock requires filling
@@ -56,17 +57,22 @@ and **some outcomes have no book at all**. A guaranteed \$1 lock requires fillin
 buying the available subset is not arbitrage, because the winner may be the leg
 you couldn't buy.
 
-Walking the **full L2 book** (832 books across 36 events), cost to lock \$1 of
+Walking the **full L2 book** (831 books across 36 events), cost to lock \$1 of
 guaranteed payoff by buying every outcome:
 
 | Order size | Complete fields | Median cost | Min cost (best case) |
 |---|---|---|---|
-| 1 share | 5 | **1.0190** | 1.0040 |
-| 100 shares | 5 | **1.0190** | 1.0040 |
-| 1000 shares | 5 | 1.0190 | 1.0068 |
+| 1 share | 5 | **1.0220** | 0.9940 |
+| 100 shares | 5 | **1.0220** | 0.9957 |
+| 1000 shares | 5 | 1.0221 | 0.9972 |
 
-**Every complete field costs more than \$1 to lock in this snapshot, at every
-size.** (The forward panel in Part 3 finds rare, marginal exceptions — see there.)
+The **median** complete field costs well over \$1 to lock, at every size — no free
+lunch for the typical field. The **one** exception is exactly the field theory
+predicts: "Balance of Power: 2026 Midterms" (5 outcomes, small and dense) locks at
+**0.9957** for 100 shares — a marginal **+0.4% gross** window that shrinks as size
+grows (0.9972 at 1000) and is *gross* of on-chain execution costs. This is the
+same field the Part 3 forward panel flags, so the cross-sectional snapshot and the
+prospective panel agree on where — and only where — a genuine window opens.
 
 The reason only 5 fields are lockable at all is the core result:
 
