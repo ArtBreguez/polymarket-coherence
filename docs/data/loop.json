@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-22T11:31:06.180407+00:00",
+  "generated_utc": "2026-08-22T11:46:06.981330+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -20,13 +20,13 @@
         },
         {
           "label": "cut_25",
-          "poly_bid": 0.01,
+          "poly_bid": 0.011,
           "poly_ask": 0.013,
           "kalshi_bid": 0.0,
           "kalshi_ask": 0.01,
           "kalshi_liq": 0.0,
-          "edge_gross": 0.0,
-          "edge_net": -0.01,
+          "edge_gross": 0.001,
+          "edge_net": -0.009,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
@@ -87,13 +87,13 @@
         },
         {
           "label": "Philadelphia 76Ers",
-          "poly_bid": 0.128,
-          "poly_ask": 0.129,
+          "poly_bid": 0.129,
+          "poly_ask": 0.13,
           "kalshi_bid": 0.1,
           "kalshi_ask": 0.11,
           "kalshi_liq": 0.0,
-          "edge_gross": 0.018,
-          "edge_net": 0.008,
+          "edge_gross": 0.019,
+          "edge_net": 0.009,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
