@@ -17,11 +17,14 @@ if git diff --quiet -- data/panel.jsonl; then
 fi
 
 # 3) keep the panel canonical (drop zombies, normalize schema) then regenerate
-#    the dashboard data (incl. cross-market loop.json)
+#    the dashboard data (incl. cross-market loop.json) and sync the prose numbers
+#    in README/FINDINGS from the freshly-written summary.json (single source of
+#    truth, so the docs never drift out of date as the panel grows).
 python3 scripts/clean_panel.py >/dev/null 2>&1 || true
 python3 scripts/generate_site_data.py >/dev/null 2>&1 || true
+python3 scripts/sync_panel_numbers.py >/dev/null 2>&1 || true
 
-git add data/panel.jsonl docs/data/
+git add data/panel.jsonl docs/data/ README.md FINDINGS.md
 git -c user.name="Arthur Breguez" \
     -c user.email="98524696+ArtBreguez@users.noreply.github.com" \
     commit -q -m "data: forward-panel snapshot $(date -u +%Y-%m-%dT%H:%MZ)"

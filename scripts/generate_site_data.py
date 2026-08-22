@@ -91,11 +91,23 @@ def main() -> int:
         ev_hist[r["event_id"]].append(r)
     ever_exec = 0
     all_costs = []
+    complete_events = 0
+    sub_dollar_obs = 0
+    sub_dollar_titles: set[str] = set()
     for recs in ev_hist.values():
         cc = [x["lock_cost"] for x in recs if x.get("complete") and x.get("lock_cost") is not None]
         all_costs.extend(cc)
-        if any(c < 1.0 for c in cc):
+        if cc:
+            complete_events += 1
+        subs = [c for c in cc if c < 1.0]
+        sub_dollar_obs += len(subs)
+        if subs:
             ever_exec += 1
+            # title of the field that crossed sub-$1 (for prose that names it)
+            for x in recs:
+                if x.get("complete") and x.get("lock_cost") is not None and x["lock_cost"] < 1.0:
+                    if x.get("title"):
+                        sub_dollar_titles.add(x["title"])
 
     # small/large liquidity structure on the latest snapshot
     small = large = small_complete = large_complete = 0
@@ -116,17 +128,29 @@ def main() -> int:
                 if fr is not None:
                     large_fill.append(fr)
 
+    # duration span in hours (first→last snapshot), for prose that cites "~Nh"
+    hours_span = None
+    if len(snapshots) >= 2:
+        t0 = dt.datetime.fromisoformat(snapshots[0].replace("Z", "+00:00"))
+        t1 = dt.datetime.fromisoformat(snapshots[-1].replace("Z", "+00:00"))
+        hours_span = round((t1 - t0).total_seconds() / 3600)
+
     summary = {
         "generated_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "snapshots": len(snapshots),
+        "hours_span": hours_span,
         "first_snapshot": snapshots[0] if snapshots else None,
         "last_snapshot": snapshots[-1] if snapshots else None,
         "distinct_events": len(ev_hist),
+        "complete_events": complete_events,
         "ever_executable": ever_exec,
         "cost_min": round(min(all_costs), 4) if all_costs else None,
         "cost_median": round(st.median(all_costs), 4) if all_costs else None,
         "cost_max": round(max(all_costs), 4) if all_costs else None,
         "n_cost_obs": len(all_costs),
+        "sub_dollar_obs": sub_dollar_obs,
+        "sub_dollar_pct": round(100 * sub_dollar_obs / len(all_costs), 1) if all_costs else None,
+        "sub_dollar_field": sorted(sub_dollar_titles)[0] if sub_dollar_titles else None,
         "liquidity_structure": {
             "small_n": small, "small_complete_pct": round(100 * small_complete / small) if small else None,
             "small_median_fill_pct": round(100 * st.median(small_fill)) if small_fill else None,
