@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-22T21:31:13.032462+00:00",
+  "generated_utc": "2026-08-22T21:46:14.379385+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -74,18 +74,6 @@
       "kind": "by_name",
       "buckets": [
         {
-          "label": "Philadelphia 76Ers",
-          "poly_bid": 0.129,
-          "poly_ask": 0.13,
-          "kalshi_bid": 0.09,
-          "kalshi_ask": 0.1,
-          "kalshi_liq": 0.0,
-          "edge_gross": 0.029,
-          "edge_net": 0.019,
-          "direction": "buy_kalshi_sell_poly",
-          "executable": false
-        },
-        {
           "label": "New York Knicks",
           "poly_bid": 0.11,
           "poly_ask": 0.12,
@@ -94,6 +82,18 @@
           "kalshi_liq": 0.0,
           "edge_gross": 0.02,
           "edge_net": 0.01,
+          "direction": "buy_kalshi_sell_poly",
+          "executable": false
+        },
+        {
+          "label": "Philadelphia 76Ers",
+          "poly_bid": 0.129,
+          "poly_ask": 0.13,
+          "kalshi_bid": 0.1,
+          "kalshi_ask": 0.11,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.019,
+          "edge_net": 0.009,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
@@ -246,7 +246,7 @@
           "poly_bid": 0.2,
           "poly_ask": 0.21,
           "kalshi_bid": 0.22,
-          "kalshi_ask": 0.23,
+          "kalshi_ask": 0.24,
           "kalshi_liq": 0.0,
           "edge_gross": 0.01,
           "edge_net": -0.01,
@@ -259,18 +259,6 @@
           "poly_ask": 0.011,
           "kalshi_bid": 0.0,
           "kalshi_ask": 0.01,
-          "kalshi_liq": 0.0,
-          "edge_gross": 0.0,
-          "edge_net": -0.01,
-          "direction": "buy_kalshi_sell_poly",
-          "executable": false
-        },
-        {
-          "label": "Los Angeles Lakers",
-          "poly_bid": 0.02,
-          "poly_ask": 0.021,
-          "kalshi_bid": 0.01,
-          "kalshi_ask": 0.02,
           "kalshi_liq": 0.0,
           "edge_gross": 0.0,
           "edge_net": -0.01,
@@ -311,6 +299,18 @@
           "edge_gross": -0.001,
           "edge_net": -0.011,
           "direction": "buy_kalshi_sell_poly",
+          "executable": false
+        },
+        {
+          "label": "Los Angeles Lakers",
+          "poly_bid": 0.02,
+          "poly_ask": 0.021,
+          "kalshi_bid": 0.02,
+          "kalshi_ask": 0.03,
+          "kalshi_liq": 0.0,
+          "edge_gross": -0.001,
+          "edge_net": -0.011,
+          "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
         {
