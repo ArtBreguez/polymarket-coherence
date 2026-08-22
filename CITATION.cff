@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "polymarket-coherence: price coherence in mutually-exclusive prediction markets"
+abstract: >-
+  A small, reproducible study of price coherence in Polymarket's mutually-exclusive
+  (negRisk) events, extended to a cross-market test against Kalshi. It shows that the
+  large multi-outcome coherence "violations" a naive observer sees are governed by
+  liquidity structure and market microstructure, not exploitable mispricing, and that
+  the only genuine sub-$1 lock windows are rare, marginal (<=0.6% gross), and confined
+  to the smallest dense fields. All numbers are reproducible from committed public data
+  with no keys or wallet.
+type: software
+authors:
+  - family-names: Breguez
+    given-names: Arthur
+    alias: ArtBreguez
+repository-code: "https://github.com/ArtBreguez/polymarket-coherence"
+url: "https://artbreguez.github.io/polymarket-coherence/"
+license: MIT
+keywords:
+  - prediction-markets
+  - polymarket
+  - kalshi
+  - market-microstructure
+  - arbitrage
+  - coherence
+  - negRisk
