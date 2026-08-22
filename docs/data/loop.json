@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-22T03:31:01.786994+00:00",
+  "generated_utc": "2026-08-22T03:46:02.283222+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -218,18 +218,6 @@
           "executable": false
         },
         {
-          "label": "Dallas Mavericks",
-          "poly_bid": 0.005,
-          "poly_ask": 0.006,
-          "kalshi_bid": 0.0,
-          "kalshi_ask": 0.01,
-          "kalshi_liq": 0.0,
-          "edge_gross": -0.005,
-          "edge_net": -0.006,
-          "direction": "buy_poly_sell_kalshi",
-          "executable": false
-        },
-        {
           "label": "Washington Wizards",
           "poly_bid": 0.012,
           "poly_ask": 0.013,
@@ -242,18 +230,6 @@
           "executable": false
         },
         {
-          "label": "Utah Jazz",
-          "poly_bid": 0.007,
-          "poly_ask": 0.008,
-          "kalshi_bid": 0.0,
-          "kalshi_ask": 0.01,
-          "kalshi_liq": 0.0,
-          "edge_gross": -0.003,
-          "edge_net": -0.008,
-          "direction": "buy_poly_sell_kalshi",
-          "executable": false
-        },
-        {
           "label": "Orlando Magic",
           "poly_bid": 0.008,
           "poly_ask": 0.009,
@@ -262,18 +238,6 @@
           "kalshi_liq": 0.0,
           "edge_gross": 0.001,
           "edge_net": -0.009,
-          "direction": "buy_poly_sell_kalshi",
-          "executable": false
-        },
-        {
-          "label": "San Antonio Spurs",
-          "poly_bid": 0.2,
-          "poly_ask": 0.21,
-          "kalshi_bid": 0.22,
-          "kalshi_ask": 0.23,
-          "kalshi_liq": 0.0,
-          "edge_gross": 0.01,
-          "edge_net": -0.01,
           "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
@@ -326,6 +290,18 @@
           "executable": false
         },
         {
+          "label": "Utah Jazz",
+          "poly_bid": 0.008,
+          "poly_ask": 0.014,
+          "kalshi_bid": 0.0,
+          "kalshi_ask": 0.01,
+          "kalshi_liq": 0.0,
+          "edge_gross": -0.002,
+          "edge_net": -0.012,
+          "direction": "buy_kalshi_sell_poly",
+          "executable": false
+        },
+        {
           "label": "Miami Heat",
           "poly_bid": 0.031,
           "poly_ask": 0.032,
@@ -371,6 +347,18 @@
           "edge_gross": -0.003,
           "edge_net": -0.013,
           "direction": "buy_poly_sell_kalshi",
+          "executable": false
+        },
+        {
+          "label": "Dallas Mavericks",
+          "poly_bid": 0.007,
+          "poly_ask": 0.017,
+          "kalshi_bid": 0.0,
+          "kalshi_ask": 0.01,
+          "kalshi_liq": 0.0,
+          "edge_gross": -0.003,
+          "edge_net": -0.013,
+          "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
         {
@@ -431,6 +419,18 @@
           "edge_gross": -0.01,
           "edge_net": -0.02,
           "direction": "buy_kalshi_sell_poly",
+          "executable": false
+        },
+        {
+          "label": "San Antonio Spurs",
+          "poly_bid": 0.2,
+          "poly_ask": 0.21,
+          "kalshi_bid": 0.23,
+          "kalshi_ask": 0.24,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.02,
+          "edge_net": 0.0,
+          "direction": "buy_poly_sell_kalshi",
           "executable": false
         }
       ]
