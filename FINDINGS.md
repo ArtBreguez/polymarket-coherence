@@ -84,16 +84,16 @@ is therefore not an executable portfolio — the apparent violation is a
 ## Part 3 — Executable windows are rare, marginal, and only in small fields (forward panel)
 
 A single snapshot can't tell you whether a fleeting sub-\$1 lock ever *appears*.
-A scheduled collector (every 15 min) built a panel of **125 snapshots** over ~30h
-across 38 events.
+A scheduled collector (every 15 min) has built a panel of **183+ snapshots** over
+~44h (and still growing) across 38 events.
 
 - **5 of 38** events were ever complete (lockable) — always the same 5 small,
   dense fields (Fed, midterms, US-Iran). Large fields are **never** lockable.
 - **1 of 38** events ever crossed below \$1 on a **gross** basis: "Balance of
   Power: 2026 Midterms" (5 outcomes) hit a lock cost of **0.994** — a **+0.6%
-  gross edge** — and held sub-\$1 for **4 consecutive snapshots (~60 min)**.
-- Lock cost over all 625 complete observations: **min 0.994, median 1.025, max
-  1.217**. 4 of 625 (0.6%) were sub-\$1, all in that one small field.
+  gross edge** — and held sub-\$1 across multiple snapshots.
+- Lock cost over all 915 complete observations: **min 0.994, median 1.024, max
+  1.243**. 62 of 915 (6.8%) were sub-\$1, all in that one small dense field.
 
 This is the honest, important result — and it *sharpens* rather than weakens the
 thesis. The method **does** detect a window when one opens, and the one it found
@@ -151,7 +151,8 @@ microstructure, shown three ways:
 
 The one place a genuine sub-\$1 lock *does* appear is exactly where the
 microstructure allows it: a **small, dense, fully-liquid field**, and even there
-the edge is **marginal (≤0.6% gross) and rare** (4 of 625 complete observations),
+the edge is **marginal (≤0.6% gross) and confined to one field** (62 of 915
+complete observations, all in that single small dense market),
 plausibly erased by execution costs. That is the opposite of the naive picture,
 in which the *large* fields look most violated.
 
@@ -166,9 +167,9 @@ windows in the smallest fields.
   not whether anyone took it. Depth-aware realized on-chain profit is a different
   question (see *Prior work*).
 - **Snapshot + young panel.** Parts 1–2 are a cross-sectional snapshot;
-  Part 3's panel is ~30h / 125 snapshots. The "rare, marginal, small-field-only
-  windows" result is strong over that span, not yet a long-horizon duration
-  statistic.
+  Part 3's panel is ~44h / 183+ snapshots (and still growing). The "rare,
+  marginal, small-field-only windows" result is strong over that span, not yet a
+  long-horizon duration statistic.
 - **Costs modeled only in Part 4.** Parts 1–3 report the raw book-walking fill
   cost. For nearly all fields the lock already costs >\$1, so taker fees / on-chain
   gas only reinforce no-arbitrage. The lone sub-\$1 case (Part 3, 0.6% gross) sits

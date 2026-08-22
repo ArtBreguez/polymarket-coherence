@@ -162,15 +162,16 @@ A single snapshot cannot tell you whether a fleeting sub-\$1 lock ever appears.
 were executable (< \$1), and the **longest run of consecutive executable
 snapshots** — a proxy for how long a window persists.
 
-Panel to date (**125 snapshots** over ~30h, order size 100): **5/38 events
-complete** (the same small dense fields every time; large fields never lock).
+Panel to date (**183+ snapshots** over ~44h and still growing, order size 100):
+**5/38 events complete** (the same small dense fields every time; large fields
+never lock).
 **1/38 ever crossed below \$1 on a gross basis** — "Balance of Power: 2026
-Midterms" hit **0.994** (+0.6% gross edge) and held sub-\$1 for ~60 min. Lock
-cost over all 625 complete observations: **min 0.994, median 1.025, max 1.217**;
-only 4/625 (0.6%) were sub-\$1, all in that one small field, and all *gross* of
-on-chain execution costs that plausibly erase a 0.6% edge. Large multi-outcome
-fields — the ones that *look* most violated — never produce a window at all. The
-scheduled collector keeps growing the series.
+Midterms" hit **0.994** (+0.6% gross edge) and held sub-\$1 across multiple
+snapshots. Lock cost over all 915 complete observations: **min 0.994, median
+1.024, max 1.243**; **62/915 (6.8%)** were sub-\$1 — all in that one small dense
+field, and all *gross* of on-chain execution costs that plausibly erase a ~0.6%
+edge. Large multi-outcome fields — the ones that *look* most violated — never
+produce a window at all. The scheduled collector keeps growing the series.
 
 ## Data
 
@@ -187,9 +188,10 @@ scheduled collector keeps growing the series.
 - **Parts 1–2 are cross-sectional; Part 3 is a young panel.** The Gamma API does
   not reliably serve historical price series for resolved markets (verified: even
   the \$1.5B Trump-2024 market returns an empty `prices-history`), so Parts 1–2
-  are a single snapshot. Part 3's forward collector has built ~30h / 125
-  snapshots so far — the "rare, marginal, small-field-only windows" result is
-  strong over that span, but not yet a long-horizon duration statistic.
+  are a single snapshot. Part 3's forward collector has built ~44h / 183+
+  snapshots so far (and still growing) — the "rare, marginal, small-field-only
+  windows" result is strong over that span, but not yet a long-horizon duration
+  statistic.
 - **Fees & gas not modeled in Parts 1–3.** The lock cost is the raw fill cost of
   walking the book. Polymarket makers are fee-exempt but takers and on-chain
   conversion pay costs. For the vast majority of fields the lock already costs
