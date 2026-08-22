@@ -11,7 +11,7 @@
     "n_markets": 13,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.014
+    "lock_cost": 1.016
   },
   {
     "title": "Fed Decision in September?",
@@ -25,14 +25,14 @@
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.043929
+    "lock_cost": 1.043694
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.192649
+    "lock_cost": 1.197388
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -196,16 +196,16 @@
     "lock_cost": null
   },
   {
-    "title": "NBA: 2026-27 Rookie of the Year",
-    "n_markets": 81,
-    "fill_ratio": 0.3704,
+    "title": "EPL: 2027 Champion",
+    "n_markets": 24,
+    "fill_ratio": 0.8333,
     "complete": false,
     "lock_cost": null
   },
   {
-    "title": "EPL: 2027 Champion",
-    "n_markets": 24,
-    "fill_ratio": 0.8333,
+    "title": "NBA: 2026-27 Rookie of the Year",
+    "n_markets": 81,
+    "fill_ratio": 0.3704,
     "complete": false,
     "lock_cost": null
   },
