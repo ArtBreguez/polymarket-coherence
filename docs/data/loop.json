@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-22T00:46:02.445382+00:00",
+  "generated_utc": "2026-08-22T01:01:00.535576+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -10,11 +10,11 @@
           "label": "maintain",
           "poly_bid": 0.68,
           "poly_ask": 0.69,
-          "kalshi_bid": 0.66,
-          "kalshi_ask": 0.67,
+          "kalshi_bid": 0.67,
+          "kalshi_ask": 0.68,
           "kalshi_liq": 0.0,
-          "edge_gross": 0.01,
-          "edge_net": -0.01,
+          "edge_gross": 0.0,
+          "edge_net": -0.02,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
@@ -74,6 +74,18 @@
       "kind": "by_name",
       "buckets": [
         {
+          "label": "Philadelphia 76Ers",
+          "poly_bid": 0.128,
+          "poly_ask": 0.129,
+          "kalshi_bid": 0.09,
+          "kalshi_ask": 0.1,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.028,
+          "edge_net": 0.018,
+          "direction": "buy_kalshi_sell_poly",
+          "executable": false
+        },
+        {
           "label": "New York Knicks",
           "poly_bid": 0.11,
           "poly_ask": 0.12,
@@ -82,18 +94,6 @@
           "kalshi_liq": 0.0,
           "edge_gross": 0.02,
           "edge_net": 0.01,
-          "direction": "buy_kalshi_sell_poly",
-          "executable": false
-        },
-        {
-          "label": "Philadelphia 76Ers",
-          "poly_bid": 0.128,
-          "poly_ask": 0.129,
-          "kalshi_bid": 0.1,
-          "kalshi_ask": 0.11,
-          "kalshi_liq": 0.0,
-          "edge_gross": 0.018,
-          "edge_net": 0.008,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
