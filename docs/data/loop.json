@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-22T07:16:03.994824+00:00",
+  "generated_utc": "2026-08-22T07:31:03.865504+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -278,6 +278,18 @@
           "executable": false
         },
         {
+          "label": "Utah Jazz",
+          "poly_bid": 0.009,
+          "poly_ask": 0.014,
+          "kalshi_bid": 0.0,
+          "kalshi_ask": 0.01,
+          "kalshi_liq": 0.0,
+          "edge_gross": -0.001,
+          "edge_net": -0.011,
+          "direction": "buy_kalshi_sell_poly",
+          "executable": false
+        },
+        {
           "label": "Detroit Pistons",
           "poly_bid": 0.029,
           "poly_ask": 0.03,
@@ -286,18 +298,6 @@
           "kalshi_liq": 0.0,
           "edge_gross": -0.001,
           "edge_net": -0.011,
-          "direction": "buy_kalshi_sell_poly",
-          "executable": false
-        },
-        {
-          "label": "Utah Jazz",
-          "poly_bid": 0.008,
-          "poly_ask": 0.014,
-          "kalshi_bid": 0.0,
-          "kalshi_ask": 0.01,
-          "kalshi_liq": 0.0,
-          "edge_gross": -0.002,
-          "edge_net": -0.012,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
