@@ -7,18 +7,18 @@
     "lock_cost": 1.016
   },
   {
+    "title": "Where will the next next round of US-Iran peace talks be...?",
+    "n_markets": 19,
+    "fill_ratio": 1.0,
+    "complete": true,
+    "lock_cost": 1.020268
+  },
+  {
     "title": "How many Fed rate cuts in 2026?",
     "n_markets": 13,
     "fill_ratio": 1.0,
     "complete": true,
     "lock_cost": 1.021
-  },
-  {
-    "title": "Where will the next next round of US-Iran peace talks be...?",
-    "n_markets": 19,
-    "fill_ratio": 1.0,
-    "complete": true,
-    "lock_cost": 1.021052
   },
   {
     "title": "Fed Decision in September?",
@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.170159
+    "lock_cost": 1.140093
   },
   {
     "title": "Democratic Presidential Nominee 2028",
