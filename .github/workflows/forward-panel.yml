@@ -10,7 +10,12 @@ on:
     # every 15 min (UTC). GitHub may delay/coalesce scheduled runs under load;
     # the staleness gate tolerates that gracefully.
     - cron: "*/15 * * * *"
-  workflow_dispatch: {}   # allow manual "collect now" from the Actions tab
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force a collection even if the panel looks fresh (bypass the staleness gate)"
+        type: boolean
+        default: false
 
 # Let the job commit the snapshot back to the repo.
 permissions:
@@ -36,7 +41,10 @@ jobs:
       - name: Decide whether to collect (failover gate)
         id: gate
         run: |
-          if python scripts/should_collect.py; then
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            echo "forced collection requested -> bypassing staleness gate"
+            echo "run=yes" >> "$GITHUB_OUTPUT"
+          elif python scripts/should_collect.py; then
             echo "run=yes" >> "$GITHUB_OUTPUT"
           else
             code=$?
