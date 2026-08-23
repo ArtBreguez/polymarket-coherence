@@ -1,17 +1,17 @@
 [
   {
-    "title": "Where will the next next round of US-Iran peace talks be...?",
-    "n_markets": 19,
-    "fill_ratio": 1.0,
-    "complete": true,
-    "lock_cost": 1.004703
-  },
-  {
     "title": "Balance of Power: 2026 Midterms",
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.007
+    "lock_cost": 1.006761
+  },
+  {
+    "title": "Where will the next next round of US-Iran peace talks be...?",
+    "n_markets": 19,
+    "fill_ratio": 1.0,
+    "complete": true,
+    "lock_cost": 1.011701
   },
   {
     "title": "How many Fed rate cuts in 2026?",
@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.186845
+    "lock_cost": 1.141759
   },
   {
     "title": "Democratic Presidential Nominee 2028",
