@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-23T01:16:15.032105+00:00",
+  "generated_utc": "2026-08-23T01:31:15.316034+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -242,6 +242,18 @@
           "executable": false
         },
         {
+          "label": "San Antonio Spurs",
+          "poly_bid": 0.2,
+          "poly_ask": 0.21,
+          "kalshi_bid": 0.22,
+          "kalshi_ask": 0.24,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.01,
+          "edge_net": -0.01,
+          "direction": "buy_poly_sell_kalshi",
+          "executable": false
+        },
+        {
           "label": "Portland Trail Blazers",
           "poly_bid": 0.01,
           "poly_ask": 0.011,
@@ -419,18 +431,6 @@
           "edge_gross": -0.01,
           "edge_net": -0.02,
           "direction": "buy_kalshi_sell_poly",
-          "executable": false
-        },
-        {
-          "label": "San Antonio Spurs",
-          "poly_bid": 0.2,
-          "poly_ask": 0.21,
-          "kalshi_bid": 0.23,
-          "kalshi_ask": 0.24,
-          "kalshi_liq": 0.0,
-          "edge_gross": 0.02,
-          "edge_net": 0.0,
-          "direction": "buy_poly_sell_kalshi",
           "executable": false
         }
       ]
