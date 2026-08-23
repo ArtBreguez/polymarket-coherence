@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-23T19:31:26.760254+00:00",
+  "generated_utc": "2026-08-23T19:46:29.403875+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -230,6 +230,18 @@
           "executable": false
         },
         {
+          "label": "Utah Jazz",
+          "poly_bid": 0.008,
+          "poly_ask": 0.009,
+          "kalshi_bid": 0.0,
+          "kalshi_ask": 0.01,
+          "kalshi_liq": 0.0,
+          "edge_gross": -0.002,
+          "edge_net": -0.009,
+          "direction": "buy_poly_sell_kalshi",
+          "executable": false
+        },
+        {
           "label": "Orlando Magic",
           "poly_bid": 0.008,
           "poly_ask": 0.009,
@@ -274,18 +286,6 @@
           "kalshi_liq": 0.0,
           "edge_gross": -0.001,
           "edge_net": -0.01,
-          "direction": "buy_poly_sell_kalshi",
-          "executable": false
-        },
-        {
-          "label": "Utah Jazz",
-          "poly_bid": 0.008,
-          "poly_ask": 0.011,
-          "kalshi_bid": 0.0,
-          "kalshi_ask": 0.01,
-          "kalshi_liq": 0.0,
-          "edge_gross": -0.002,
-          "edge_net": -0.011,
           "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
@@ -388,13 +388,13 @@
         {
           "label": "Houston Rockets",
           "poly_bid": 0.014,
-          "poly_ask": 0.016,
+          "poly_ask": 0.015,
           "kalshi_bid": 0.01,
           "kalshi_ask": 0.02,
           "kalshi_liq": 0.0,
-          "edge_gross": -0.006,
-          "edge_net": -0.016,
-          "direction": "buy_kalshi_sell_poly",
+          "edge_gross": -0.005,
+          "edge_net": -0.015,
+          "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
         {
