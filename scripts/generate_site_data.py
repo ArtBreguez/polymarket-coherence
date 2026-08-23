@@ -25,6 +25,7 @@ from collections import defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from hygiene import ZOMBIE_EVENT_IDS as EXCLUDED_EVENT_IDS  # noqa: E402
+import panel_io  # noqa: E402  full-history reader (active file + monthly archives)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PANEL = os.path.join(ROOT, "data", "panel.jsonl")
@@ -33,18 +34,13 @@ OUTDIR = os.path.join(ROOT, "docs", "data")
 
 def load_panel():
     rows = []
-    if not os.path.exists(PANEL):
-        return rows
-    for line in open(PANEL):
-        line = line.strip()
-        if line:
-            try:
-                r = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            if r.get("event_id") in EXCLUDED_EVENT_IDS:
-                continue  # drop known zombie (expired) markets from the site view
-            rows.append(r)
+    # Read the FULL history: active panel.jsonl plus any rolled-over monthly
+    # archives (panel-YYYY-MM.jsonl). panel_io is the single source of truth for
+    # where rows live, so rotation never hides data from the dashboard.
+    for r in panel_io.iter_rows():
+        if r.get("event_id") in EXCLUDED_EVENT_IDS:
+            continue  # drop known zombie (expired) markets from the site view
+        rows.append(r)
     return rows
 
 

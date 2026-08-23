@@ -33,52 +33,72 @@ BACKUP = os.path.join(ROOT, "data", "panel_raw.jsonl.bak")
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from hygiene import ZOMBIE_EVENT_IDS as ZOMBIE_IDS  # noqa: E402  single source of truth
+import panel_io  # noqa: E402  full-history file set (active + monthly archives)
 
 CANONICAL_KEYS = ["ts", "event_id", "title", "n_markets", "volume", "end_date",
                   "size", "filled_legs", "fill_ratio", "complete", "lock_cost"]
 
 
-def main() -> int:
+def _read(path):
     rows = []
-    for line in open(PANEL):
+    if not os.path.exists(path):
+        return rows
+    for line in open(path):
         line = line.strip()
         if line:
             try:
                 rows.append(json.loads(line))
             except json.JSONDecodeError:
                 continue  # drop unparseable lines
+    return rows
 
-    before = len(rows)
-    rows = [r for r in rows if r.get("event_id") not in ZOMBIE_IDS]
-    dropped = before - len(rows)
+
+def main() -> int:
+    # Clean across the FULL history so canonicalization (titles, end_date) is
+    # consistent whether a row lives in the active file or a rolled archive.
+    paths = panel_io.all_paths()
+    all_rows = []
+    for p in paths:
+        for r in _read(p):
+            all_rows.append((p, r))
+
+    before = len(all_rows)
+    all_rows = [(p, r) for (p, r) in all_rows if r.get("event_id") not in ZOMBIE_IDS]
+    dropped = before - len(all_rows)
 
     # canonical title = the most recent title seen per event_id (rows are in file
-    # order, i.e. chronological)
+    # order, i.e. chronological; archives sort before the active file)
     latest_title, latest_end = {}, {}
-    for r in rows:
+    for _p, r in all_rows:
         eid = r.get("event_id")
         latest_title[eid] = r.get("title", latest_title.get(eid))
         if r.get("end_date"):
             latest_end[eid] = r["end_date"]
 
-    clean = []
-    for r in rows:
+    # one-time raw backup of the active file (git-ignored), matching prior behavior
+    if not os.path.exists(BACKUP) and os.path.exists(PANEL):
+        shutil.copy2(PANEL, BACKUP)
+        print(f"raw backup -> {BACKUP}")
+
+    # rewrite each file in place, preserving which file each row belongs to
+    per_file = {}
+    for p, r in all_rows:
         eid = r.get("event_id")
         norm = {k: r.get(k) for k in CANONICAL_KEYS}
         norm["title"] = latest_title.get(eid, r.get("title"))
         norm["end_date"] = r.get("end_date") or latest_end.get(eid)
-        clean.append(norm)
+        per_file.setdefault(p, []).append(norm)
 
-    if not os.path.exists(BACKUP):
-        shutil.copy2(PANEL, BACKUP)
-        print(f"raw backup -> {BACKUP}")
+    clean_total = 0
+    for p in paths:
+        rows = per_file.get(p, [])
+        with open(p, "w") as f:
+            for r in rows:
+                f.write(json.dumps(r) + "\n")
+        clean_total += len(rows)
 
-    with open(PANEL, "w") as f:
-        for r in clean:
-            f.write(json.dumps(r) + "\n")
-
-    n_events = len({r["event_id"] for r in clean})
-    print(f"cleaned panel: {before} -> {len(clean)} rows "
+    n_events = len({r["event_id"] for _p, r in all_rows})
+    print(f"cleaned panel across {len(paths)} file(s): {before} -> {clean_total} rows "
           f"({dropped} zombie rows dropped), {n_events} distinct events, "
           f"schema normalized to {len(CANONICAL_KEYS)} keys.")
     return 0
