@@ -4,7 +4,10 @@
 # only when something notable happens) so it is watchdog-friendly.
 set -euo pipefail
 
-REPO="/home/ubuntu/polymarket-coherence"
+# Resolve the repo root from this script's own location so it runs both locally
+# (/home/ubuntu/polymarket-coherence) and on CI runners (/home/runner/work/...),
+# not just on the box where it was first deployed.
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO"
 
 # 0) Hard stop: the study's value is spent once the one field that ever opened a
