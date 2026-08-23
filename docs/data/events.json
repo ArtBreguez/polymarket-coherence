@@ -25,14 +25,14 @@
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.024001
+    "lock_cost": 1.023088
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.166398
+    "lock_cost": 1.146369
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -168,16 +168,16 @@
     "lock_cost": null
   },
   {
-    "title": "Los Angeles Mayoral Election",
-    "n_markets": 15,
-    "fill_ratio": 0.1333,
+    "title": "UEFA Champions League: 2027 Champion",
+    "n_markets": 42,
+    "fill_ratio": 0.6905,
     "complete": false,
     "lock_cost": null
   },
   {
-    "title": "UEFA Champions League: 2027 Champion",
-    "n_markets": 42,
-    "fill_ratio": 0.6905,
+    "title": "Los Angeles Mayoral Election",
+    "n_markets": 15,
+    "fill_ratio": 0.1333,
     "complete": false,
     "lock_cost": null
   },
