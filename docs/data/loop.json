@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-24T15:15:41.211368+00:00",
+  "generated_utc": "2026-08-24T15:30:39.583558+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -20,13 +20,13 @@
         },
         {
           "label": "cut_25",
-          "poly_bid": 0.013,
-          "poly_ask": 0.014,
+          "poly_bid": 0.012,
+          "poly_ask": 0.013,
           "kalshi_bid": 0.0,
           "kalshi_ask": 0.01,
           "kalshi_liq": 0.0,
-          "edge_gross": 0.003,
-          "edge_net": -0.007,
+          "edge_gross": 0.002,
+          "edge_net": -0.008,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
@@ -44,13 +44,13 @@
         },
         {
           "label": "hike_25",
-          "poly_bid": 0.33,
-          "poly_ask": 0.34,
+          "poly_bid": 0.32,
+          "poly_ask": 0.33,
           "kalshi_bid": 0.32,
           "kalshi_ask": 0.33,
           "kalshi_liq": 0.0,
-          "edge_gross": 0.0,
-          "edge_net": -0.02,
+          "edge_gross": -0.01,
+          "edge_net": -0.03,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
@@ -279,12 +279,12 @@
         },
         {
           "label": "Dallas Mavericks",
-          "poly_bid": 0.009,
+          "poly_bid": 0.006,
           "poly_ask": 0.01,
           "kalshi_bid": 0.0,
           "kalshi_ask": 0.01,
           "kalshi_liq": 0.0,
-          "edge_gross": -0.001,
+          "edge_gross": -0.004,
           "edge_net": -0.01,
           "direction": "buy_poly_sell_kalshi",
           "executable": false
