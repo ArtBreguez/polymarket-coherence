@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-24T00:00:28.847365+00:00",
+  "generated_utc": "2026-08-24T00:15:29.423570+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -194,7 +194,7 @@
           "executable": false
         },
         {
-          "label": "Phoenix Suns",
+          "label": "Charlotte Hornets",
           "poly_bid": 0.004,
           "poly_ask": 0.005,
           "kalshi_bid": 0.0,
@@ -206,14 +206,14 @@
           "executable": false
         },
         {
-          "label": "Charlotte Hornets",
-          "poly_bid": 0.004,
-          "poly_ask": 0.005,
+          "label": "Phoenix Suns",
+          "poly_bid": 0.005,
+          "poly_ask": 0.006,
           "kalshi_bid": 0.0,
           "kalshi_ask": 0.01,
           "kalshi_liq": 0.0,
           "edge_gross": -0.005,
-          "edge_net": -0.005,
+          "edge_net": -0.006,
           "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
