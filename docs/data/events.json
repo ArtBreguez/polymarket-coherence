@@ -18,7 +18,7 @@
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.03
+    "lock_cost": 1.024
   },
   {
     "title": "Where will the next next round of US-Iran peace talks be...?",
@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.147524
+    "lock_cost": 1.148637
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -189,16 +189,16 @@
     "lock_cost": null
   },
   {
-    "title": "Which party will win the House in 2026?",
-    "n_markets": 9,
-    "fill_ratio": 0.2222,
+    "title": "EPL: 2027 Champion",
+    "n_markets": 24,
+    "fill_ratio": 0.8333,
     "complete": false,
     "lock_cost": null
   },
   {
-    "title": "EPL: 2027 Champion",
-    "n_markets": 24,
-    "fill_ratio": 0.8333,
+    "title": "Which party will win the House in 2026?",
+    "n_markets": 9,
+    "fill_ratio": 0.2222,
     "complete": false,
     "lock_cost": null
   },
