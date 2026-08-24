@@ -11,7 +11,7 @@
     "n_markets": 13,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.01634
+    "lock_cost": 1.016
   },
   {
     "title": "Fed Decision in September?",
@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.191102
+    "lock_cost": 1.227698
   },
   {
     "title": "Democratic Presidential Nominee 2028",
