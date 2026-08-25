@@ -25,14 +25,14 @@
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.065337
+    "lock_cost": 1.058941
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.139912
+    "lock_cost": 1.136043
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -114,7 +114,7 @@
   {
     "title": "Prime Minister of Israel after the next election?",
     "n_markets": 28,
-    "fill_ratio": 0.6429,
+    "fill_ratio": 0.6786,
     "complete": false,
     "lock_cost": null
   },
