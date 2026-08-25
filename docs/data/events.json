@@ -7,13 +7,6 @@
     "lock_cost": 0.995
   },
   {
-    "title": "Fed Decision in September?",
-    "n_markets": 5,
-    "fill_ratio": 1.0,
-    "complete": true,
-    "lock_cost": 1.011
-  },
-  {
     "title": "How many Fed rate cuts in 2026?",
     "n_markets": 13,
     "fill_ratio": 1.0,
@@ -21,123 +14,25 @@
     "lock_cost": 1.013
   },
   {
+    "title": "Fed Decision in September?",
+    "n_markets": 5,
+    "fill_ratio": 1.0,
+    "complete": true,
+    "lock_cost": 1.021
+  },
+  {
     "title": "Where will the next next round of US-Iran peace talks be...?",
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.060772
+    "lock_cost": 1.06031
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.144889
-  },
-  {
-    "title": "F1 Drivers' Champion",
-    "n_markets": 32,
-    "fill_ratio": 0.6875,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "F1 Constructors' Champion",
-    "n_markets": 12,
-    "fill_ratio": 0.9167,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "2026 Men\u2019s US Open Winner (Tennis)",
-    "n_markets": 49,
-    "fill_ratio": 0.4286,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "2026 Women\u2019s US Open Winner (Tennis)",
-    "n_markets": 67,
-    "fill_ratio": 0.597,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "Venezuela leader end of 2026?",
-    "n_markets": 57,
-    "fill_ratio": 0.2807,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "Which party will gain most seats in Russian Parliamentary Election?",
-    "n_markets": 34,
-    "fill_ratio": 0.2353,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "MLB World Series Champion 2026",
-    "n_markets": 31,
-    "fill_ratio": 0.9677,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "Largest IPO by market cap in 2026?",
-    "n_markets": 74,
-    "fill_ratio": 0.1622,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "MLS Cup Winner 2026",
-    "n_markets": 31,
-    "fill_ratio": 0.9677,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "Pro Football: 2027 Champion",
-    "n_markets": 33,
-    "fill_ratio": 0.9697,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "Where will Maxx Crosby play in 2026?",
-    "n_markets": 33,
-    "fill_ratio": 0.9697,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "Pro Football: 2027 NFC Champion ",
-    "n_markets": 17,
-    "fill_ratio": 0.9412,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "Brazil Presidential Election First Round: 2nd Place",
-    "n_markets": 32,
-    "fill_ratio": 0.5312,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "Where will Tyreek Hill play in 2026?",
-    "n_markets": 19,
-    "fill_ratio": 0.7368,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "Iran leader end of 2026?",
-    "n_markets": 123,
-    "fill_ratio": 0.2439,
-    "complete": false,
-    "lock_cost": null
+    "lock_cost": 1.140349
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -161,9 +56,9 @@
     "lock_cost": null
   },
   {
-    "title": "Which party will win the House in 2026?",
-    "n_markets": 9,
-    "fill_ratio": 0.2222,
+    "title": "F1 Drivers' Champion",
+    "n_markets": 32,
+    "fill_ratio": 0.6875,
     "complete": false,
     "lock_cost": null
   },
@@ -175,16 +70,23 @@
     "lock_cost": null
   },
   {
-    "title": "NBA: 2027 Champion",
-    "n_markets": 36,
-    "fill_ratio": 0.8333,
+    "title": "Next French Presidential Election",
+    "n_markets": 128,
+    "fill_ratio": 0.3203,
     "complete": false,
     "lock_cost": null
   },
   {
-    "title": "Ballon d'Or Winner 2026",
-    "n_markets": 89,
-    "fill_ratio": 0.3483,
+    "title": "Venezuela leader end of 2026?",
+    "n_markets": 57,
+    "fill_ratio": 0.2807,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Pro Football: 2027 Champion",
+    "n_markets": 33,
+    "fill_ratio": 0.9697,
     "complete": false,
     "lock_cost": null
   },
@@ -196,9 +98,37 @@
     "lock_cost": null
   },
   {
-    "title": "Los Angeles Mayoral Election",
-    "n_markets": 15,
-    "fill_ratio": 0.1333,
+    "title": "MLB World Series Champion 2026",
+    "n_markets": 31,
+    "fill_ratio": 0.9677,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Iran leader end of 2026?",
+    "n_markets": 123,
+    "fill_ratio": 0.2439,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Prime Minister of Israel after the next election?",
+    "n_markets": 28,
+    "fill_ratio": 0.6429,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Ballon d'Or Winner 2026",
+    "n_markets": 89,
+    "fill_ratio": 0.3483,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "F1 Constructors' Champion",
+    "n_markets": 12,
+    "fill_ratio": 0.9167,
     "complete": false,
     "lock_cost": null
   },
@@ -210,30 +140,23 @@
     "lock_cost": null
   },
   {
-    "title": "NBA: 2026-27 Rookie of the Year",
-    "n_markets": 81,
-    "fill_ratio": 0.3704,
+    "title": "Which party will gain most seats in Russian Parliamentary Election?",
+    "n_markets": 34,
+    "fill_ratio": 0.2353,
     "complete": false,
     "lock_cost": null
   },
   {
-    "title": "EPL: 2027 Champion",
-    "n_markets": 24,
+    "title": "MLS Cup Winner 2026",
+    "n_markets": 31,
+    "fill_ratio": 0.9677,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "NBA: 2027 Champion",
+    "n_markets": 36,
     "fill_ratio": 0.8333,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "UEFA Champions League: 2027 Champion",
-    "n_markets": 42,
-    "fill_ratio": 0.6905,
-    "complete": false,
-    "lock_cost": null
-  },
-  {
-    "title": "Largest Company end of December 2026?",
-    "n_markets": 28,
-    "fill_ratio": 0.2857,
     "complete": false,
     "lock_cost": null
   },
@@ -245,6 +168,48 @@
     "lock_cost": null
   },
   {
+    "title": "UEFA Champions League: 2027 Champion",
+    "n_markets": 42,
+    "fill_ratio": 0.6905,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Los Angeles Mayoral Election",
+    "n_markets": 15,
+    "fill_ratio": 0.1333,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "2026 Men\u2019s US Open Winner (Tennis)",
+    "n_markets": 49,
+    "fill_ratio": 0.4286,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "EPL: 2027 Champion",
+    "n_markets": 24,
+    "fill_ratio": 0.8333,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Which party will win the House in 2026?",
+    "n_markets": 9,
+    "fill_ratio": 0.2222,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "NBA: 2026-27 Rookie of the Year",
+    "n_markets": 81,
+    "fill_ratio": 0.3704,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
     "title": "How many different countries will Israel strike in 2026?",
     "n_markets": 16,
     "fill_ratio": 0.75,
@@ -252,16 +217,51 @@
     "lock_cost": null
   },
   {
-    "title": "Next French Presidential Election",
-    "n_markets": 128,
-    "fill_ratio": 0.3203,
+    "title": "2026 Women\u2019s US Open Winner (Tennis)",
+    "n_markets": 67,
+    "fill_ratio": 0.597,
     "complete": false,
     "lock_cost": null
   },
   {
-    "title": "Prime Minister of Israel after the next election?",
+    "title": "Where will Maxx Crosby play in 2026?",
+    "n_markets": 33,
+    "fill_ratio": 0.9697,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Pro Football: 2027 NFC Champion ",
+    "n_markets": 17,
+    "fill_ratio": 0.9412,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Largest Company end of December 2026?",
     "n_markets": 28,
-    "fill_ratio": 0.6429,
+    "fill_ratio": 0.2857,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Largest IPO by market cap in 2026?",
+    "n_markets": 74,
+    "fill_ratio": 0.1622,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Brazil Presidential Election First Round: 2nd Place",
+    "n_markets": 32,
+    "fill_ratio": 0.5312,
+    "complete": false,
+    "lock_cost": null
+  },
+  {
+    "title": "Where will Tyreek Hill play in 2026?",
+    "n_markets": 19,
+    "fill_ratio": 0.7368,
     "complete": false,
     "lock_cost": null
   }
