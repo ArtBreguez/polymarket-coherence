@@ -1,15 +1,23 @@
 name: forward-panel (cloud failover)
 
-# Redundancy for the local collector. Runs on GitHub's infra so snapshots keep
-# flowing if the local machine is down. It is a FAILOVER, not a second primary:
-# should_collect.py only lets it proceed when the newest snapshot in the repo is
-# stale (local hasn't pushed recently), so a healthy local run means this job
-# exits silently with no double-collection and no push race.
+# DISABLED as the automatic secondary collector (2026-08-25).
+#
+# Why: running this on a schedule alongside the local Hermes cron made BOTH
+# collectors commit snapshots to master. Despite the staleness gate, their
+# histories diverged (each saw a different "newest" once a push race started),
+# the local push got blocked (ahead/behind), and origin/master went stale until
+# manually reconciled — which tripped the panel watchdog. The redundancy only
+# pays off if the local box is down, in which case the local watchdog is down
+# too, so the automatic failover bought little for the divergence risk it added.
+#
+# The scheduled trigger is removed so there is a SINGLE writer (local cron). The
+# manual workflow_dispatch is kept: if the local box is genuinely down, trigger
+# this by hand (optionally force=true) to collect from the cloud until local is
+# back. Re-enable the schedule only if the two writers are moved to separate
+# branches with a periodic union-merge.
 on:
-  schedule:
-    # every 15 min (UTC). GitHub may delay/coalesce scheduled runs under load;
-    # the staleness gate tolerates that gracefully.
-    - cron: "*/15 * * * *"
+  # schedule:
+  #   - cron: "*/15 * * * *"   # disabled: single-writer policy (see note above)
   workflow_dispatch:
     inputs:
       force:

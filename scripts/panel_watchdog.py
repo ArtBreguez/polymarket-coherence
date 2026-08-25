@@ -113,8 +113,9 @@ def main() -> int:
         print(
             f"🔴 polymarket-coherence: no new snapshot in {span} "
             f"(newest {newest.isoformat(timespec='minutes')}, threshold {STALE_MINUTES} min).\n"
-            f"Both collectors (local cron + GitHub Actions failover) appear stalled. "
-            f"Check: local Hermes cron 9dd581af3bdc, and the 'forward-panel (cloud failover)' Action."
+            f"The local cron is the single collector now. Check: local Hermes cron "
+            f"9dd581af3bdc. If the box is down, trigger the 'forward-panel (cloud "
+            f"failover)' Action manually (workflow_dispatch) to collect until it's back."
         )
     # healthy -> print nothing (silent = OK)
     return 0
