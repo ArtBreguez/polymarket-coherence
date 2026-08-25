@@ -4,7 +4,7 @@
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.00595
+    "lock_cost": 1.005
   },
   {
     "title": "How many Fed rate cuts in 2026?",
@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.155826
+    "lock_cost": 1.140087
   },
   {
     "title": "Democratic Presidential Nominee 2028",
