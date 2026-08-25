@@ -4,14 +4,14 @@
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 0.995
+    "lock_cost": 1.005
   },
   {
     "title": "How many Fed rate cuts in 2026?",
     "n_markets": 13,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.013
+    "lock_cost": 1.012
   },
   {
     "title": "Fed Decision in September?",
@@ -25,14 +25,14 @@
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.062943
+    "lock_cost": 1.065576
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.140324
+    "lock_cost": 1.140174
   },
   {
     "title": "Democratic Presidential Nominee 2028",
