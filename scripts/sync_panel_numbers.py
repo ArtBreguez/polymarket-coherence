@@ -57,6 +57,9 @@ def formatters(s: dict) -> dict[str, str]:
         "sub_dollar_of": f"{s['sub_dollar_obs']} of {s['n_cost_obs']}",
         "sub_dollar_pct": f"{s['sub_dollar_pct']}%",
         "sub_dollar_field": str(s["sub_dollar_field"]),
+        "best_window_run_hours": f"~{s['best_window_run_hours']}h",
+        "best_edge_pct": f"{s['best_edge_pct']}%",
+        "best_annualized_pct": f"{s['best_annualized_pct']}%",
     }
 
 

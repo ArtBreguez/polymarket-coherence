@@ -100,6 +100,13 @@ A scheduled collector (every 15 min) has built a panel of **<!--panel:snapshots-
   gross edge** — and held sub-\$1 across multiple snapshots.
 - Lock cost over all <!--panel:n_obs-->2140<!--/panel:n_obs--> complete observations: **min <!--panel:cost_min-->0.994<!--/panel:cost_min-->, median <!--panel:cost_median-->1.021<!--/panel:cost_median-->, max
   <!--panel:cost_max-->1.280<!--/panel:cost_max-->**. <!--panel:sub_dollar_of-->125 of 2140<!--/panel:sub_dollar_of--> (<!--panel:sub_dollar_pct-->5.8%<!--/panel:sub_dollar_pct-->) were sub-\$1, all in that one small dense field.
+- **Persistence doesn't rescue it.** That window wasn't a flicker: it stayed
+  sub-\$1 for a longest unbroken run of **<!--panel:best_window_run_hours-->~31.2h<!--/panel:best_window_run_hours-->**. But the edge is
+  **<!--panel:best_edge_pct-->0.6%<!--/panel:best_edge_pct--> gross**, and the capital stays locked until the field resolves
+  (Nov 2026), so annualized it is **<!--panel:best_annualized_pct-->3.02%<!--/panel:best_annualized_pct--> gross-of-costs** — below the
+  on-chain gas/conversion drag and the return on a T-bill. A durable window that
+  still isn't a free lunch is the sharpest form of the thesis: what kills the
+  trade is not fleetingness but **marginality**.
 
 This is the honest, important result — and it *sharpens* rather than weakens the
 thesis. The method **does** detect a window when one opens, and the one it found

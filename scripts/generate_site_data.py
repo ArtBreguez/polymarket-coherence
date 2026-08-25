@@ -90,6 +90,14 @@ def main() -> int:
     complete_events = 0
     sub_dollar_obs = 0
     sub_dollar_titles: set[str] = set()
+    # Persistence + annualized-return of the deepest executable window. The
+    # thesis-sharpening point a single snapshot misses: even when a sub-$1 window
+    # DOES open and PERSISTS, the edge is so thin that the return on capital
+    # locked until resolution is negligible — so persistence doesn't rescue it.
+    best_run_snaps = 0           # longest consecutive complete & sub-$1 run
+    best_lock_cost = None        # deepest (lowest) lock cost ever seen sub-$1
+    best_lock_end_date = None    # resolution date of that field (for annualizing)
+    best_lock_ts = None          # when the deepest lock was observed
     for recs in ev_hist.values():
         cc = [x["lock_cost"] for x in recs if x.get("complete") and x.get("lock_cost") is not None]
         all_costs.extend(cc)
@@ -104,6 +112,23 @@ def main() -> int:
                 if x.get("complete") and x.get("lock_cost") is not None and x["lock_cost"] < 1.0:
                     if x.get("title"):
                         sub_dollar_titles.add(x["title"])
+            # deepest lock cost across this event's sub-$1 observations
+            for x in sorted(recs, key=lambda r: r.get("ts", "")):
+                lc = x.get("lock_cost")
+                if x.get("complete") and lc is not None and lc < 1.0:
+                    if best_lock_cost is None or lc < best_lock_cost:
+                        best_lock_cost = lc
+                        best_lock_end_date = x.get("end_date")
+                        best_lock_ts = x.get("ts")
+            # longest consecutive run of complete & sub-$1 snapshots for this event
+            cur = 0
+            for x in sorted(recs, key=lambda r: r.get("ts", "")):
+                lc = x.get("lock_cost")
+                if x.get("complete") and lc is not None and lc < 1.0:
+                    cur += 1
+                    best_run_snaps = max(best_run_snaps, cur)
+                else:
+                    cur = 0
 
     # small/large liquidity structure on the latest snapshot
     small = large = small_complete = large_complete = 0
@@ -131,6 +156,24 @@ def main() -> int:
         t1 = dt.datetime.fromisoformat(snapshots[-1].replace("Z", "+00:00"))
         hours_span = round((t1 - t0).total_seconds() / 3600)
 
+    # Persistence + annualized economics of the deepest window (all derived, no
+    # hand-typed numbers). gross_edge_pct = 1 - lock_cost. The capital is locked
+    # until the field resolves (end_date), so the honest return is annualized over
+    # that horizon — this is what shows a persistent window still isn't a lunch.
+    best_run_hours = round(best_run_snaps * 15 / 60, 1) if best_run_snaps else 0
+    best_edge_pct = round(100 * (1 - best_lock_cost), 2) if best_lock_cost is not None else None
+    best_annualized_pct = None
+    if best_lock_cost is not None and best_lock_end_date and best_lock_ts:
+        try:
+            t_obs = dt.datetime.fromisoformat(best_lock_ts.replace("Z", "+00:00"))
+            t_end = dt.datetime.fromisoformat(best_lock_end_date.replace("Z", "+00:00"))
+            days_locked = (t_end - t_obs).total_seconds() / 86400
+            if days_locked > 0:
+                gross = (1.0 - best_lock_cost) / best_lock_cost  # return on cost
+                best_annualized_pct = round(100 * gross * (365 / days_locked), 2)
+        except (ValueError, AttributeError):
+            best_annualized_pct = None
+
     summary = {
         "generated_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "snapshots": len(snapshots),
@@ -147,6 +190,10 @@ def main() -> int:
         "sub_dollar_obs": sub_dollar_obs,
         "sub_dollar_pct": round(100 * sub_dollar_obs / len(all_costs), 1) if all_costs else None,
         "sub_dollar_field": sorted(sub_dollar_titles)[0] if sub_dollar_titles else None,
+        "best_window_run_snaps": best_run_snaps,
+        "best_window_run_hours": best_run_hours,
+        "best_edge_pct": best_edge_pct,
+        "best_annualized_pct": best_annualized_pct,
         "liquidity_structure": {
             "small_n": small, "small_complete_pct": round(100 * small_complete / small) if small else None,
             "small_median_fill_pct": round(100 * st.median(small_fill)) if small_fill else None,
