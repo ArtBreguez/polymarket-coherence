@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-25T17:15:58.541649+00:00",
+  "generated_utc": "2026-08-25T17:30:58.069037+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -21,7 +21,7 @@
         {
           "label": "cut_25",
           "poly_bid": 0.012,
-          "poly_ask": 0.013,
+          "poly_ask": 0.014,
           "kalshi_bid": 0.0,
           "kalshi_ask": 0.01,
           "kalshi_liq": 0.0,
@@ -33,12 +33,12 @@
         {
           "label": "cut_50",
           "poly_bid": 0.003,
-          "poly_ask": 0.005,
+          "poly_ask": 0.004,
           "kalshi_bid": 0.0,
           "kalshi_ask": 0.01,
           "kalshi_liq": 0.0,
-          "edge_gross": -0.005,
-          "edge_net": -0.005,
+          "edge_gross": -0.004,
+          "edge_net": -0.004,
           "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
