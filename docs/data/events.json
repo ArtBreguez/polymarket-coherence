@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.168178
+    "lock_cost": 1.168278
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -231,16 +231,16 @@
     "lock_cost": null
   },
   {
-    "title": "Pro Football: 2027 NFC Champion ",
-    "n_markets": 17,
-    "fill_ratio": 0.9412,
+    "title": "Largest Company end of December 2026?",
+    "n_markets": 28,
+    "fill_ratio": 0.2857,
     "complete": false,
     "lock_cost": null
   },
   {
-    "title": "Largest Company end of December 2026?",
-    "n_markets": 28,
-    "fill_ratio": 0.2857,
+    "title": "Pro Football: 2027 NFC Champion ",
+    "n_markets": 17,
+    "fill_ratio": 0.9412,
     "complete": false,
     "lock_cost": null
   },
