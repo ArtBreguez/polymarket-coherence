@@ -165,18 +165,18 @@ A single snapshot cannot tell you whether a fleeting sub-\$1 lock ever appears.
 were executable (< \$1), and the **longest run of consecutive executable
 snapshots** — a proxy for how long a window persists.
 
-Panel to date (**<!--panel:snapshots-->528<!--/panel:snapshots-->+ snapshots**
+Panel to date (**<!--panel:snapshots-->529<!--/panel:snapshots-->+ snapshots**
 over <!--panel:hours-->~128h<!--/panel:hours--> and still growing, order size
 100): **<!--panel:complete_events-->5/38<!--/panel:complete_events--> events
 complete** (the same small dense fields every time; large fields never lock).
 **<!--panel:ever_executable-->1/38<!--/panel:ever_executable--> ever crossed
 below \$1 on a gross basis** — "<!--panel:sub_dollar_field-->Balance of Power: 2026 Midterms<!--/panel:sub_dollar_field-->"
 hit **0.994** (+0.6% gross edge) and held sub-\$1 across multiple snapshots. Lock
-cost over all <!--panel:n_obs-->2640<!--/panel:n_obs--> complete observations:
+cost over all <!--panel:n_obs-->2645<!--/panel:n_obs--> complete observations:
 **min <!--panel:cost_min-->0.994<!--/panel:cost_min-->, median
 <!--panel:cost_median-->1.021<!--/panel:cost_median-->, max
 <!--panel:cost_max-->1.280<!--/panel:cost_max-->**;
-**<!--panel:sub_dollar-->129/2640<!--/panel:sub_dollar-->
+**<!--panel:sub_dollar-->129/2645<!--/panel:sub_dollar-->
 (<!--panel:sub_dollar_pct-->4.9%<!--/panel:sub_dollar_pct-->)** were sub-\$1 — all
 in that one small dense field, and all *gross* of on-chain execution costs that
 plausibly erase a ~0.6% edge. Large multi-outcome fields — the ones that *look*
@@ -200,7 +200,7 @@ growing the series.
   the \$1.5B Trump-2024 market returns an empty `prices-history`), so Parts 1–2
   are a single snapshot. Part 3's forward collector has built
   <!--panel:hours-->~128h<!--/panel:hours--> /
-  <!--panel:snapshots-->528<!--/panel:snapshots-->+ snapshots so far (and still
+  <!--panel:snapshots-->529<!--/panel:snapshots-->+ snapshots so far (and still
   growing) — the "rare, marginal, small-field-only
   windows" result is strong over that span, but not yet a long-horizon duration
   statistic.
