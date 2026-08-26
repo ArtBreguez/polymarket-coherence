@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-26T23:01:18.424882+00:00",
+  "generated_utc": "2026-08-26T23:16:16.526018+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -75,13 +75,13 @@
       "buckets": [
         {
           "label": "Philadelphia 76Ers",
-          "poly_bid": 0.129,
-          "poly_ask": 0.13,
+          "poly_bid": 0.127,
+          "poly_ask": 0.128,
           "kalshi_bid": 0.09,
           "kalshi_ask": 0.1,
           "kalshi_liq": 0.0,
-          "edge_gross": 0.029,
-          "edge_net": 0.019,
+          "edge_gross": 0.027,
+          "edge_net": 0.017,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
