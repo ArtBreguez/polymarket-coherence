@@ -25,14 +25,14 @@
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.044721
+    "lock_cost": 1.04447
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.171553
+    "lock_cost": 1.172509
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -65,7 +65,7 @@
   {
     "title": "Brazil Presidential Election",
     "n_markets": 32,
-    "fill_ratio": 0.5625,
+    "fill_ratio": 0.5938,
     "complete": false,
     "lock_cost": null
   },
@@ -254,7 +254,7 @@
   {
     "title": "Brazil Presidential Election First Round: 2nd Place",
     "n_markets": 32,
-    "fill_ratio": 0.5312,
+    "fill_ratio": 0.5625,
     "complete": false,
     "lock_cost": null
   },
