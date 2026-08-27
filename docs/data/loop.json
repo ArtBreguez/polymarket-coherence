@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-27T22:45:31.553786+00:00",
+  "generated_utc": "2026-08-27T23:00:31.877246+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -266,6 +266,18 @@
           "executable": false
         },
         {
+          "label": "Minnesota Timberwolves",
+          "poly_bid": 0.041,
+          "poly_ask": 0.042,
+          "kalshi_bid": 0.03,
+          "kalshi_ask": 0.04,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.001,
+          "edge_net": -0.009,
+          "direction": "buy_kalshi_sell_poly",
+          "executable": false
+        },
+        {
           "label": "Atlanta Hawks",
           "poly_bid": 0.008,
           "poly_ask": 0.009,
@@ -287,18 +299,6 @@
           "edge_gross": -0.001,
           "edge_net": -0.01,
           "direction": "buy_poly_sell_kalshi",
-          "executable": false
-        },
-        {
-          "label": "Minnesota Timberwolves",
-          "poly_bid": 0.04,
-          "poly_ask": 0.041,
-          "kalshi_bid": 0.03,
-          "kalshi_ask": 0.04,
-          "kalshi_liq": 0.0,
-          "edge_gross": 0.0,
-          "edge_net": -0.01,
-          "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
         {
