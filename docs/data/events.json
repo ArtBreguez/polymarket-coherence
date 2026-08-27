@@ -25,14 +25,14 @@
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.051847
+    "lock_cost": 1.049419
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.172571
+    "lock_cost": 1.169254
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -224,16 +224,16 @@
     "lock_cost": null
   },
   {
-    "title": "Where will Maxx Crosby play in 2026?",
-    "n_markets": 33,
-    "fill_ratio": 0.9697,
+    "title": "Largest Company end of December 2026?",
+    "n_markets": 28,
+    "fill_ratio": 0.2857,
     "complete": false,
     "lock_cost": null
   },
   {
-    "title": "Largest Company end of December 2026?",
-    "n_markets": 28,
-    "fill_ratio": 0.2857,
+    "title": "Where will Maxx Crosby play in 2026?",
+    "n_markets": 33,
+    "fill_ratio": 0.9697,
     "complete": false,
     "lock_cost": null
   },

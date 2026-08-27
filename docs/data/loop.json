@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-27T18:01:29.762198+00:00",
+  "generated_utc": "2026-08-27T18:15:29.831032+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -10,11 +10,11 @@
           "label": "maintain",
           "poly_bid": 0.67,
           "poly_ask": 0.68,
-          "kalshi_bid": 0.7,
-          "kalshi_ask": 0.71,
+          "kalshi_bid": 0.69,
+          "kalshi_ask": 0.7,
           "kalshi_liq": 0.0,
-          "edge_gross": 0.02,
-          "edge_net": -0.0,
+          "edge_gross": 0.01,
+          "edge_net": -0.01,
           "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
@@ -206,18 +206,6 @@
           "executable": false
         },
         {
-          "label": "Toronto Raptors",
-          "poly_bid": 0.033,
-          "poly_ask": 0.034,
-          "kalshi_bid": 0.02,
-          "kalshi_ask": 0.03,
-          "kalshi_liq": 0.0,
-          "edge_gross": 0.003,
-          "edge_net": -0.007,
-          "direction": "buy_kalshi_sell_poly",
-          "executable": false
-        },
-        {
           "label": "Washington Wizards",
           "poly_bid": 0.012,
           "poly_ask": 0.013,
@@ -251,6 +239,18 @@
           "edge_gross": -0.003,
           "edge_net": -0.008,
           "direction": "buy_poly_sell_kalshi",
+          "executable": false
+        },
+        {
+          "label": "Toronto Raptors",
+          "poly_bid": 0.031,
+          "poly_ask": 0.032,
+          "kalshi_bid": 0.02,
+          "kalshi_ask": 0.03,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.001,
+          "edge_net": -0.009,
+          "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
         {
