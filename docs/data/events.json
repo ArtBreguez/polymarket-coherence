@@ -1,17 +1,17 @@
 [
   {
+    "title": "Fed Decision in September?",
+    "n_markets": 5,
+    "fill_ratio": 1.0,
+    "complete": true,
+    "lock_cost": 1.0
+  },
+  {
     "title": "Balance of Power: 2026 Midterms",
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
     "lock_cost": 1.003
-  },
-  {
-    "title": "Fed Decision in September?",
-    "n_markets": 5,
-    "fill_ratio": 1.0,
-    "complete": true,
-    "lock_cost": 1.01
   },
   {
     "title": "How many Fed rate cuts in 2026?",
@@ -25,14 +25,14 @@
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.040347
+    "lock_cost": 1.040757
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.174624
+    "lock_cost": 1.175882
   },
   {
     "title": "Democratic Presidential Nominee 2028",
