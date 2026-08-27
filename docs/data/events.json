@@ -11,7 +11,7 @@
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.01
+    "lock_cost": 1.011
   },
   {
     "title": "How many Fed rate cuts in 2026?",
@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.181114
+    "lock_cost": 1.188511
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -184,7 +184,7 @@
   {
     "title": "2026 Men\u2019s US Open Winner (Tennis)",
     "n_markets": 49,
-    "fill_ratio": 0.4286,
+    "fill_ratio": 0.4082,
     "complete": false,
     "lock_cost": null
   },
