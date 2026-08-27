@@ -18,7 +18,7 @@
     "n_markets": 13,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.03
+    "lock_cost": 1.028
   },
   {
     "title": "Where will the next next round of US-Iran peace talks be...?",
@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.188511
+    "lock_cost": 1.188549
   },
   {
     "title": "Democratic Presidential Nominee 2028",
