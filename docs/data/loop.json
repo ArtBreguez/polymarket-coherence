@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-27T07:16:21.604661+00:00",
+  "generated_utc": "2026-08-27T07:31:20.870144+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -20,7 +20,7 @@
         },
         {
           "label": "cut_25",
-          "poly_bid": 0.009,
+          "poly_bid": 0.01,
           "poly_ask": 0.011,
           "kalshi_bid": 0.01,
           "kalshi_ask": 0.02,
