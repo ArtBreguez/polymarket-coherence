@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-28T20:45:46.129681+00:00",
+  "generated_utc": "2026-08-28T21:00:44.917433+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -45,12 +45,12 @@
         {
           "label": "hike_25",
           "poly_bid": 0.5,
-          "poly_ask": 0.52,
-          "kalshi_bid": 0.5,
-          "kalshi_ask": 0.51,
+          "poly_ask": 0.51,
+          "kalshi_bid": 0.49,
+          "kalshi_ask": 0.5,
           "kalshi_liq": 0.0,
-          "edge_gross": -0.01,
-          "edge_net": -0.03,
+          "edge_gross": 0.0,
+          "edge_net": -0.02,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
@@ -75,13 +75,13 @@
       "buckets": [
         {
           "label": "Philadelphia 76Ers",
-          "poly_bid": 0.127,
-          "poly_ask": 0.128,
+          "poly_bid": 0.126,
+          "poly_ask": 0.127,
           "kalshi_bid": 0.09,
           "kalshi_ask": 0.1,
           "kalshi_liq": 0.0,
-          "edge_gross": 0.027,
-          "edge_net": 0.017,
+          "edge_gross": 0.026,
+          "edge_net": 0.016,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
@@ -302,18 +302,6 @@
           "executable": false
         },
         {
-          "label": "San Antonio Spurs",
-          "poly_bid": 0.2,
-          "poly_ask": 0.21,
-          "kalshi_bid": 0.22,
-          "kalshi_ask": 0.23,
-          "kalshi_liq": 0.0,
-          "edge_gross": 0.01,
-          "edge_net": -0.01,
-          "direction": "buy_poly_sell_kalshi",
-          "executable": false
-        },
-        {
           "label": "Portland Trail Blazers",
           "poly_bid": 0.009,
           "poly_ask": 0.01,
@@ -431,6 +419,18 @@
           "edge_gross": -0.01,
           "edge_net": -0.02,
           "direction": "buy_kalshi_sell_poly",
+          "executable": false
+        },
+        {
+          "label": "San Antonio Spurs",
+          "poly_bid": 0.2,
+          "poly_ask": 0.21,
+          "kalshi_bid": 0.23,
+          "kalshi_ask": 0.24,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.02,
+          "edge_net": 0.0,
+          "direction": "buy_poly_sell_kalshi",
           "executable": false
         }
       ]
