@@ -18,7 +18,7 @@
     "n_markets": 13,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.02
+    "lock_cost": 1.022
   },
   {
     "title": "Where will the next next round of US-Iran peace talks be...?",
@@ -32,7 +32,7 @@
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.208706
+    "lock_cost": 1.191487
   },
   {
     "title": "Democratic Presidential Nominee 2028",
@@ -184,7 +184,7 @@
   {
     "title": "2026 Men\u2019s US Open Winner (Tennis)",
     "n_markets": 49,
-    "fill_ratio": 0.4082,
+    "fill_ratio": 0.3673,
     "complete": false,
     "lock_cost": null
   },
@@ -219,7 +219,7 @@
   {
     "title": "2026 Women\u2019s US Open Winner (Tennis)",
     "n_markets": 67,
-    "fill_ratio": 0.597,
+    "fill_ratio": 0.5373,
     "complete": false,
     "lock_cost": null
   },
