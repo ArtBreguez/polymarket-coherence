@@ -7,13 +7,6 @@
     "lock_cost": 0.993
   },
   {
-    "title": "Fed Decision in September?",
-    "n_markets": 5,
-    "fill_ratio": 1.0,
-    "complete": true,
-    "lock_cost": 1.005
-  },
-  {
     "title": "How many Fed rate cuts in 2026?",
     "n_markets": 13,
     "fill_ratio": 1.0,
@@ -21,18 +14,25 @@
     "lock_cost": 1.023
   },
   {
+    "title": "Fed Decision in September?",
+    "n_markets": 5,
+    "fill_ratio": 1.0,
+    "complete": true,
+    "lock_cost": 1.025
+  },
+  {
     "title": "Where will the next next round of US-Iran peace talks be...?",
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.03654
+    "lock_cost": 1.038729
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.167547
+    "lock_cost": 1.164652
   },
   {
     "title": "Democratic Presidential Nominee 2028",
