@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-28T03:45:33.659634+00:00",
+  "generated_utc": "2026-08-28T04:00:34.681833+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -254,6 +254,18 @@
           "executable": false
         },
         {
+          "label": "Cleveland Cavaliers",
+          "poly_bid": 0.017,
+          "poly_ask": 0.018,
+          "kalshi_bid": 0.02,
+          "kalshi_ask": 0.03,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.002,
+          "edge_net": -0.008,
+          "direction": "buy_poly_sell_kalshi",
+          "executable": false
+        },
+        {
           "label": "Toronto Raptors",
           "poly_bid": 0.031,
           "poly_ask": 0.032,
@@ -367,18 +379,6 @@
           "poly_ask": 0.033,
           "kalshi_bid": 0.03,
           "kalshi_ask": 0.04,
-          "kalshi_liq": 0.0,
-          "edge_gross": -0.003,
-          "edge_net": -0.013,
-          "direction": "buy_poly_sell_kalshi",
-          "executable": false
-        },
-        {
-          "label": "Cleveland Cavaliers",
-          "poly_bid": 0.022,
-          "poly_ask": 0.023,
-          "kalshi_bid": 0.02,
-          "kalshi_ask": 0.03,
           "kalshi_liq": 0.0,
           "edge_gross": -0.003,
           "edge_net": -0.013,
