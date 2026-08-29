@@ -90,7 +90,7 @@ is therefore not an executable portfolio — the apparent violation is a
 ## Part 3 — Executable windows are rare, marginal, and only in small fields (forward panel)
 
 A single snapshot can't tell you whether a fleeting sub-\$1 lock ever *appears*.
-A scheduled collector (every 15 min) has built a panel of **<!--panel:snapshots-->835<!--/panel:snapshots-->+ snapshots** over
+A scheduled collector (every 15 min) has built a panel of **<!--panel:snapshots-->836<!--/panel:snapshots-->+ snapshots** over
 <!--panel:hours-->~205h<!--/panel:hours--> (and still growing) across <!--panel:distinct_events-->38<!--/panel:distinct_events--> events.
 
 - **<!--panel:complete_events_of-->5 of 38<!--/panel:complete_events_of-->** events were ever complete (lockable) — always the same 5 small,
@@ -98,8 +98,8 @@ A scheduled collector (every 15 min) has built a panel of **<!--panel:snapshots-
 - **<!--panel:ever_executable_of-->2 of 38<!--/panel:ever_executable_of-->** events ever crossed below \$1 on a **gross** basis: "<!--panel:sub_dollar_field-->Balance of Power: 2026 Midterms<!--/panel:sub_dollar_field-->"
   (5 outcomes) hit a lock cost of **0.994** — a **+0.6%
   gross edge** — and held sub-\$1 across multiple snapshots.
-- Lock cost over all <!--panel:n_obs-->4175<!--/panel:n_obs--> complete observations: **min <!--panel:cost_min-->0.973<!--/panel:cost_min-->, median <!--panel:cost_median-->1.022<!--/panel:cost_median-->, max
-  <!--panel:cost_max-->1.316<!--/panel:cost_max-->**. <!--panel:sub_dollar_of-->259 of 4175<!--/panel:sub_dollar_of--> (<!--panel:sub_dollar_pct-->6.2%<!--/panel:sub_dollar_pct-->) were sub-\$1, all in that one small dense field.
+- Lock cost over all <!--panel:n_obs-->4180<!--/panel:n_obs--> complete observations: **min <!--panel:cost_min-->0.973<!--/panel:cost_min-->, median <!--panel:cost_median-->1.022<!--/panel:cost_median-->, max
+  <!--panel:cost_max-->1.316<!--/panel:cost_max-->**. <!--panel:sub_dollar_of-->260 of 4180<!--/panel:sub_dollar_of--> (<!--panel:sub_dollar_pct-->6.2%<!--/panel:sub_dollar_pct-->) were sub-\$1, all in that one small dense field.
 - **Persistence doesn't rescue it.** That window wasn't a flicker: it stayed
   sub-\$1 for a longest unbroken run of **<!--panel:best_window_run_hours-->~31.2h<!--/panel:best_window_run_hours-->**. But the edge is
   **<!--panel:best_edge_pct-->2.7%<!--/panel:best_edge_pct--> gross**, and the capital stays locked until the field resolves
@@ -164,7 +164,7 @@ microstructure, shown three ways:
 
 The one place a genuine sub-\$1 lock *does* appear is exactly where the
 microstructure allows it: a **small, dense, fully-liquid field**, and even there
-the edge is **marginal (≤0.6% gross) and confined to one field** (<!--panel:sub_dollar_of-->259 of 4175<!--/panel:sub_dollar_of--> complete observations, all in that single small dense market),
+the edge is **marginal (≤0.6% gross) and confined to one field** (<!--panel:sub_dollar_of-->260 of 4180<!--/panel:sub_dollar_of--> complete observations, all in that single small dense market),
 plausibly erased by execution costs. That is the opposite of the naive picture,
 in which the *large* fields look most violated.
 
@@ -179,7 +179,7 @@ windows in the smallest fields.
   not whether anyone took it. Depth-aware realized on-chain profit is a different
   question (see *Prior work*).
 - **Snapshot + young panel.** Parts 1–2 are a cross-sectional snapshot;
-  Part 3's panel is <!--panel:hours-->~205h<!--/panel:hours--> / <!--panel:snapshots-->835<!--/panel:snapshots-->+ snapshots (and still growing). The "rare,
+  Part 3's panel is <!--panel:hours-->~205h<!--/panel:hours--> / <!--panel:snapshots-->836<!--/panel:snapshots-->+ snapshots (and still growing). The "rare,
   marginal, small-field-only windows" result is strong over that span, not yet a
   long-horizon duration statistic.
 - **Costs modeled only in Part 4.** Parts 1–3 report the raw book-walking fill
