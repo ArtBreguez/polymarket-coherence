@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-29T01:45:47.408130+00:00",
+  "generated_utc": "2026-08-29T02:00:47.759029+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -8,10 +8,10 @@
       "buckets": [
         {
           "label": "maintain",
-          "poly_bid": 0.52,
-          "poly_ask": 0.53,
-          "kalshi_bid": 0.51,
-          "kalshi_ask": 0.52,
+          "poly_bid": 0.53,
+          "poly_ask": 0.54,
+          "kalshi_bid": 0.52,
+          "kalshi_ask": 0.53,
           "kalshi_liq": 0.0,
           "edge_gross": 0.0,
           "edge_net": -0.02,
@@ -44,13 +44,13 @@
         },
         {
           "label": "hike_25",
-          "poly_bid": 0.46,
-          "poly_ask": 0.47,
+          "poly_bid": 0.45,
+          "poly_ask": 0.46,
           "kalshi_bid": 0.47,
           "kalshi_ask": 0.48,
           "kalshi_liq": 0.0,
-          "edge_gross": 0.0,
-          "edge_net": -0.02,
+          "edge_gross": 0.01,
+          "edge_net": -0.01,
           "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
