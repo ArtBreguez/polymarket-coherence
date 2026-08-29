@@ -4,7 +4,7 @@
     "n_markets": 5,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 0.998
+    "lock_cost": 0.999
   },
   {
     "title": "Balance of Power: 2026 Midterms",
@@ -25,14 +25,14 @@
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.043188
+    "lock_cost": 1.042627
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.15291
+    "lock_cost": 1.151567
   },
   {
     "title": "Democratic Presidential Nominee 2028",
