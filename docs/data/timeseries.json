@@ -7014,5 +7014,13 @@
     "executable": 1,
     "min_cost": 0.983,
     "median_cost": 1.029
+  },
+  {
+    "ts": "2026-08-29T16:30:56.187486+00:00",
+    "events": 38,
+    "complete": 5,
+    "executable": 1,
+    "min_cost": 0.983,
+    "median_cost": 1.028
   }
 ]
