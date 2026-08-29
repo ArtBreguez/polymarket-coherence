@@ -18,21 +18,21 @@
     "n_markets": 13,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.027249
+    "lock_cost": 1.028
   },
   {
     "title": "Where will the next next round of US-Iran peace talks be...?",
     "n_markets": 19,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.037698
+    "lock_cost": 1.037292
   },
   {
     "title": "What will the Fed rate be at the end of 2026?",
     "n_markets": 15,
     "fill_ratio": 1.0,
     "complete": true,
-    "lock_cost": 1.120324
+    "lock_cost": 1.123542
   },
   {
     "title": "Democratic Presidential Nominee 2028",
