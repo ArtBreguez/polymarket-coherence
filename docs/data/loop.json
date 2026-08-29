@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-29T18:01:01.345062+00:00",
+  "generated_utc": "2026-08-29T18:16:02.076638+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -10,23 +10,23 @@
           "label": "maintain",
           "poly_bid": 0.54,
           "poly_ask": 0.55,
-          "kalshi_bid": 0.53,
-          "kalshi_ask": 0.54,
+          "kalshi_bid": 0.52,
+          "kalshi_ask": 0.53,
           "kalshi_liq": 0.0,
-          "edge_gross": 0.0,
-          "edge_net": -0.02,
+          "edge_gross": 0.01,
+          "edge_net": -0.01,
           "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
         {
           "label": "cut_25",
-          "poly_bid": 0.007,
-          "poly_ask": 0.008,
+          "poly_bid": 0.008,
+          "poly_ask": 0.01,
           "kalshi_bid": 0.0,
           "kalshi_ask": 0.01,
           "kalshi_liq": 0.0,
-          "edge_gross": -0.003,
-          "edge_net": -0.008,
+          "edge_gross": -0.002,
+          "edge_net": -0.01,
           "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
@@ -302,6 +302,18 @@
           "executable": false
         },
         {
+          "label": "San Antonio Spurs",
+          "poly_bid": 0.2,
+          "poly_ask": 0.21,
+          "kalshi_bid": 0.22,
+          "kalshi_ask": 0.23,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.01,
+          "edge_net": -0.01,
+          "direction": "buy_poly_sell_kalshi",
+          "executable": false
+        },
+        {
           "label": "Portland Trail Blazers",
           "poly_bid": 0.009,
           "poly_ask": 0.01,
@@ -419,18 +431,6 @@
           "edge_gross": -0.01,
           "edge_net": -0.02,
           "direction": "buy_kalshi_sell_poly",
-          "executable": false
-        },
-        {
-          "label": "San Antonio Spurs",
-          "poly_bid": 0.2,
-          "poly_ask": 0.21,
-          "kalshi_bid": 0.23,
-          "kalshi_ask": 0.24,
-          "kalshi_liq": 0.0,
-          "edge_gross": 0.02,
-          "edge_net": 0.0,
-          "direction": "buy_poly_sell_kalshi",
           "executable": false
         }
       ]
