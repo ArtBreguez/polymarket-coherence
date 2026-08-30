@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-30T07:01:07.415970+00:00",
+  "generated_utc": "2026-08-30T07:16:09.029316+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -129,6 +129,18 @@
           "kalshi_ask": 0.01,
           "kalshi_liq": 0.0,
           "edge_gross": -0.002,
+          "edge_net": -0.002,
+          "direction": "buy_poly_sell_kalshi",
+          "executable": false
+        },
+        {
+          "label": "Miami Heat",
+          "poly_bid": 0.031,
+          "poly_ask": 0.032,
+          "kalshi_bid": 0.04,
+          "kalshi_ask": 0.05,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.008,
           "edge_net": -0.002,
           "direction": "buy_poly_sell_kalshi",
           "executable": false
@@ -359,18 +371,6 @@
           "edge_gross": -0.001,
           "edge_net": -0.011,
           "direction": "buy_kalshi_sell_poly",
-          "executable": false
-        },
-        {
-          "label": "Miami Heat",
-          "poly_bid": 0.031,
-          "poly_ask": 0.032,
-          "kalshi_bid": 0.03,
-          "kalshi_ask": 0.04,
-          "kalshi_liq": 0.0,
-          "edge_gross": -0.002,
-          "edge_net": -0.012,
-          "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
         {
