@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-30T12:01:08.643076+00:00",
+  "generated_utc": "2026-08-30T12:16:15.722503+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -254,18 +254,6 @@
           "executable": false
         },
         {
-          "label": "Toronto Raptors",
-          "poly_bid": 0.031,
-          "poly_ask": 0.032,
-          "kalshi_bid": 0.02,
-          "kalshi_ask": 0.03,
-          "kalshi_liq": 0.0,
-          "edge_gross": 0.001,
-          "edge_net": -0.009,
-          "direction": "buy_kalshi_sell_poly",
-          "executable": false
-        },
-        {
           "label": "Orlando Magic",
           "poly_bid": 0.008,
           "poly_ask": 0.009,
@@ -299,6 +287,18 @@
           "edge_gross": -0.002,
           "edge_net": -0.009,
           "direction": "buy_poly_sell_kalshi",
+          "executable": false
+        },
+        {
+          "label": "Toronto Raptors",
+          "poly_bid": 0.03,
+          "poly_ask": 0.031,
+          "kalshi_bid": 0.02,
+          "kalshi_ask": 0.03,
+          "kalshi_liq": 0.0,
+          "edge_gross": 0.0,
+          "edge_net": -0.01,
+          "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
         {
