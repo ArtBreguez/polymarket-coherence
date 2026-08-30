@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-30T13:16:09.622029+00:00",
+  "generated_utc": "2026-08-30T13:31:13.490027+00:00",
   "results": [
     {
       "id": "fed-sep-2026",
@@ -20,13 +20,13 @@
         },
         {
           "label": "cut_25",
-          "poly_bid": 0.008,
-          "poly_ask": 0.009,
+          "poly_bid": 0.009,
+          "poly_ask": 0.01,
           "kalshi_bid": 0.0,
           "kalshi_ask": 0.01,
           "kalshi_liq": 0.0,
-          "edge_gross": -0.002,
-          "edge_net": -0.009,
+          "edge_gross": -0.001,
+          "edge_net": -0.01,
           "direction": "buy_poly_sell_kalshi",
           "executable": false
         },
@@ -338,6 +338,18 @@
           "executable": false
         },
         {
+          "label": "Indiana Pacers",
+          "poly_bid": 0.019,
+          "poly_ask": 0.02,
+          "kalshi_bid": 0.01,
+          "kalshi_ask": 0.02,
+          "kalshi_liq": 0.0,
+          "edge_gross": -0.001,
+          "edge_net": -0.011,
+          "direction": "buy_kalshi_sell_poly",
+          "executable": false
+        },
+        {
           "label": "Golden State Warriors",
           "poly_bid": 0.01,
           "poly_ask": 0.011,
@@ -371,18 +383,6 @@
           "edge_gross": -0.002,
           "edge_net": -0.012,
           "direction": "buy_poly_sell_kalshi",
-          "executable": false
-        },
-        {
-          "label": "Indiana Pacers",
-          "poly_bid": 0.018,
-          "poly_ask": 0.019,
-          "kalshi_bid": 0.01,
-          "kalshi_ask": 0.02,
-          "kalshi_liq": 0.0,
-          "edge_gross": -0.002,
-          "edge_net": -0.012,
-          "direction": "buy_kalshi_sell_poly",
           "executable": false
         },
         {
