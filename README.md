@@ -2,8 +2,8 @@
 
 **Do Polymarket's multi-outcome markets really violate coherence — or is it just the spread?**
 
-📊 **Live dashboard:** https://artbreguez.github.io/polymarket-coherence/ — auto-updates
-every 15 min from a scheduled collector.
+📊 **Dashboard:** https://artbreguez.github.io/polymarket-coherence/ — the final
+panel (2026-08-20 → 2026-08-30, 964 snapshots); collection is now closed.
 
 ![tests](https://github.com/ArtBreguez/polymarket-coherence/actions/workflows/tests.yml/badge.svg)
 
@@ -165,8 +165,8 @@ A single snapshot cannot tell you whether a fleeting sub-\$1 lock ever appears.
 were executable (< \$1), and the **longest run of consecutive executable
 snapshots** — a proxy for how long a window persists.
 
-Panel to date (**<!--panel:snapshots-->964<!--/panel:snapshots-->+ snapshots**
-over <!--panel:hours-->~237h<!--/panel:hours--> and still growing, order size
+Final panel (**<!--panel:snapshots-->964<!--/panel:snapshots--> snapshots**
+over <!--panel:hours-->~237h<!--/panel:hours-->, 2026-08-20 → 2026-08-30, order size
 100): **<!--panel:complete_events-->5/38<!--/panel:complete_events--> events
 complete** (the same small dense fields every time; large fields never lock).
 **<!--panel:ever_executable-->2/38<!--/panel:ever_executable--> ever crossed
@@ -195,15 +195,15 @@ growing the series.
 
 ## Honest limitations
 
-- **Parts 1–2 are cross-sectional; Part 3 is a young panel.** The Gamma API does
+- **Parts 1–2 are cross-sectional; Part 3 is a bounded 10-day panel.** The Gamma API does
   not reliably serve historical price series for resolved markets (verified: even
   the \$1.5B Trump-2024 market returns an empty `prices-history`), so Parts 1–2
-  are a single snapshot. Part 3's forward collector has built
+  are a single snapshot. Part 3's forward collector ran for a fixed window,
   <!--panel:hours-->~237h<!--/panel:hours--> /
-  <!--panel:snapshots-->964<!--/panel:snapshots-->+ snapshots so far (and still
-  growing) — the "rare, marginal, small-field-only
-  windows" result is strong over that span, but not yet a long-horizon duration
-  statistic.
+  <!--panel:snapshots-->964<!--/panel:snapshots--> snapshots (2026-08-20 →
+  2026-08-30) — the "rare, marginal, small-field-only
+  windows" result is strong over that span, though it is a 10-day window, not a
+  long-horizon duration statistic.
 - **Fees & gas not modeled in Parts 1–3.** The lock cost is the raw fill cost of
   walking the book. Polymarket makers are fee-exempt but takers and on-chain
   conversion pay costs. For the vast majority of fields the lock already costs

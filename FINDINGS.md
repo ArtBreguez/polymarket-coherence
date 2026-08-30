@@ -90,8 +90,8 @@ is therefore not an executable portfolio — the apparent violation is a
 ## Part 3 — Executable windows are rare, marginal, and only in small fields (forward panel)
 
 A single snapshot can't tell you whether a fleeting sub-\$1 lock ever *appears*.
-A scheduled collector (every 15 min) has built a panel of **<!--panel:snapshots-->964<!--/panel:snapshots-->+ snapshots** over
-<!--panel:hours-->~237h<!--/panel:hours--> (and still growing) across <!--panel:distinct_events-->38<!--/panel:distinct_events--> events.
+A scheduled collector (every 15 min) built a panel of **<!--panel:snapshots-->964<!--/panel:snapshots--> snapshots** over
+<!--panel:hours-->~237h<!--/panel:hours--> (2026-08-20 → 2026-08-30) across <!--panel:distinct_events-->38<!--/panel:distinct_events--> events.
 
 - **<!--panel:complete_events_of-->5 of 38<!--/panel:complete_events_of-->** events were ever complete (lockable) — always the same 5 small,
   dense fields (Fed, midterms, US-Iran). Large fields are **never** lockable.
@@ -178,10 +178,10 @@ windows in the smallest fields.
 - **Availability, not realized profit.** We measure whether a lock is *available*,
   not whether anyone took it. Depth-aware realized on-chain profit is a different
   question (see *Prior work*).
-- **Snapshot + young panel.** Parts 1–2 are a cross-sectional snapshot;
-  Part 3's panel is <!--panel:hours-->~237h<!--/panel:hours--> / <!--panel:snapshots-->964<!--/panel:snapshots-->+ snapshots (and still growing). The "rare,
-  marginal, small-field-only windows" result is strong over that span, not yet a
-  long-horizon duration statistic.
+- **Snapshot + bounded 10-day panel.** Parts 1–2 are a cross-sectional snapshot;
+  Part 3's panel is <!--panel:hours-->~237h<!--/panel:hours--> / <!--panel:snapshots-->964<!--/panel:snapshots--> snapshots (2026-08-20 → 2026-08-30, collection now closed). The "rare,
+  marginal, small-field-only windows" result is strong over that span, which is a
+  10-day window rather than a long-horizon duration statistic.
 - **Costs modeled only in Part 4.** Parts 1–3 report the raw book-walking fill
   cost. For nearly all fields the lock already costs >\$1, so taker fees / on-chain
   gas only reinforce no-arbitrage. The lone sub-\$1 case (Part 3, 0.6% gross) sits
