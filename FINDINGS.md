@@ -227,4 +227,4 @@ python scripts/analyze_loop.py   --matches data/event_matches.json  # Part 4
 python tests/test_core.py        # 23 unit tests, no network
 ```
 
-Live dashboard: <https://artbreguez.github.io/polymarket-coherence/>
+Interactive dashboard: <https://artbreguez.github.io/polymarket-coherence/>
