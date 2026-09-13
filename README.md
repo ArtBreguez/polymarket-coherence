@@ -234,9 +234,9 @@ cost >\$1 to lock after spread (genuine sub-\$1 windows are rare, ≤2.7% gross,
 only in the smallest fields), and large fields only *appear* violated because a
 long tail of illiquid, unpriced outcomes cannot be bought.
 
-- *Unravelling the Probabilistic Forest: Arbitrage in Prediction Markets* (2025)
-- *Executable Arbitrage and Market Efficiency in Prediction Markets* (2026)
-- *Semantic Non-Fungibility and Violations of the Law of One Price in Prediction Markets* (2026)
+- Gebele, Mutzel & Matthes (2026), *Executable Arbitrage and Market Efficiency in Prediction Markets*, [arXiv:2608.00666](https://arxiv.org/abs/2608.00666)
+- Gebele & Matthes (2026), *Semantic Non-Fungibility and Violations of the Law of One Price in Prediction Markets*, [arXiv:2601.01706](https://arxiv.org/abs/2601.01706)
+- Dai, Jia & Yu (2026), *Settlement Manipulation in Prediction Markets*, [arXiv:2606.31675](https://arxiv.org/abs/2606.31675)
 
 ## License
 
