@@ -6,7 +6,7 @@ abstract: >-
   (negRisk) events, extended to a cross-market test against Kalshi. It shows that the
   large multi-outcome coherence "violations" a naive observer sees are governed by
   liquidity structure and market microstructure, not exploitable mispricing, and that
-  the only genuine sub-$1 lock windows are rare, marginal (<=0.6% gross), and confined
+  the only genuine sub-$1 lock windows are rare, marginal (<=2.7% gross), and confined
   to the smallest dense fields. All numbers are reproducible from committed public data
   with no keys or wallet.
 type: software

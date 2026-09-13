@@ -23,7 +23,7 @@ The contribution here is narrow and contrarian: not to discover prediction-marke
 arbitrage (others have — see *Prior work*), but to show that the **large
 multi-outcome "coherence violations" a naive observer sees are governed by
 liquidity structure, not mispricing** — and that the only genuine sub-\$1 windows
-are rare, marginal (≤0.6% gross), and confined to the *smallest* fields, the
+are rare, marginal (≤2.7% gross), and confined to the *smallest* fields, the
 opposite of the naive picture. Demonstrated at three levels of increasing rigor,
 including a second, independently-quoted venue.
 
@@ -96,7 +96,7 @@ A scheduled collector (every 15 min) built a panel of **<!--panel:snapshots-->96
 - **<!--panel:complete_events_of-->5 of 38<!--/panel:complete_events_of-->** events were ever complete (lockable) — always the same 5 small,
   dense fields (Fed, midterms, US-Iran). Large fields are **never** lockable.
 - **<!--panel:ever_executable_of-->2 of 38<!--/panel:ever_executable_of-->** events ever crossed below \$1 on a **gross** basis: "<!--panel:sub_dollar_field-->Balance of Power: 2026 Midterms<!--/panel:sub_dollar_field-->"
-  (5 outcomes) hit a lock cost of **0.994** — a **+0.6%
+  (5 outcomes) reached a depth-aware (100-share) lock cost as low as **0.973** — a **+2.7%
   gross edge** — and held sub-\$1 across multiple snapshots.
 - Lock cost over all <!--panel:n_obs-->4820<!--/panel:n_obs--> complete observations: **min <!--panel:cost_min-->0.973<!--/panel:cost_min-->, median <!--panel:cost_median-->1.022<!--/panel:cost_median-->, max
   <!--panel:cost_max-->1.316<!--/panel:cost_max-->**. <!--panel:sub_dollar_of-->397 of 4820<!--/panel:sub_dollar_of--> (<!--panel:sub_dollar_pct-->8.2%<!--/panel:sub_dollar_pct-->) were sub-\$1, all in that one small dense field.
@@ -111,10 +111,10 @@ A scheduled collector (every 15 min) built a panel of **<!--panel:snapshots-->96
 This is the honest, important result — and it *sharpens* rather than weakens the
 thesis. The method **does** detect a window when one opens, and the one it found
 is exactly where theory predicts: a **small, dense, fully-liquid field**, not a
-large one. The window is **marginal (0.6% gross) and gross-of-costs**: on
+large one. The window is **marginal (2.7% gross at its peak) and gross-of-costs**: on
 Polymarket, converting a complete YES set to \$1 incurs on-chain gas and
 conversion costs not modeled here (see *Scope & limitations*), which plausibly
-erase a 0.6% edge. Large multi-outcome fields — the ones a naive observer flags
+erase a low-single-digit-percent edge. Large multi-outcome fields — the ones a naive observer flags
 as "violated" — **never** produce such a window at all, because they never
 complete. So:
 
@@ -164,7 +164,7 @@ microstructure, shown three ways:
 
 The one place a genuine sub-\$1 lock *does* appear is exactly where the
 microstructure allows it: a **small, dense, fully-liquid field**, and even there
-the edge is **marginal (≤0.6% gross) and confined to one field** (<!--panel:sub_dollar_of-->397 of 4820<!--/panel:sub_dollar_of--> complete observations, all in that single small dense market),
+the edge is **marginal (≤2.7% gross) and confined to one field** (<!--panel:sub_dollar_of-->397 of 4820<!--/panel:sub_dollar_of--> complete observations, all in that single small dense market),
 plausibly erased by execution costs. That is the opposite of the naive picture,
 in which the *large* fields look most violated.
 
@@ -184,9 +184,11 @@ windows in the smallest fields.
   10-day window rather than a long-horizon duration statistic.
 - **Costs modeled only in Part 4.** Parts 1–3 report the raw book-walking fill
   cost. For nearly all fields the lock already costs >\$1, so taker fees / on-chain
-  gas only reinforce no-arbitrage. The lone sub-\$1 case (Part 3, 0.6% gross) sits
-  *within* the range those unmodeled costs could erase, so it is reported as a
-  **gross** window, not realized profit. Part 4 *does* model Kalshi fees.
+  gas only reinforce no-arbitrage. The lone sub-\$1 case (Part 3, up to 2.7% gross)
+  is reported as a **gross** window, not realized profit: because the capital
+  stays locked until the field resolves (Nov 2026), it annualizes to ~15%
+  gross-of-costs — below the on-chain gas/conversion drag plus the T-bill
+  alternative once those unmodeled costs are charged. Part 4 *does* model Kalshi fees.
 - **Curated cross-venue matches.** Only unambiguous same-semantics events are
   matched (2 here); automatic semantic matching is deliberately avoided because it
   fabricates false arbitrage.
