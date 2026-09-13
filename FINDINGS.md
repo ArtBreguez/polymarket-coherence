@@ -123,7 +123,7 @@ complete. So:
   few fields dense enough to lock.
 
 The panel confirms prospectively what the snapshots showed: **no large free
-lunch — only occasional, sub-1%, small-field, gross-of-cost windows.**
+lunch — only occasional, low-single-digit-percent, small-field, gross-of-cost windows.**
 
 ## Part 4 — The same outcome is coherent across two venues (cross-market)
 
@@ -131,21 +131,24 @@ Within one venue prices are coherent almost by construction. The sharper test �
 with *real* variance, because two venues quote independently — asks whether the
 **same real-world outcome** trades at the same price on **Polymarket and Kalshi**.
 
-Matches are curated and auditable (`data/event_matches.json`), two ways:
-**bucket-matched** for discrete categorical events (the FOMC decision, outcome by
-outcome) and **name-matched** for team fields (NBA champion, by unique city
-substring; ambiguous names are skipped, never guessed). An edge counts as
-executable **only** if it (a) survives Kalshi's taker fee `ceil(0.07·p·(1−p))`
-**and** (b) sits on real liquidity — a zero-liquidity Kalshi quote is a phantom
-top-of-book with an empty order book behind it.
+Matches are curated and auditable (`data/event_matches.json`), and both venues
+are read from committed snapshots (`data/snapshot.csv` for Polymarket,
+`data/kalshi_fed.json` for Kalshi) so the result reproduces from repo data with
+no network. The reproducible cross-venue leg is the **FOMC September-2026 rate
+decision**, matched bucket by bucket (the one event captured on both venues in
+the frozen snapshot). An edge counts as executable **only** if it (a) survives
+Kalshi's taker fee `ceil(0.07·p·(1−p))` **and** (b) sits on real liquidity — a
+zero-liquidity Kalshi quote is a phantom top-of-book with an empty order book
+behind it.
 
-Across **2 matched events / 35 aligned outcomes** (Fed decision · 5 buckets, NBA
-champion · 30 teams): **0 executable arbitrage.**
+Across the FOMC decision's **5 aligned buckets** (maintain, ±25bp, ±50bp):
+**0 executable arbitrage.**
 
-A few NBA outcomes show a gross gap that even survives fees (e.g. NY Knicks
-+\$0.01, Philadelphia +\$0.008), but every one sits on a **zero-liquidity Kalshi
-quote** — not tradeable. The raw cross-venue gaps are eaten by spread, fees, or
-missing depth. **The two venues are coherent.**
+The raw mid-to-mid gaps are tiny to begin with (e.g. maintain quotes 0.68/0.69
+on Polymarket vs 0.65/0.66 on Kalshi — a +\$0.02 gross gap), and every Kalshi
+bucket carries **zero reported liquidity**, so no gap is tradeable even before
+fees. The cross-venue gaps are eaten by spread, fees, or missing depth. **The
+two venues are coherent.**
 
 ---
 

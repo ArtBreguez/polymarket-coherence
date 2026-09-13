@@ -1,29 +1,42 @@
 {
-  "_comment": "Curated cross-venue event matches. Automatic semantic matching across venues is error-prone (wrong date/bucket pairing produces fake arbitrage), so matches are declared explicitly and auditably here. Two match kinds: 'buckets' (explicit per-outcome mapping, for discrete categorical events like the FOMC decision) and 'by_name' (map a Kalshi series to a Polymarket event by matching each outcome's name/city substring, for team/person fields). Only events with the SAME contract semantics are matched; e.g. Polymarket exact-rate buckets are NOT matched to Kalshi cumulative 'Above X' thresholds, and illiquid long tails are kept (low liquidity is data, not error). Prices are read live; only the identity mapping is fixed.",
-  "matches": [
+ "_comment": "Curated cross-venue event matches. Automatic semantic matching across venues is error-prone (wrong date/bucket pairing produces fake arbitrage), so matches are declared explicitly and auditably here. Two match kinds: 'buckets' (explicit per-outcome mapping, for discrete categorical events like the FOMC decision) and 'by_name' (map a Kalshi series to a Polymarket event by matching each outcome's name/city substring, for team/person fields). Only events with the SAME contract semantics are matched; e.g. Polymarket exact-rate buckets are NOT matched to Kalshi cumulative 'Above X' thresholds, and illiquid long tails are kept (low liquidity is data, not error). Prices are read live; only the identity mapping is fixed. Cross-venue legs are limited to events for which BOTH venues were captured in the committed snapshot; the FOMC Sep-2026 decision is the reproducible leg. A prior NBA leg relied on a live Kalshi pull never committed and was dropped.",
+ "matches": [
+  {
+   "id": "fed-sep-2026",
+   "kind": "buckets",
+   "description": "FOMC September 2026 rate decision",
+   "polymarket_event_title": "Fed Decision in September?",
+   "kalshi_series": "KXFEDDECISION",
+   "kalshi_date_code": "26SEP",
+   "buckets": [
     {
-      "id": "fed-sep-2026",
-      "kind": "buckets",
-      "description": "FOMC September 2026 rate decision",
-      "polymarket_event_title": "Fed Decision in September?",
-      "kalshi_series": "KXFEDDECISION",
-      "kalshi_date_code": "26SEP",
-      "buckets": [
-        {"label": "maintain",  "polymarket_contains": "no change",        "kalshi_ticker_suffix": "H0"},
-        {"label": "cut_25",    "polymarket_contains": "decrease interest rates by 25", "kalshi_ticker_suffix": "C25"},
-        {"label": "cut_50",    "polymarket_contains": "decrease interest rates by 50", "kalshi_ticker_suffix": "C26"},
-        {"label": "hike_25",   "polymarket_contains": "increase interest rates by 25", "kalshi_ticker_suffix": "H25"},
-        {"label": "hike_50",   "polymarket_contains": "increase interest rates by 50", "kalshi_ticker_suffix": "H26"}
-      ]
+     "label": "maintain",
+     "polymarket_contains": "no change",
+     "kalshi_ticker_suffix": "H0"
     },
     {
-      "id": "nba-champ-2027",
-      "kind": "by_name",
-      "description": "NBA 2027 Champion",
-      "polymarket_event_title": "NBA: 2027 Champion",
-      "kalshi_series": "KXNBA",
-      "name_source": "groupItemTitle",
-      "match_on": "city_substring"
+     "label": "cut_25",
+     "polymarket_contains": "decrease interest rates by 25",
+     "kalshi_ticker_suffix": "C25"
+    },
+    {
+     "label": "cut_50",
+     "polymarket_contains": "decrease interest rates by 50",
+     "kalshi_ticker_suffix": "C26"
+    },
+    {
+     "label": "hike_25",
+     "polymarket_contains": "increase interest rates by 25",
+     "kalshi_ticker_suffix": "H25"
+    },
+    {
+     "label": "hike_50",
+     "polymarket_contains": "increase interest rates by 50",
+     "kalshi_ticker_suffix": "H26"
     }
-  ]
+   ],
+   "polymarket_snapshot": "data/snapshot.csv",
+   "kalshi_snapshot": "data/kalshi_fed.json"
+  }
+ ]
 }

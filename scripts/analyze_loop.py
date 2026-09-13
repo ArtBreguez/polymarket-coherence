@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
-"""Cross-market Law-of-One-Price (LOOP) analyzer.
+"""Cross-market Law-of-One-Price (LOOP) analyzer — frozen / reproducible.
 
 The single-venue study showed multi-outcome fields are internally coherent once
 you account for spread and liquidity. The sharper question — with real variance,
 because two venues quote independently — is *cross-market*: does the SAME
 real-world outcome trade at the same price on Polymarket and Kalshi?
 
-For each curated bucket (see data/event_matches.json) we read both venues'
-executable quotes:
-    Polymarket: bestBid / bestAsk on the YES contract
-    Kalshi:     yes_bid / yes_ask
-A LOOP violation is EXECUTABLE only if you can buy YES where it's cheap and sell
-(or buy NO) where it's dear after crossing both spreads:
-    edge = max( kalshi_bid - poly_ask , poly_bid - kalshi_ask )
-edge > 0 means a real, spread-crossing arbitrage on that single outcome.
+This reads BOTH venues from committed snapshots (no network), so every number is
+reproducible from the data in this repo, exactly like Parts 1–3:
+    Polymarket: data/snapshot.csv          (bestBid / bestAsk on the YES contract)
+    Kalshi:     data/kalshi_fed.json       (yes_bid / yes_ask + reported liquidity)
 
-This is deliberately conservative (top-of-book, ignores fees) and reuses the
-same executable-price discipline as the rest of the repo.
+A LOOP violation is EXECUTABLE only if you can buy YES where it's cheap and sell
+where it's dear after crossing both spreads AND paying Kalshi's taker fee, on a
+quote that has real liquidity behind it (Kalshi liquidity == 0 is a phantom
+top-of-book with an empty order book).
+
+Scope note: the cross-venue leg is the FOMC September-2026 decision, the one event
+for which both venues were captured in the frozen snapshot. (An earlier NBA-champion
+leg relied on a live Kalshi pull that was never committed, so it is not reproducible
+and has been dropped rather than shipped un-reproducible.)
 
 Usage:
     python scripts/analyze_loop.py --matches data/event_matches.json
@@ -24,67 +27,23 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import csv
 import json
-import urllib.parse
-import urllib.request
+import math
 import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from hygiene import http_json, to_float as _f  # noqa: E402
-
-GAMMA = "https://gamma-api.polymarket.com"
-KALSHI = "https://api.elections.kalshi.com/trade-api/v2"
-
-
-def _get(url: str):
-    return http_json(url, timeout=30)
+from hygiene import to_float as _f  # noqa: E402
 
 
 def kalshi_fee(price, contracts=1):
     """Kalshi taker fee: round_up(0.07 * C * p * (1-p)) in dollars.
     Fees turn many raw cross-venue gaps into non-arbitrage — modeling them is the
     whole point of an *executable* coherence study."""
-    import math
     if price is None:
         return 0.0
     return math.ceil(0.07 * contracts * price * (1 - price) * 100) / 100
-
-
-def load_polymarket_event(title: str, name_source: str = "question") -> dict:
-    """Return {name_lower: (bid, ask)} for the negRisk event with this title.
-    name_source is 'question' (default) or 'groupItemTitle' for team fields."""
-    events = _get(f"{GAMMA}/events?" + urllib.parse.urlencode(
-        {"closed": "false", "limit": 500, "order": "volume", "ascending": "false"}))
-    for e in events:
-        if e.get("title") == title:
-            out = {}
-            for m in e.get("markets", []):
-                key = str(m.get(name_source) or m.get("question", "")).lower()
-                out[key] = (_f(m.get("bestBid")), _f(m.get("bestAsk")))
-            return out
-    return {}
-
-
-def load_kalshi_series(series: str, by_name: bool = False) -> dict:
-    """Return {ticker: (bid, ask, liq)} or, if by_name, {yes_sub_title_lower: (bid, ask, liq)}.
-    liq is Kalshi's reported dollar liquidity — 0 means a phantom top-of-book quote
-    with no executable depth behind it."""
-    out, cursor = {}, None
-    while True:
-        params = {"limit": 200, "status": "open", "series_ticker": series}
-        if cursor:
-            params["cursor"] = cursor
-        resp = _get(f"{KALSHI}/markets?" + urllib.parse.urlencode(params))
-        for m in resp.get("markets", []):
-            val = (_f(m.get("yes_bid_dollars")), _f(m.get("yes_ask_dollars")),
-                   _f(m.get("liquidity_dollars")) or 0.0)
-            key = str(m.get("yes_sub_title") or "").lower() if by_name else m["ticker"]
-            out[key] = val
-        cursor = resp.get("cursor")
-        if not cursor:
-            break
-    return out
 
 
 def loop_edge(pb, pa, kb, ka):
@@ -101,6 +60,29 @@ def loop_edge(pb, pa, kb, ka):
     edge_gross = max(kb - pa, pb - ka)
     direction = "buy_kalshi_sell_poly" if a >= b else "buy_poly_sell_kalshi"
     return round(edge_gross, 4), round(edge_net, 4), direction
+
+
+def load_polymarket_event(title: str, snapshot_path: str) -> dict:
+    """Return {question_lower: (bid, ask)} for the negRisk event with this title,
+    read from the committed Polymarket snapshot CSV."""
+    out: dict = {}
+    with open(snapshot_path, newline="") as fh:
+        for r in csv.DictReader(fh):
+            if r.get("event_title") == title:
+                key = str(r.get("question", "")).lower()
+                out[key] = (_f(r.get("best_bid")), _f(r.get("best_ask")))
+    return out
+
+
+def load_kalshi_markets(kalshi_path: str) -> dict:
+    """Return {ticker: (bid, ask, liq)} from the committed Kalshi snapshot JSON.
+    liq is Kalshi's reported dollar liquidity — 0 means a phantom top-of-book quote
+    with no executable depth behind it."""
+    out: dict = {}
+    d = json.load(open(kalshi_path))
+    for tkr, m in d.get("markets", {}).items():
+        out[tkr] = (_f(m.get("yes_bid")), _f(m.get("yes_ask")), _f(m.get("liquidity")) or 0.0)
+    return out
 
 
 def match_bucket(poly: dict, kalshi: dict, bucket: dict, date_code: str):
@@ -133,8 +115,8 @@ def _row(label, pb, pa, kb, ka, kliq):
 
 
 def analyze_buckets(match):
-    poly = load_polymarket_event(match["polymarket_event_title"])
-    kalshi = load_kalshi_series(match["kalshi_series"])
+    poly = load_polymarket_event(match["polymarket_event_title"], match["polymarket_snapshot"])
+    kalshi = load_kalshi_markets(match["kalshi_snapshot"])
     date_code = match["kalshi_date_code"]
     rows = []
     for bucket in match["buckets"]:
@@ -143,33 +125,17 @@ def analyze_buckets(match):
     return rows
 
 
-def analyze_by_name(match):
-    """Match each Kalshi outcome (yes_sub_title = city) to the Polymarket outcome
-    whose groupItemTitle contains it (unique-substring). Skips ambiguous names."""
-    poly = load_polymarket_event(match["polymarket_event_title"],
-                                 match.get("name_source", "groupItemTitle"))
-    kalshi = load_kalshi_series(match["kalshi_series"], by_name=True)
-    rows = []
-    for kname, (kb, ka, kliq) in kalshi.items():
-        if not kname:
-            continue
-        cands = [pn for pn in poly if kname in pn]  # kname (city) inside poly full name
-        if len(cands) != 1:
-            continue  # skip missing or ambiguous — never guess
-        pb, pa = poly[cands[0]]
-        rows.append(_row(cands[0].title(), pb, pa, kb, ka, kliq))
-    rows.sort(key=lambda r: (r["edge_net"] is None, -(r["edge_net"] or -9)))
-    return rows
-
-
 def analyze(matches_path: str):
     reg = json.load(open(matches_path))
     results = []
     for match in reg["matches"]:
-        kind = match.get("kind", "buckets")
-        rows = analyze_by_name(match) if kind == "by_name" else analyze_buckets(match)
+        # Only frozen, reproducible matches are analyzed. A match without a
+        # committed Kalshi snapshot cannot be reproduced and is skipped.
+        if not match.get("kalshi_snapshot") or not match.get("polymarket_snapshot"):
+            continue
+        rows = analyze_buckets(match)
         results.append({"id": match["id"], "description": match["description"],
-                        "kind": kind, "buckets": rows})
+                        "kind": match.get("kind", "buckets"), "buckets": rows})
     return results
 
 
@@ -180,19 +146,19 @@ def main() -> int:
 
     for r in analyze(args.matches):
         print(f"\n=== {r['id']}: {r['description']}  [{r['kind']}, {len(r['buckets'])} outcomes] ===")
-        print(f"{'outcome':24} {'poly(bid/ask)':>14} {'kalshi(bid/ask)':>14} {'net':>7} {'kliq':>7}")
+        print(f"{'outcome':24} {'poly(bid/ask)':>14} {'kalshi(bid/ask)':>16} {'gross':>7} {'net':>7} {'kliq':>7}")
         best = None
         n_exec = 0
         for b in r["buckets"]:
             pj = f"{b['poly_bid']}/{b['poly_ask']}" if b['poly_bid'] is not None else "—"
             kj = f"{b['kalshi_bid']}/{b['kalshi_ask']}" if b['kalshi_bid'] is not None else "—"
-            en = b["edge_net"]
             flag = "  <-- EXECUTABLE ARB" if b["executable"] else ""
             if b["executable"]:
                 n_exec += 1
-            print(f"{str(b['label'])[:24]:24} {pj:>14} {kj:>14} {str(en):>7} {str(b['kalshi_liq']):>7}{flag}")
-            if b["executable"] and (best is None or en > best):
-                best = en
+            print(f"{str(b['label'])[:24]:24} {pj:>14} {kj:>16} "
+                  f"{str(b['edge_gross']):>7} {str(b['edge_net']):>7} {str(b['kalshi_liq']):>7}{flag}")
+            if b["executable"] and (best is None or b["edge_net"] > best):
+                best = b["edge_net"]
         verdict = (f"{n_exec} EXECUTABLE net-of-fee arbitrage(s), best {best}" if n_exec
                    else "no executable arbitrage (edges are phantom top-of-book or fee-negative)")
         print(f"verdict: {verdict}")
