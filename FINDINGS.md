@@ -207,11 +207,13 @@ windows in the smallest fields.
 This is a **refinement**, not a first. Arbitrage and coherence on prediction
 markets have been studied:
 
-- *Unravelling the Probabilistic Forest: Arbitrage in Prediction Markets* (2025)
-- *Executable Arbitrage and Market Efficiency in Prediction Markets* (2026)
-- *Semantic Non-Fungibility and Violations of the Law of One Price in Prediction
-  Markets* (2026)
-- *Settlement Manipulation in Prediction Markets* (2026)
+- Gebele, Mutzel & Matthes (2026), *Executable Arbitrage and Market Efficiency in
+  Prediction Markets*, arXiv:2608.00666 — <https://arxiv.org/abs/2608.00666>
+- Gebele & Matthes (2026), *Semantic Non-Fungibility and Violations of the Law of
+  One Price in Prediction Markets*, arXiv:2601.01706 —
+  <https://arxiv.org/abs/2601.01706>
+- Dai, Jia & Yu (2026), *Settlement Manipulation in Prediction Markets*,
+  arXiv:2606.31675 — <https://arxiv.org/abs/2606.31675>
 
 The narrow, reproducible point this repo adds: the coherence "violations" that a
 naive observer sees in large multi-outcome fields are a **liquidity-structure and
