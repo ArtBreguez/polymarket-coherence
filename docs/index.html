@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>polymarket-coherence // live terminal</title>
-<meta name="description" content="Are Polymarket 'coherence violations' real arbitrage or a spread/liquidity artifact? A live, reproducible study across Polymarket & Kalshi.">
+<title>polymarket-coherence // research terminal</title>
+<meta name="description" content="Are Polymarket 'coherence violations' real arbitrage or a spread/liquidity artifact? A reproducible study across Polymarket & Kalshi.">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root{
@@ -83,7 +83,7 @@
 <div class="wrap">
 
   <div class="bar">
-    <span><span class="dot">●</span> polymarket-coherence <span class="dimtxt">// live research terminal</span></span>
+    <span><span class="dot">●</span> polymarket-coherence <span class="dimtxt">// research terminal</span></span>
     <span id="clock">--:--:-- UTC</span>
   </div>
 
@@ -94,7 +94,7 @@
   <p class="sub">&gt; do mutually-exclusive prediction markets really violate coherence — or is it just spread, fees &amp; liquidity?</p>
   <p class="sub" style="margin-bottom:14px">
     <span class="prompt">artbreguez@research:~$</span>
-    <span class="cmd">./monitor --venues polymarket,kalshi --live</span><span class="blink">▊</span>
+    <span class="cmd">./monitor --venues polymarket,kalshi --frozen</span><span class="blink">▊</span>
   </p>
   <p style="font-size:12px"><a href="https://github.com/ArtBreguez/polymarket-coherence">[ git repo ]</a> &nbsp; <a href="#loop">[ cross-market ]</a> &nbsp; <a id="statuslink">[ status ]</a></p>
 
@@ -126,7 +126,7 @@
     <div class="quote" id="verdict"></div>
 
     <footer>
-      <div>feed: public Gamma + CLOB (Polymarket) &amp; Kalshi trade-api · no keys · collector runs every 15 min → auto-commits to the repo.</div>
+      <div>feed: public Gamma + CLOB (Polymarket) &amp; Kalshi trade-api · no keys · panel frozen 2026-08-20 → 2026-08-30 (964 snapshots); collection closed.</div>
       <div id="genstamp" style="margin-top:4px"></div>
       <div style="margin-top:4px">a small, reproducible research artifact. see the repo for methodology, honest limitations &amp; prior work.</div>
     </footer>
@@ -150,11 +150,11 @@ async function load(){
   document.getElementById("boot").style.display="none";
   document.getElementById("content").style.display="block";
   document.getElementById("statuslink").textContent="[ "+summary.snapshots+" snapshots ]";
-  document.getElementById("genstamp").textContent="last collector run: "+sTs(summary.last_snapshot)+" UTC · site generated "+sTs(summary.generated_utc)+" UTC";
+  document.getElementById("genstamp").textContent="final snapshot: "+sTs(summary.last_snapshot)+" UTC · site generated "+sTs(summary.generated_utc)+" UTC";
 
   const ls=summary.liquidity_structure||{};
   const cards=[
-    {k:"snapshots",v:summary.snapshots,s:"every 15 min"},
+    {k:"snapshots",v:summary.snapshots,s:"frozen panel"},
     {k:"events tracked",v:summary.distinct_events,s:"negRisk fields"},
     {k:"arb windows",v:summary.ever_executable+" / "+summary.distinct_events,s:summary.ever_executable?"window opened":"no free lunch",warn:summary.ever_executable>0},
     {k:"min lock cost",v:"$"+fmt(summary.cost_min),s:"best case · "+summary.n_cost_obs+" obs"},
