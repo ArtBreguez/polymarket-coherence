@@ -72,30 +72,30 @@ listing artifact.
 Within one venue, prices are internally coherent by construction. The sharper
 test — with *real* variance, because two venues quote independently — is whether
 the **same real-world outcome** trades at the same price on **Polymarket and
-Kalshi**. We curate explicit event matches (`data/event_matches.json`) two ways:
-**bucket-matched** (discrete categorical events like the FOMC decision, mapped
-outcome-by-outcome) and **name-matched** (team fields like the NBA champion,
-matched by unique city substring; ambiguous names such as two Madrid clubs are
-skipped, never guessed). Automatic semantic matching is error-prone and produces
-fake arbitrage, so every match is declared and auditable.
+Kalshi**. We curate an explicit, auditable event match (`data/event_matches.json`)
+and read **both venues from committed snapshots** (`data/snapshot.csv`,
+`data/kalshi_fed.json`), so the result reproduces from repo data with no network.
+The reproducible cross-venue leg is the **FOMC September-2026 decision**, mapped
+bucket by bucket. (A prior NBA-champion leg relied on a live Kalshi pull that was
+never committed, so it is not reproducible and has been dropped rather than
+shipped un-reproducible.)
 
 An edge counts as executable arbitrage only if it (a) survives **Kalshi's taker
 fee** `ceil(0.07·p·(1−p))` **and** (b) sits on **real liquidity** — a
 zero-liquidity Kalshi quote is a phantom top-of-book with an empty order book
 behind it, so a "gap" there is not tradeable.
 
-Live example — September FOMC decision, aligned bucket by bucket:
+September FOMC decision, aligned bucket by bucket (from the frozen snapshot):
 
-| Bucket | Polymarket (bid/ask) | Kalshi (bid/ask) | Gross edge | Net of fee |
-|---|---|---|---|---|
-| maintain | 0.67 / 0.68 | 0.65 / 0.66 | +0.01 | **−0.01** |
-| hike 25bp | 0.31 / 0.32 | 0.32 / 0.33 | 0.00 | **−0.02** |
-| cut 25bp | 0.011 / 0.012 | 0.00 / 0.01 | +0.001 | **−0.009** |
+| Bucket | Polymarket (bid/ask) | Kalshi (bid/ask) | Gross edge | Net of fee | Kalshi liq |
+|---|---|---|---|---|---|
+| maintain | 0.68 / 0.69 | 0.65 / 0.66 | +0.02 | **−0.00** | 0 |
+| hike 25bp | 0.30 / 0.31 | 0.32 / 0.33 | +0.01 | **−0.01** | 0 |
+| cut 25bp | 0.013 / 0.014 | 0.00 / 0.01 | +0.003 | **−0.007** | 0 |
 
-Across the matched events (Fed decision · 5 buckets, NBA champion · 30 teams =
-**35 aligned outcomes**): **0 executable arbitrage.** A few NBA teams show a
-gross gap that even survives fees (e.g. NY Knicks +$0.01), but every one sits on
-a **zero-liquidity Kalshi quote** — phantom top-of-book, not tradeable. The two
+Across the FOMC decision's **5 aligned buckets**: **0 executable arbitrage.** The
+raw mid-to-mid gaps are tiny, every Kalshi bucket carries **zero reported
+liquidity** (phantom top-of-book), and fees erase what little remains. The two
 venues are coherent.
 
 > **Interpretation.** The same-outcome, cross-venue result mirrors the
