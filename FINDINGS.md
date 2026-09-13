@@ -45,9 +45,12 @@ bid/ask sums **straddle** 1.0: you cannot buy the whole field for the bid sum
 The gap is a bid/ask **spread band**, and it widens with field size
 (corr(field size, band) = **+0.664**).
 
-At top-of-book, 7 of 36 fields *look* buyable below \$0.99 — a mostly-false signal
-that Part 2 dismantles (only one of them survives a depth-aware, complete-field
-lock).
+At top-of-book, 7 of 36 fields *look* buyable below \$0.99 — but this signal is
+not just noisy, it is **backwards**. Part 2 shows that **none** of those 7
+survives a depth-aware, complete-field lock (they are all large fields with an
+unfillable illiquid tail), while the one field that *does* lock sub-\$1 (a small
+dense field) is **not** among them — its top-of-book sum is \$0.994, above the
+cutoff. The naive top-of-book screen flags exactly the wrong fields.
 
 ## Part 2 — Locking a field costs ~\$1, and the only sub-\$1 case is a small dense field (depth-aware)
 
