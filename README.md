@@ -17,7 +17,7 @@ frequent, large violations (buy/sell the whole field for less/more than \$1).
 This repo tests whether those violations **survive the bid-ask spread and order-book
 depth** — i.e. whether they are *executable* — and finds the large ones are a
 liquidity-structure artifact, while genuine sub-\$1 windows are rare, marginal
-(≤0.6% gross), and confined to the smallest fields.
+(≤2.7% gross), and confined to the smallest fields.
 
 ## TL;DR findings
 
@@ -64,7 +64,7 @@ listing artifact.
 > after spread; (c) large fields only *appear* violated because a long tail of
 > illiquid, unpriced outcomes cannot be bought, so their listed-price sum is not
 > an executable portfolio. The forward panel (below) finds the *only* genuine
-> sub-\$1 windows are rare, marginal (≤0.6% gross), and confined to small fields —
+> sub-\$1 windows are rare, marginal (≤2.7% gross), and confined to small fields —
 > the opposite of the naive picture. Coherence must be judged on **depth-aware,
 > complete-field** execution.
 
@@ -171,17 +171,16 @@ over <!--panel:hours-->~237h<!--/panel:hours-->, 2026-08-20 → 2026-08-30, orde
 complete** (the same small dense fields every time; large fields never lock).
 **<!--panel:ever_executable-->2/38<!--/panel:ever_executable--> ever crossed
 below \$1 on a gross basis** — "<!--panel:sub_dollar_field-->Balance of Power: 2026 Midterms<!--/panel:sub_dollar_field-->"
-hit **0.994** (+0.6% gross edge) and held sub-\$1 across multiple snapshots. Lock
+hit a depth-aware (100-share) lock cost as low as **0.973** (+2.7% gross edge) and held sub-\$1 across multiple snapshots. Lock
 cost over all <!--panel:n_obs-->4820<!--/panel:n_obs--> complete observations:
 **min <!--panel:cost_min-->0.973<!--/panel:cost_min-->, median
 <!--panel:cost_median-->1.022<!--/panel:cost_median-->, max
 <!--panel:cost_max-->1.316<!--/panel:cost_max-->**;
 **<!--panel:sub_dollar-->397/4820<!--/panel:sub_dollar-->
 (<!--panel:sub_dollar_pct-->8.2%<!--/panel:sub_dollar_pct-->)** were sub-\$1 — all
-in that one small dense field, and all *gross* of on-chain execution costs that
-plausibly erase a ~0.6% edge. Large multi-outcome fields — the ones that *look*
-most violated — never produce a window at all. The scheduled collector keeps
-growing the series.
+in that one small dense field, and all *gross* of on-chain execution costs. Large multi-outcome fields — the ones that *look*
+most violated — never produce a window at all. The forward panel is now closed
+(2026-08-20 → 2026-08-30, 964 snapshots); the figures above are frozen at that final panel.
 
 ## Data
 
@@ -208,9 +207,10 @@ growing the series.
   walking the book. Polymarket makers are fee-exempt but takers and on-chain
   conversion pay costs. For the vast majority of fields the lock already costs
   > \$1, so these costs only reinforce no-arbitrage. The one exception — the
-  small-field 0.6%-gross window in Part 3 — is *within* the range these unmodeled
-  costs could plausibly erase, so we report it as a **gross** window, not a
-  realized profit. Part 4 *does* model Kalshi's taker fee explicitly.
+  small-field window in Part 3, up to 2.7% gross — is reported as a **gross**
+  window, not a realized profit: capital stays locked until resolution (Nov 2026),
+  annualizing to ~15% gross-of-costs, below the on-chain gas/conversion drag plus
+  the T-bill alternative. Part 4 *does* model Kalshi's taker fee explicitly.
 - **Zombie markets are filtered.** Polymarket occasionally keeps an event flagged
   `closed=false` past its `endDate` (e.g. a resolved weekly market). These have
   degenerate prices and evaporating liquidity, so all collectors now drop any
@@ -230,7 +230,7 @@ claim to discover prediction-market arbitrage; its contribution is the narrow,
 contrarian, and reproducible point that **the large multi-outcome "coherence
 violations" a naive observer sees are a liquidity-structure artifact, not
 mispricing** — the mid prices already sum to ~1, small dense fields typically
-cost >\$1 to lock after spread (genuine sub-\$1 windows are rare, ≤0.6% gross, and
+cost >\$1 to lock after spread (genuine sub-\$1 windows are rare, ≤2.7% gross, and
 only in the smallest fields), and large fields only *appear* violated because a
 long tail of illiquid, unpriced outcomes cannot be bought.
 
