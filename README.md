@@ -6,6 +6,7 @@
 panel (2026-08-20 → 2026-08-30, 964 snapshots); collection is now closed.
 
 ![tests](https://github.com/ArtBreguez/polymarket-coherence/actions/workflows/tests.yml/badge.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22739555.svg)](https://doi.org/10.5281/zenodo.22739555)
 
 📄 **Read the write-up: [FINDINGS.md](FINDINGS.md)** — question, method, results,
 limitations, prior work (the short-paper version of this repo).
@@ -237,6 +238,18 @@ long tail of illiquid, unpriced outcomes cannot be bought.
 - Gebele, Mutzel & Matthes (2026), *Executable Arbitrage and Market Efficiency in Prediction Markets*, [arXiv:2608.00666](https://arxiv.org/abs/2608.00666)
 - Gebele & Matthes (2026), *Semantic Non-Fungibility and Violations of the Law of One Price in Prediction Markets*, [arXiv:2601.01706](https://arxiv.org/abs/2601.01706)
 - Dai, Jia & Yu (2026), *Settlement Manipulation in Prediction Markets*, [arXiv:2606.31675](https://arxiv.org/abs/2606.31675)
+
+## How to cite
+
+If you use this work, please cite it via its DOI (archived on Zenodo):
+
+> Breguez, A. (2026). *polymarket-coherence: price coherence in mutually-exclusive
+> prediction markets*. Zenodo. https://doi.org/10.5281/zenodo.22739555
+
+The DOI above is the **concept DOI** — it always resolves to the latest version.
+For a specific release, cite its version DOI (e.g. v1.0.6 →
+[10.5281/zenodo.22739556](https://doi.org/10.5281/zenodo.22739556)). Machine-readable
+metadata is in [CITATION.cff](CITATION.cff).
 
 ## License
 

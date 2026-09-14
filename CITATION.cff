@@ -10,6 +10,13 @@ abstract: >-
   to the smallest dense fields. All numbers are reproducible from committed public data
   with no keys or wallet.
 type: software
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22739555"
+    description: "Concept DOI — always resolves to the latest version"
+  - type: doi
+    value: "10.5281/zenodo.22739556"
+    description: "Version DOI for v1.0.6"
 authors:
   - family-names: Breguez
     given-names: Arthur
@@ -26,4 +33,5 @@ keywords:
   - coherence
   - negRisk
 version: "1.0.6"
+doi: "10.5281/zenodo.22739555"
 date-released: "2026-09-13"

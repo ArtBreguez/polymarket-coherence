@@ -7,6 +7,9 @@ Snapshot: **2026-08-22** · public data only (Gamma API, CLOB L2 order books,
 Kalshi trade-api) · no keys, no wallet · every number below is reproduced by the
 scripts in this repo from the committed data.
 
+DOI: [10.5281/zenodo.22739555](https://doi.org/10.5281/zenodo.22739555) (Zenodo,
+concept DOI — always resolves to the latest version).
+
 ---
 
 ## The question
