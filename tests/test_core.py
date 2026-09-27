@@ -149,6 +149,79 @@ def test_loop_edge_direction_reported():
     assert dr == "buy_kalshi_sell_poly" and en > 0
 
 
+# --- window_stats: the two claims that were wrong in the prose -------------
+#
+# Both defects were in the WRITEUP, not the math, and both traced to the summary
+# under-reporting: only one sub-$1 field title was kept, and the longest run was
+# tracked with no record of what it actually paid. A reader then sees "31.2h"
+# beside "2.7%" and concludes the deep edge lasted a day and a half.
+
+site = _load("generate_site_data", "generate_site_data.py")
+
+
+def _rec(ts, event_id, title, cost, end_date="2026-11-03T00:00:00Z"):
+    return {"ts": ts, "event_id": event_id, "title": title, "n_markets": 5,
+            "complete": True, "lock_cost": cost, "size": 100, "fill_ratio": 1.0,
+            "filled_legs": 5, "end_date": end_date}
+
+
+def test_window_stats_keeps_every_sub_dollar_field():
+    """397 sub-$1 observations spanned TWO fields; reporting one is the bug."""
+    rows = [
+        _rec("2026-08-21T00:00:00Z", "a", "Balance of Power: 2026 Midterms", 0.97),
+        _rec("2026-08-21T00:00:00Z", "b", "Fed Decision in September?", 0.99,
+             "2026-09-16T00:00:00Z"),
+    ]
+    ws = site.window_stats(rows)
+    assert ws["sub_dollar_titles"] == {
+        "Balance of Power: 2026 Midterms", "Fed Decision in September?"}, ws["sub_dollar_titles"]
+    assert ws["ever_exec"] == 2, ws["ever_exec"]
+
+
+def test_longest_run_reports_the_edge_it_actually_paid():
+    """The longest run and the deepest print can be different episodes.
+
+    Long run of 3 shallow snapshots (best 0.994 = 0.6% gross), then a break,
+    then a single deep snapshot (0.973 = 2.7%). The summary must not let the
+    2.7% be read as lasting the length of the 3-snapshot run.
+    """
+    rows = [_rec("2026-08-21T0%d:00:00Z" % i, "a", "F", c)
+            for i, c in enumerate([0.994, 0.996, 0.995])]
+    rows.append(_rec("2026-08-22T00:00:00Z", "a", "F", 1.01))   # breaks the run
+    rows.append(_rec("2026-08-23T00:00:00Z", "a", "F", 0.973))  # deep, short
+    ws = site.window_stats(rows)
+
+    assert ws["best_run_snaps"] == 3, ws["best_run_snaps"]
+    assert abs(ws["best_run_snaps_cost"] - 0.994) < 1e-9, ws["best_run_snaps_cost"]
+    assert abs(ws["best_lock_cost"] - 0.973) < 1e-9, ws["best_lock_cost"]
+    # the whole point: what the long run paid is WORSE than the deepest print
+    assert ws["best_run_snaps_cost"] > ws["best_lock_cost"]
+
+
+def test_run_length_resets_on_a_break():
+    """A run is consecutive; two short runs must not add up to a long one."""
+    rows = [_rec("2026-08-21T00:00:00Z", "a", "F", 0.98),
+            _rec("2026-08-21T01:00:00Z", "a", "F", 1.02),
+            _rec("2026-08-21T02:00:00Z", "a", "F", 0.98)]
+    ws = site.window_stats(rows)
+    assert ws["best_run_snaps"] == 1, ws["best_run_snaps"]
+
+
+def test_committed_panel_still_has_two_sub_dollar_fields():
+    """Regression against the real data the findings are written from."""
+    path = os.path.join(ROOT, "data", "panel.jsonl")
+    if not os.path.exists(path):
+        return
+    import json
+    rows = [json.loads(l) for l in open(path) if l.strip()]
+    ws = site.window_stats(rows)
+    assert len(ws["sub_dollar_titles"]) == 2, sorted(ws["sub_dollar_titles"])
+    assert ws["sub_dollar_obs"] == 397, ws["sub_dollar_obs"]
+    # 31.2h run pays 0.6%, the 0.973 print is elsewhere
+    assert abs(ws["best_run_snaps_cost"] - 0.994) < 1e-6, ws["best_run_snaps_cost"]
+    assert abs(ws["best_lock_cost"] - 0.973) < 1e-6, ws["best_lock_cost"]
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_") and callable(v)]
     failed = 0

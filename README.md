@@ -178,8 +178,11 @@ cost over all <!--panel:n_obs-->4820<!--/panel:n_obs--> complete observations:
 <!--panel:cost_median-->1.022<!--/panel:cost_median-->, max
 <!--panel:cost_max-->1.316<!--/panel:cost_max-->**;
 **<!--panel:sub_dollar-->397/4820<!--/panel:sub_dollar-->
-(<!--panel:sub_dollar_pct-->8.2%<!--/panel:sub_dollar_pct-->)** were sub-\$1 — all
-in that one small dense field, and all *gross* of on-chain execution costs. Large multi-outcome fields — the ones that *look*
+(<!--panel:sub_dollar_pct-->8.2%<!--/panel:sub_dollar_pct-->)** were sub-\$1 — split
+across two small dense fields (373 in the midterms field, 24 in the Fed decision),
+and all *gross* of on-chain execution costs. The longest unbroken sub-\$1 run was
+31.2h but bottomed at only 0.994 (0.6% gross); the 2.7% print came later in a
+shorter ~12.7h window. Large multi-outcome fields — the ones that *look*
 most violated — never produce a window at all. The forward panel is now closed
 (2026-08-20 → 2026-08-30, 964 snapshots); the figures above are frozen at that final panel.
 
@@ -210,8 +213,10 @@ most violated — never produce a window at all. The forward panel is now closed
   > \$1, so these costs only reinforce no-arbitrage. The one exception — the
   small-field window in Part 3, up to 2.7% gross — is reported as a **gross**
   window, not a realized profit: capital stays locked until resolution (Nov 2026),
-  annualizing to ~15% gross-of-costs, below the on-chain gas/conversion drag plus
-  the T-bill alternative. Part 4 *does* model Kalshi's taker fee explicitly.
+  annualizing to ~15% gross-of-costs, which is *above* the risk-free rate. What
+  makes it unattractive is size, not rate: the measured order is 100 shares, so
+  ~\$97 of capital returning ~\$2.70, against near-fixed on-chain gas and
+  conversion costs not modeled here. Part 4 *does* model Kalshi's taker fee explicitly.
 - **Zombie markets are filtered.** Polymarket occasionally keeps an event flagged
   `closed=false` past its `endDate` (e.g. a resolved weekly market). These have
   degenerate prices and evaporating liquidity, so all collectors now drop any

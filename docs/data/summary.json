@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-30T14:01:10.998942+00:00",
+  "generated_utc": "2026-09-27T00:32:40.147525+00:00",
   "snapshots": 964,
   "hours_span": 237,
   "first_snapshot": "2026-08-20T17:07:44.445789+00:00",
@@ -14,8 +14,14 @@
   "sub_dollar_obs": 397,
   "sub_dollar_pct": 8.2,
   "sub_dollar_field": "Balance of Power: 2026 Midterms",
+  "sub_dollar_fields": [
+    "Balance of Power: 2026 Midterms",
+    "Fed Decision in September?"
+  ],
+  "sub_dollar_field_count": 2,
   "best_window_run_snaps": 125,
   "best_window_run_hours": 31.2,
+  "best_run_edge_pct": 0.6,
   "best_edge_pct": 2.7,
   "best_annualized_pct": 15.05,
   "liquidity_structure": {
