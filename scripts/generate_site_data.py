@@ -44,6 +44,83 @@ def load_panel():
     return rows
 
 
+def window_stats(rows):
+    """Persistence and depth of sub-$1 windows, per the panel records.
+
+    Extracted from main() so it can be unit-tested. Returns the longest unbroken
+    sub-$1 run, the deepest print, AND the deepest cost inside that longest run.
+
+    That last value is the point: the longest run and the deepest print are not
+    necessarily the same episode. In the committed panel the longest run (31.2h)
+    bottoms at 0.994 while the deepest print (0.973) sits in a shorter ~12.7h run
+    five days later. Reporting run length beside the global best, with nothing
+    tying them together, reads as "the 2.7% edge lasted 31 hours" — which the
+    data does not show.
+    """
+    ev_hist = defaultdict(list)
+    for r in rows:
+        ev_hist[r["event_id"]].append(r)
+
+    out = {
+        "ever_exec": 0,
+        "all_costs": [],
+        "complete_events": 0,
+        "sub_dollar_obs": 0,
+        "sub_dollar_titles": set(),
+        "best_run_snaps": 0,
+        "best_run_snaps_cost": None,
+        "best_lock_cost": None,
+        "best_lock_end_date": None,
+        "best_lock_ts": None,
+    }
+
+    for recs in ev_hist.values():
+        cc = [x["lock_cost"] for x in recs
+              if x.get("complete") and x.get("lock_cost") is not None]
+        out["all_costs"].extend(cc)
+        if cc:
+            out["complete_events"] += 1
+        subs = [c for c in cc if c < 1.0]
+        out["sub_dollar_obs"] += len(subs)
+        if not subs:
+            continue
+        out["ever_exec"] += 1
+
+        # every field that crossed sub-$1, not just one of them
+        for x in recs:
+            if (x.get("complete") and x.get("lock_cost") is not None
+                    and x["lock_cost"] < 1.0 and x.get("title")):
+                out["sub_dollar_titles"].add(x["title"])
+
+        ordered = sorted(recs, key=lambda r: r.get("ts", ""))
+
+        # deepest lock cost across this event's sub-$1 observations
+        for x in ordered:
+            lc = x.get("lock_cost")
+            if x.get("complete") and lc is not None and lc < 1.0:
+                if out["best_lock_cost"] is None or lc < out["best_lock_cost"]:
+                    out["best_lock_cost"] = lc
+                    out["best_lock_end_date"] = x.get("end_date")
+                    out["best_lock_ts"] = x.get("ts")
+
+        # longest consecutive sub-$1 run, carrying the best cost inside it
+        cur = 0
+        cur_min = None
+        for x in ordered:
+            lc = x.get("lock_cost")
+            if x.get("complete") and lc is not None and lc < 1.0:
+                cur += 1
+                cur_min = lc if cur_min is None else min(cur_min, lc)
+                if cur > out["best_run_snaps"]:
+                    out["best_run_snaps"] = cur
+                    out["best_run_snaps_cost"] = cur_min
+            else:
+                cur = 0
+                cur_min = None
+
+    return out
+
+
 def main() -> int:
     os.makedirs(OUTDIR, exist_ok=True)
     rows = load_panel()
@@ -82,53 +159,22 @@ def main() -> int:
             })
 
     # ---- per-event history for "ever executable" + persistence ----
+    # All of this lives in window_stats() so it is unit-testable; the two
+    # defects it now guards against were reporting bugs, not math bugs.
     ev_hist = defaultdict(list)
     for r in rows:
         ev_hist[r["event_id"]].append(r)
-    ever_exec = 0
-    all_costs = []
-    complete_events = 0
-    sub_dollar_obs = 0
-    sub_dollar_titles: set[str] = set()
-    # Persistence + annualized-return of the deepest executable window. The
-    # thesis-sharpening point a single snapshot misses: even when a sub-$1 window
-    # DOES open and PERSISTS, the edge is so thin that the return on capital
-    # locked until resolution is negligible — so persistence doesn't rescue it.
-    best_run_snaps = 0           # longest consecutive complete & sub-$1 run
-    best_lock_cost = None        # deepest (lowest) lock cost ever seen sub-$1
-    best_lock_end_date = None    # resolution date of that field (for annualizing)
-    best_lock_ts = None          # when the deepest lock was observed
-    for recs in ev_hist.values():
-        cc = [x["lock_cost"] for x in recs if x.get("complete") and x.get("lock_cost") is not None]
-        all_costs.extend(cc)
-        if cc:
-            complete_events += 1
-        subs = [c for c in cc if c < 1.0]
-        sub_dollar_obs += len(subs)
-        if subs:
-            ever_exec += 1
-            # title of the field that crossed sub-$1 (for prose that names it)
-            for x in recs:
-                if x.get("complete") and x.get("lock_cost") is not None and x["lock_cost"] < 1.0:
-                    if x.get("title"):
-                        sub_dollar_titles.add(x["title"])
-            # deepest lock cost across this event's sub-$1 observations
-            for x in sorted(recs, key=lambda r: r.get("ts", "")):
-                lc = x.get("lock_cost")
-                if x.get("complete") and lc is not None and lc < 1.0:
-                    if best_lock_cost is None or lc < best_lock_cost:
-                        best_lock_cost = lc
-                        best_lock_end_date = x.get("end_date")
-                        best_lock_ts = x.get("ts")
-            # longest consecutive run of complete & sub-$1 snapshots for this event
-            cur = 0
-            for x in sorted(recs, key=lambda r: r.get("ts", "")):
-                lc = x.get("lock_cost")
-                if x.get("complete") and lc is not None and lc < 1.0:
-                    cur += 1
-                    best_run_snaps = max(best_run_snaps, cur)
-                else:
-                    cur = 0
+    ws = window_stats(rows)
+    ever_exec = ws["ever_exec"]
+    all_costs = ws["all_costs"]
+    complete_events = ws["complete_events"]
+    sub_dollar_obs = ws["sub_dollar_obs"]
+    sub_dollar_titles = ws["sub_dollar_titles"]
+    best_run_snaps = ws["best_run_snaps"]
+    best_run_snaps_cost = ws["best_run_snaps_cost"]
+    best_lock_cost = ws["best_lock_cost"]
+    best_lock_end_date = ws["best_lock_end_date"]
+    best_lock_ts = ws["best_lock_ts"]
 
     # small/large liquidity structure on the latest snapshot
     small = large = small_complete = large_complete = 0
@@ -190,8 +236,12 @@ def main() -> int:
         "sub_dollar_obs": sub_dollar_obs,
         "sub_dollar_pct": round(100 * sub_dollar_obs / len(all_costs), 1) if all_costs else None,
         "sub_dollar_field": sorted(sub_dollar_titles)[0] if sub_dollar_titles else None,
+        "sub_dollar_fields": sorted(sub_dollar_titles),
+        "sub_dollar_field_count": len(sub_dollar_titles),
         "best_window_run_snaps": best_run_snaps,
         "best_window_run_hours": best_run_hours,
+        "best_run_edge_pct": (round(100 * (1 - best_run_snaps_cost), 2)
+                              if best_run_snaps_cost is not None else None),
         "best_edge_pct": best_edge_pct,
         "best_annualized_pct": best_annualized_pct,
         "liquidity_structure": {

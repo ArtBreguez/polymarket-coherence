@@ -59,6 +59,10 @@ def formatters(s: dict) -> dict[str, str]:
         "sub_dollar_field": str(s["sub_dollar_field"]),
         "best_window_run_hours": f"~{s['best_window_run_hours']}h",
         "best_edge_pct": f"{s['best_edge_pct']}%",
+        # What the LONGEST run actually paid, which is not the deepest print.
+        # Without this the prose can put "31.2h" next to "2.7%" and imply the
+        # deep edge persisted for the whole run; in this panel it paid 0.6%.
+        "best_run_edge_pct": f"{s['best_run_edge_pct']}",
         "best_annualized_pct": f"{s['best_annualized_pct']}%",
     }
 

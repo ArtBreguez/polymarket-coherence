@@ -103,16 +103,28 @@ A scheduled collector (every 15 min) built a panel of **<!--panel:snapshots-->96
   dense fields (Fed, midterms, US-Iran). Large fields are **never** lockable.
 - **<!--panel:ever_executable_of-->2 of 38<!--/panel:ever_executable_of-->** events ever crossed below \$1 on a **gross** basis: "<!--panel:sub_dollar_field-->Balance of Power: 2026 Midterms<!--/panel:sub_dollar_field-->"
   (5 outcomes) reached a depth-aware (100-share) lock cost as low as **0.973** — a **+2.7%
-  gross edge** — and held sub-\$1 across multiple snapshots.
+  gross edge** — and held sub-\$1 across multiple snapshots. The second was
+  "Fed Decision in September?", which bottomed at **0.988** (+1.2% gross).
 - Lock cost over all <!--panel:n_obs-->4820<!--/panel:n_obs--> complete observations: **min <!--panel:cost_min-->0.973<!--/panel:cost_min-->, median <!--panel:cost_median-->1.022<!--/panel:cost_median-->, max
-  <!--panel:cost_max-->1.316<!--/panel:cost_max-->**. <!--panel:sub_dollar_of-->397 of 4820<!--/panel:sub_dollar_of--> (<!--panel:sub_dollar_pct-->8.2%<!--/panel:sub_dollar_pct-->) were sub-\$1, all in that one small dense field.
-- **Persistence doesn't rescue it.** That window wasn't a flicker: it stayed
-  sub-\$1 for a longest unbroken run of **<!--panel:best_window_run_hours-->~31.2h<!--/panel:best_window_run_hours-->**. But the edge is
-  **<!--panel:best_edge_pct-->2.7%<!--/panel:best_edge_pct--> gross**, and the capital stays locked until the field resolves
-  (Nov 2026), so annualized it is **<!--panel:best_annualized_pct-->15.05%<!--/panel:best_annualized_pct--> gross-of-costs** — below the
-  on-chain gas/conversion drag and the return on a T-bill. A durable window that
-  still isn't a free lunch is the sharpest form of the thesis: what kills the
-  trade is not fleetingness but **marginality**.
+  <!--panel:cost_max-->1.316<!--/panel:cost_max-->**. <!--panel:sub_dollar_of-->397 of 4820<!--/panel:sub_dollar_of--> (<!--panel:sub_dollar_pct-->8.2%<!--/panel:sub_dollar_pct-->) were sub-\$1, split across
+  those two small dense fields: 373 in the midterms field and 24 in the Fed
+  decision. Both small, neither large.
+- **Persistence doesn't rescue it, and the long run is not the deep one.** The
+  longest unbroken sub-\$1 run was **<!--panel:best_window_run_hours-->~31.2h<!--/panel:best_window_run_hours-->**, but inside that run the
+  best cost was only **0.994**, an edge of **<!--panel:best_run_edge_pct-->0.6<!--/panel:best_run_edge_pct-->% gross**. The deepest print
+  (**<!--panel:best_edge_pct-->2.7%<!--/panel:best_edge_pct--> gross**) came five days later in a shorter ~12.7h window; the field
+  stayed below 0.98 for about 12 straight hours. Citing 31.2h next to 2.7%
+  without that distinction implies a deep edge that lasted a day and a half,
+  which the panel does not show.
+- **What actually kills it is size, not rate.** The deepest window annualizes to
+  **<!--panel:best_annualized_pct-->15.05%<!--/panel:best_annualized_pct--> gross-of-costs** over the 67 days to resolution, and the
+  shorter-dated Fed field annualizes *higher* (~26% over 17 days) while paying
+  less in absolute terms. Neither is below the risk-free rate. But every
+  observation here is a **100-share** order: at a 0.973 lock cost that is
+  **~\$97 of capital returning ~\$2.70**, before the on-chain gas and conversion
+  costs not modeled here — costs that are near-fixed and therefore hit a \$97
+  position hardest. A durable window that still isn't worth wiring money for is
+  the sharpest form of the thesis: what kills the trade is **capacity**.
 
 This is the honest, important result — and it *sharpens* rather than weakens the
 thesis. The method **does** detect a window when one opens, and the one it found
@@ -194,10 +206,13 @@ windows in the smallest fields.
 - **Costs modeled only in Part 4.** Parts 1–3 report the raw book-walking fill
   cost. For nearly all fields the lock already costs >\$1, so taker fees / on-chain
   gas only reinforce no-arbitrage. The lone sub-\$1 case (Part 3, up to 2.7% gross)
-  is reported as a **gross** window, not realized profit: because the capital
-  stays locked until the field resolves (Nov 2026), it annualizes to ~15%
-  gross-of-costs — below the on-chain gas/conversion drag plus the T-bill
-  alternative once those unmodeled costs are charged. Part 4 *does* model Kalshi fees.
+  is reported as a **gross** window, not realized profit: the capital stays locked
+  until the field resolves (Nov 2026), so it annualizes to ~15% gross-of-costs,
+  which is *above* the risk-free rate rather than below it. What makes it
+  unattractive is not the rate but the size: the measured order is 100 shares,
+  i.e. ~\$97 of capital returning ~\$2.70, against near-fixed on-chain gas and
+  conversion costs that are not modeled here and that fall hardest on a position
+  that small. Part 4 *does* model Kalshi fees.
 - **Curated cross-venue matches.** Only unambiguous same-semantics events are
   matched (2 here); automatic semantic matching is deliberately avoided because it
   fabricates false arbitrage.
